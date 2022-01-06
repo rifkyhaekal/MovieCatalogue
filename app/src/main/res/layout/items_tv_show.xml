@@ -26,6 +26,7 @@
             android:id="@+id/img_poster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/tv_show_poster"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

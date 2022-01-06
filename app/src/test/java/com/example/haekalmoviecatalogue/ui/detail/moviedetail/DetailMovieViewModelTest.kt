@@ -1,9 +1,9 @@
 package com.example.haekalmoviecatalogue.ui.detail.moviedetail
 
 import com.example.haekalmoviecatalogue.utils.DataDummy
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
-
 import org.junit.Test
 
 class DetailMovieViewModelTest {

@@ -12,14 +12,15 @@ import com.example.haekalmoviecatalogue.databinding.FragmentMovieBinding
 
 class MovieFragment : Fragment() {
 
-    private lateinit var fragmentMovieBinding: FragmentMovieBinding
+    private var _fragmentMovieBinding: FragmentMovieBinding? = null
+    private val fragmentMovieBinding get() = _fragmentMovieBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
+        _fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
         return fragmentMovieBinding.root
     }
 
@@ -42,5 +43,10 @@ class MovieFragment : Fragment() {
                 adapter = movieAdapater
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _fragmentMovieBinding = null
     }
 }

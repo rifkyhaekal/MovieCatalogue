@@ -10,7 +10,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.TvShowEntity
 import com.example.haekalmoviecatalogue.databinding.ItemsTvShowBinding
-import com.example.haekalmoviecatalogue.ui.detail.moviedetail.DetailMovieActivity
 import com.example.haekalmoviecatalogue.ui.detail.tvshowdetail.DetailTvShowActivity
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {

@@ -11,14 +11,15 @@ import com.example.haekalmoviecatalogue.databinding.FragmentTvShowBinding
 
 class TvShowFragment : Fragment() {
 
-    private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
+    private var _fragmentTvShowBinding: FragmentTvShowBinding? = null
+    private val fragmentTvShowBinding get() = _fragmentTvShowBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
+        _fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
         return fragmentTvShowBinding.root
     }
 
@@ -41,5 +42,10 @@ class TvShowFragment : Fragment() {
                 adapter = movieAdapater
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _fragmentTvShowBinding = null
     }
 }
