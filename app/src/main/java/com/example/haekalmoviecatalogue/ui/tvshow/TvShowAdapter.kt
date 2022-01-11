@@ -8,15 +8,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.TvShowEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
+import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 import com.example.haekalmoviecatalogue.databinding.ItemsTvShowBinding
 import com.example.haekalmoviecatalogue.ui.detail.tvshowdetail.DetailTvShowActivity
+import com.example.haekalmoviecatalogue.utils.Common
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
-    private var listTvShow = ArrayList<TvShowEntity>()
+    private var listTvShow = ArrayList<TvShowItem>()
 
-    fun setTvShow(tvShows: List<TvShowEntity>) {
+    fun setTvShow(tvShows: List<TvShowItem>?) {
         if (tvShows == null) return
         this.listTvShow.clear()
         this.listTvShow.addAll(tvShows)
@@ -35,18 +37,18 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     override fun getItemCount(): Int = listTvShow.size
 
     inner class TvShowViewHolder(private val binding: ItemsTvShowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShow: TvShowEntity) {
+        fun bind(tvShow: TvShowItem) {
             with(binding) {
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailTvShowActivity::class.java)
-                    intent.putExtra(DetailTvShowActivity.EXTRA_TVSHOW, tvShow.tvShowId)
+                    intent.putExtra(DetailTvShowActivity.EXTRA_TVSHOW, tvShow.id)
                     itemView.context.startActivity(intent)
                 }
                 Glide.with(itemView.context)
-                    .load(tvShow.imgPoster)
+                    .load(Common.POSTER_URL + tvShow.posterPath)
                     .transform(CenterCrop())
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
-                    .error(R.drawable.ic_error)
+                        .error(R.drawable.ic_error)
                     .into(imgPoster)
             }
         }

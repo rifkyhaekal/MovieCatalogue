@@ -1,4 +1,4 @@
-package com.example.haekalmoviecatalogue.data
+package com.example.haekalmoviecatalogue.data.source.local.entity
 
 data class MovieEntity(
     var movieId: String,

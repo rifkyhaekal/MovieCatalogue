@@ -36,4 +36,7 @@ ext {
     viewPager2Version = '1.0.0'
     legacyVersion = '1.0.0'
     navigationVersion = '2.3.5'
+
+    retrofitVersion = '2.9.0'
+    interceptorVersion = '4.9.0'
 }

@@ -1,7 +1,7 @@
 package com.example.haekalmoviecatalogue.ui.detail.tvshowdetail
 
 import androidx.lifecycle.ViewModel
-import com.example.haekalmoviecatalogue.data.TvShowEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.utils.DataDummy
 
 class DetailTvShowViewModel : ViewModel() {

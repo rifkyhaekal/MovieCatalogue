@@ -1,8 +1,8 @@
 package com.example.haekalmoviecatalogue.utils
 
 import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.MovieEntity
-import com.example.haekalmoviecatalogue.data.TvShowEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 
 
 object DataDummy {
@@ -19,7 +19,8 @@ object DataDummy {
             "75%",
             "10/05/2018",
             "Released",
-                R.drawable.poster_a_start_is_born))
+                R.drawable.poster_a_start_is_born)
+        )
         movies.add(
             MovieEntity("m2",
                 "Alita: Battle Angel",
@@ -29,7 +30,8 @@ object DataDummy {
                 "72%",
                 "02/14/2019",
                 "Released",
-                R.drawable.poster_alita))
+                R.drawable.poster_alita)
+        )
         movies.add(
             MovieEntity("m3",
                 "Aquaman",
@@ -39,7 +41,8 @@ object DataDummy {
                 "69%",
                 "12/26/2018",
                 "Released",
-                R.drawable.poster_aquaman))
+                R.drawable.poster_aquaman)
+        )
         movies.add(
             MovieEntity("m4",
                 "Bohemian Rhapsody",
@@ -49,7 +52,8 @@ object DataDummy {
                 "80%",
                 "10/05/2018",
                 "Released",
-                R.drawable.poster_bohemian))
+                R.drawable.poster_bohemian)
+        )
         movies.add(
             MovieEntity("m5",
                 "Creed II",
@@ -59,7 +63,8 @@ object DataDummy {
                 "69%",
                 "11/21/2018",
                 "Released",
-                R.drawable.poster_creed))
+                R.drawable.poster_creed)
+        )
         movies.add(
             MovieEntity("m6",
                 "Cold Pursuit",
@@ -69,7 +74,8 @@ object DataDummy {
                 "57%",
                 "02/08/2019",
                 "Released",
-                R.drawable.poster_cold_persuit))
+                R.drawable.poster_cold_persuit)
+        )
         movies.add(
             MovieEntity("m7",
                 "Glass",
@@ -79,7 +85,8 @@ object DataDummy {
                 "67%",
                 "01/18/2019",
                 "Released",
-                R.drawable.poster_glass))
+                R.drawable.poster_glass)
+        )
         movies.add(
             MovieEntity("m8",
                 "How to Train Your Dragon: The Hidden World",
@@ -89,7 +96,8 @@ object DataDummy {
                 "78%",
                 "01/09/2019",
                 "Released",
-                R.drawable.poster_how_to_train))
+                R.drawable.poster_how_to_train)
+        )
         movies.add(
             MovieEntity("m9",
                 "Avengers: Infinity War",
@@ -99,7 +107,8 @@ object DataDummy {
                 "83%",
                 "04/27/2018",
                 "Released",
-                R.drawable.poster_infinity_war))
+                R.drawable.poster_infinity_war)
+        )
         movies.add(
             MovieEntity("m10",
                 "Mary Queen of Scots",
@@ -109,7 +118,8 @@ object DataDummy {
                 "66%",
                 "12/21/2018",
                 "Released",
-                R.drawable.poster_marry_queen))
+                R.drawable.poster_marry_queen)
+        )
         return movies
     }
 
@@ -125,7 +135,8 @@ object DataDummy {
                 "Crime, Drama, Mystery, Action & Adventure",
                 "The CW",
                 "67%",
-                R.drawable.poster_arrow))
+                R.drawable.poster_arrow)
+        )
         tvShows.add(
             TvShowEntity( "ts2",
                 "Doom Patrol",
@@ -135,7 +146,8 @@ object DataDummy {
                 "Sci-Fi & Fantasy, Drama",
                 "MBO MAX",
                 "77%",
-                R.drawable.poster_doom_patrol))
+                R.drawable.poster_doom_patrol)
+        )
         tvShows.add(
             TvShowEntity( "ts3",
                 "Dragon Ball",
@@ -145,7 +157,8 @@ object DataDummy {
                 "Animation, Action & Adventure, Sci-Fi & Fantasy",
                 "Fuji TV",
                 "82%",
-                R.drawable.poster_dragon_ball))
+                R.drawable.poster_dragon_ball)
+        )
         tvShows.add(
             TvShowEntity( "ts4",
                 "Family Guy",
@@ -155,7 +168,8 @@ object DataDummy {
                 "Animation, Comedy",
                 "FOX",
                 "71%",
-                R.drawable.poster_family_guy))
+                R.drawable.poster_family_guy)
+        )
         tvShows.add(
             TvShowEntity( "ts5",
                 "The Flash",
@@ -165,7 +179,8 @@ object DataDummy {
                 "Drama, Sci-Fi & Fantasy",
                 "The CW",
                 "78%",
-                R.drawable.poster_flash))
+                R.drawable.poster_flash)
+        )
         tvShows.add(
             TvShowEntity( "ts6",
                 "Gotham",
@@ -175,7 +190,8 @@ object DataDummy {
                 "Drama, Crime, Sci-Fi & Fantasy",
                 "FOX",
                 "76%",
-                R.drawable.poster_gotham))
+                R.drawable.poster_gotham)
+        )
         tvShows.add(
             TvShowEntity( "ts7",
                 "Grey's Anatomy",
@@ -185,7 +201,8 @@ object DataDummy {
                 "Drama",
                 "ABC",
                 "82%",
-                R.drawable.poster_grey_anatomy))
+                R.drawable.poster_grey_anatomy)
+        )
         tvShows.add(
             TvShowEntity( "ts8",
                 "Hanna",
@@ -195,7 +212,8 @@ object DataDummy {
                 "Action & Adventure, Drama",
                 "Prime Video",
                 "76%",
-                R.drawable.poster_hanna))
+                R.drawable.poster_hanna)
+        )
         tvShows.add(
             TvShowEntity( "ts9",
                 "Marvel's Iron Fist ",
@@ -205,7 +223,8 @@ object DataDummy {
                 "Action & Adventure, Drama, Sci-Fi & Fantasy",
                 "Netflix",
                 "66%",
-                R.drawable.poster_iron_fist))
+                R.drawable.poster_iron_fist)
+        )
         tvShows.add(
             TvShowEntity( "ts10",
                 "NCIS",
@@ -215,7 +234,8 @@ object DataDummy {
                 "Crime, Action & Adventure, Drama",
                 "CBS",
                 "75%",
-                R.drawable.poster_ncis))
+                R.drawable.poster_ncis)
+        )
 
         return tvShows
     }

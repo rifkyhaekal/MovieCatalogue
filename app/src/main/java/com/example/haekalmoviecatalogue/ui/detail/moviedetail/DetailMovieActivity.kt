@@ -8,7 +8,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.MovieEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.databinding.ActivityDetailMovieBinding
 import com.example.haekalmoviecatalogue.databinding.ContentDetailMovieBinding
 
