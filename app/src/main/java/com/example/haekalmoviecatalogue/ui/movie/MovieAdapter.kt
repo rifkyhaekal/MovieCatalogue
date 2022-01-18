@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
 import com.example.haekalmoviecatalogue.databinding.ItemsMovieBinding
-import com.example.haekalmoviecatalogue.ui.detail.moviedetail.DetailMovieActivity
+import com.example.haekalmoviecatalogue.ui.detail.moviedetail.MovieDetailActivity
 import com.example.haekalmoviecatalogue.utils.Common
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
@@ -39,8 +39,8 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         fun bind(movie: MovieItem) {
             with(binding) {
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailMovieActivity::class.java)
-                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.id)
+                    val intent = Intent(itemView.context, MovieDetailActivity::class.java)
+                    intent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie.id)
                     itemView.context.startActivity(intent)
                 }
                 Glide.with(itemView.context)

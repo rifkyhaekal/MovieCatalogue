@@ -8,10 +8,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 import com.example.haekalmoviecatalogue.databinding.ItemsTvShowBinding
-import com.example.haekalmoviecatalogue.ui.detail.tvshowdetail.DetailTvShowActivity
+import com.example.haekalmoviecatalogue.ui.detail.tvshowdetail.TvShowDetailActivity
 import com.example.haekalmoviecatalogue.utils.Common
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
@@ -40,8 +39,8 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
         fun bind(tvShow: TvShowItem) {
             with(binding) {
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailTvShowActivity::class.java)
-                    intent.putExtra(DetailTvShowActivity.EXTRA_TVSHOW, tvShow.id)
+                    val intent = Intent(itemView.context, TvShowDetailActivity::class.java)
+                    intent.putExtra(TvShowDetailActivity.EXTRA_TVSHOW, tvShow.id)
                     itemView.context.startActivity(intent)
                 }
                 Glide.with(itemView.context)

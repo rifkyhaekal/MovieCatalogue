@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content_tv_show"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -80,7 +81,7 @@
         tools:text="@string/type"/>
 
     <TextView
-        android:id="@+id/txt_score_score"
+        android:id="@+id/txt_score_tvshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -89,16 +90,28 @@
         app:layout_constraintTop_toBottomOf="@+id/text_type_tvshow"
         android:text="@string/score" />
 
-    <TextView
-        android:id="@+id/text_score_tvshow"
-        android:layout_width="0dp"
+    <RatingBar
+        android:id="@+id/rating_tv_show"
+        style="@android:style/Widget.Material.RatingBar.Small"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@+id/txt_score_score"
-        app:layout_constraintStart_toStartOf="@+id/txt_score_score"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:progressBackgroundTint="@color/lightGrey"
+        android:secondaryProgressTint="@color/lightGrey"
+        android:backgroundTint="@color/lightGrey"
+        android:progressTint="@color/duskYellow"
+        app:layout_constraintTop_toBottomOf="@+id/txt_score_tvshow"
+        app:layout_constraintStart_toStartOf="@+id/txt_score_tvshow" />
+
+    <TextView
+        android:id="@+id/rating_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/duskYellow"
+        android:textSize="11sp"
+        app:layout_constraintTop_toTopOf="@+id/rating_tv_show"
+        app:layout_constraintStart_toEndOf="@id/rating_tv_show"
         tools:text="@string/score"/>
 
     <TextView
@@ -107,8 +120,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/text_score_tvshow"
-        app:layout_constraintTop_toBottomOf="@+id/text_score_tvshow"
+        app:layout_constraintStart_toStartOf="@+id/rating_tv_show"
+        app:layout_constraintTop_toBottomOf="@+id/rating_tv_show"
         android:text="@string/status" />
 
     <TextView
@@ -169,5 +182,30 @@
         app:layout_constraintStart_toStartOf="@+id/txt_overview_tvshow"
         app:layout_constraintTop_toBottomOf="@+id/txt_overview_tvshow"
         tools:text="@string/overview" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible"/>
+
+    <include
+        android:id="@+id/error_info"
+        layout="@layout/error_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

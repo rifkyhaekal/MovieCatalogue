@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,13 +13,13 @@ import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.ErrorEntity
 import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
 import com.example.haekalmoviecatalogue.databinding.FragmentMovieBinding
+import com.example.haekalmoviecatalogue.utils.JsonHelper
 import com.example.haekalmoviecatalogue.viewmodel.ViewModelFactory
 
 class MovieFragment : Fragment() {
 
     private var _fragmentMovieBinding: FragmentMovieBinding? = null
     private val fragmentMovieBinding get() = _fragmentMovieBinding!!
-    private lateinit var movieViewModel: MovieViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,18 +33,13 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        movieViewModel = obtainViewModel(activity as AppCompatActivity)
+        val factory = ViewModelFactory.getInstance(JsonHelper())
+        val movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
-        movieViewModel.isLoading.observe(viewLifecycleOwner, {
-            showLoading(it)
-        })
-
-        movieViewModel.showError.observe(viewLifecycleOwner, {
-            showErrorInfo(it)
-        })
-
-        movieViewModel.popularMovie.observe(viewLifecycleOwner, {
-            setPopularMovie(it)
+        showLoading(true)
+        movieViewModel.getPopularMovies().observe(viewLifecycleOwner, { popularMovies ->
+            showLoading(false)
+            setPopularMovie(popularMovies.results)
         })
 
     }
@@ -54,6 +48,7 @@ class MovieFragment : Fragment() {
 
         val movieAdapater = MovieAdapter()
         movieAdapater.setMovies(items)
+        movieAdapater.notifyDataSetChanged()
 
         with(fragmentMovieBinding.rvMovie) {
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -64,11 +59,6 @@ class MovieFragment : Fragment() {
             setHasFixedSize(true)
             adapter = movieAdapater
         }
-    }
-
-    private fun obtainViewModel(activity: AppCompatActivity): MovieViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory).get(MovieViewModel::class.java)
     }
 
     private fun showLoading(isLoading: Boolean) {

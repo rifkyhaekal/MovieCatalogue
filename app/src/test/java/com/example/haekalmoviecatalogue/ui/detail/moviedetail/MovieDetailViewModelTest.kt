@@ -6,22 +6,22 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 
-class DetailMovieViewModelTest {
+class MovieDetailViewModelTest {
 
-    private lateinit var viewModel: DetailMovieViewModel
+    private lateinit var detailViewModel: MovieDetailViewModel
     private val dummyMovie = DataDummy.generateDummyMovies()[0]
     private val movieId = dummyMovie.movieId
 
     @Before
     fun setUp() {
-        viewModel = DetailMovieViewModel()
-        viewModel.setSelectedMovie(movieId)
+        detailViewModel = MovieDetailViewModel()
+        detailViewModel.setSelectedMovie(movieId)
     }
 
     @Test
     fun getMovie() {
-        viewModel.setSelectedMovie(dummyMovie.movieId)
-        val movieEntity = viewModel.getMovie()
+        detailViewModel.setSelectedMovie(dummyMovie.movieId)
+        val movieEntity = detailViewModel.getMovie()
         assertNotNull(movieEntity)
         assertEquals(dummyMovie.movieId, movieEntity.movieId)
         assertEquals(dummyMovie.title, movieEntity.title)

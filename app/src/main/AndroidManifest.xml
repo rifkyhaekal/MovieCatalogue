@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.detail.moviedetail.DetailMovieActivity"
+            android:name=".ui.detail.moviedetail.MovieDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_detail_movie"
             android:parentActivityName=".ui.home.HomeActivity"
@@ -32,7 +32,7 @@
                 android:value="com.example.haekalmoviecatalogue.ui.home.HomeActivity" />
         </activity>
         <activity
-            android:name=".ui.detail.tvshowdetail.DetailTvShowActivity"
+            android:name=".ui.detail.tvshowdetail.TvShowDetailActivity"
             android:label="@string/title_activity_detail_tv_show"
             android:parentActivityName=".ui.home.HomeActivity"
             android:exported="false"

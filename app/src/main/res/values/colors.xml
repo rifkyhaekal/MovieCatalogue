@@ -7,4 +7,6 @@
     <color name="colorSecondaryDark">#0778bb</color>
     <color name="placeholder">#6FB6B6B6</color>
     <color name="textMinor">#777b80</color>
+    <color name="lightGrey">#D3D3D3</color>
+    <color name="duskYellow">#FFC922</color>
 </resources>
