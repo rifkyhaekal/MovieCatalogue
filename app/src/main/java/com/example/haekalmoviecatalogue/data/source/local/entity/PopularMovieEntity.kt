@@ -1,12 +1,10 @@
 package com.example.haekalmoviecatalogue.data.source.local.entity
 
-import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
-
 data class PopularMovieEntity(
-    var results: List<MovieItem>
+    var results: List<MovieItemEntity>
 )
 
-data class MovieItem(
+data class MovieItemEntity(
     val id: Int,
     val posterPath: String
 )

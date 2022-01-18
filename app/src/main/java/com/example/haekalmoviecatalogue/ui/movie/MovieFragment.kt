@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.ErrorEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieItemEntity
 import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
 import com.example.haekalmoviecatalogue.databinding.FragmentMovieBinding
 import com.example.haekalmoviecatalogue.utils.JsonHelper
@@ -39,12 +40,12 @@ class MovieFragment : Fragment() {
         showLoading(true)
         movieViewModel.getPopularMovies().observe(viewLifecycleOwner, { popularMovies ->
             showLoading(false)
-            setPopularMovie(popularMovies.results)
+            setPopularMovie(popularMovies)
         })
 
     }
 
-    private fun setPopularMovie(items: List<MovieItem>?) {
+    private fun setPopularMovie(items: List<MovieItemEntity>?) {
 
         val movieAdapater = MovieAdapter()
         movieAdapater.setMovies(items)

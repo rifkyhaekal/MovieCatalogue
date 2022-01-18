@@ -20,7 +20,7 @@ interface ApiService {
         @Query("api_key") api_key: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<TvShowItem>
+    ): Call<List<TvShowItem>>
 
     @GET("movie/{movie_id}")
     fun getMovieDetail(

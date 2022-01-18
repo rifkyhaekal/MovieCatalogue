@@ -6,6 +6,7 @@ import com.example.haekalmoviecatalogue.utils.JsonHelper
 
 object Injection {
     fun provideRepository(helper: JsonHelper): MovieRepository {
+
         val remoteDataSource = RemoteDataSource.getInstance(helper)
 
         return MovieRepository.getInstance(remoteDataSource)

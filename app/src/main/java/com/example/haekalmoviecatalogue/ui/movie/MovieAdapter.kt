@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieItemEntity
 import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
 import com.example.haekalmoviecatalogue.databinding.ItemsMovieBinding
 import com.example.haekalmoviecatalogue.ui.detail.moviedetail.MovieDetailActivity
@@ -15,9 +16,9 @@ import com.example.haekalmoviecatalogue.utils.Common
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var listMovie = ArrayList<MovieItem>()
+    private var listMovie = ArrayList<MovieItemEntity>()
 
-    fun setMovies(movies: List<MovieItem>?){
+    fun setMovies(movies: List<MovieItemEntity>?){
         if (movies == null) return
         this.listMovie.clear()
         this.listMovie.addAll(movies)
@@ -36,7 +37,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     override fun getItemCount(): Int = listMovie.size
 
     inner class MovieViewHolder(private val binding: ItemsMovieBinding) :  RecyclerView.ViewHolder(binding.root){
-        fun bind(movie: MovieItem) {
+        fun bind(movie: MovieItemEntity) {
             with(binding) {
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, MovieDetailActivity::class.java)

@@ -22,7 +22,7 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper){
     }
 
     interface  LoadPopularMoviesCallback {
-        fun onAllPopularMovieReceived(popularMovieResponses: PopularMovieResponse)
+        fun onAllPopularMovieReceived(popularMovieResponses: List<MovieItem>)
     }
 
     interface LoadPopularTvShowCallback {

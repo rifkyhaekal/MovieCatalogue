@@ -2,15 +2,15 @@ package com.example.haekalmoviecatalogue.data.source
 
 import androidx.lifecycle.LiveData
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieDetailEntity
-import com.example.haekalmoviecatalogue.data.source.local.entity.PopularMovieEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieItemEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowDetailEntity
-import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowItemEntity
 import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 
 interface MovieDataSource  {
-    fun getPopularMovie(): LiveData<PopularMovieEntity>
+    fun getPopularMovie(): LiveData<List<MovieItemEntity>>
 
-    fun getPopularTvShow(): LiveData<List<TvShowItem>>
+    fun getPopularTvShow(): LiveData<List<TvShowItemEntity>>
 
     fun getMovieDetail(movieId: Int?): LiveData<MovieDetailEntity>
 

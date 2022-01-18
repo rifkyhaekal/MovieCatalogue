@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowItemEntity
 import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 import com.example.haekalmoviecatalogue.databinding.ItemsTvShowBinding
 import com.example.haekalmoviecatalogue.ui.detail.tvshowdetail.TvShowDetailActivity
@@ -15,9 +16,9 @@ import com.example.haekalmoviecatalogue.utils.Common
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
-    private var listTvShow = ArrayList<TvShowItem>()
+    private var listTvShow = ArrayList<TvShowItemEntity>()
 
-    fun setTvShow(tvShows: List<TvShowItem>?) {
+    fun setTvShow(tvShows: List<TvShowItemEntity>?) {
         if (tvShows == null) return
         this.listTvShow.clear()
         this.listTvShow.addAll(tvShows)
@@ -36,7 +37,7 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     override fun getItemCount(): Int = listTvShow.size
 
     inner class TvShowViewHolder(private val binding: ItemsTvShowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShow: TvShowItem) {
+        fun bind(tvShow: TvShowItemEntity) {
             with(binding) {
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, TvShowDetailActivity::class.java)

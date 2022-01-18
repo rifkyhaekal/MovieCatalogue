@@ -1,9 +1,12 @@
 package com.example.haekalmoviecatalogue.data.source.local.entity
 
-import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
-
 data class PopularTvShowEntity(
-    val results: List<TvShowItem>
+    val results: List<TvShowItemEntity>
+)
+
+data class TvShowItemEntity(
+    val id: Int,
+    val posterPath: String
 )
 
 

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.ErrorEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowItemEntity
 import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 import com.example.haekalmoviecatalogue.databinding.FragmentTvShowBinding
 import com.example.haekalmoviecatalogue.utils.JsonHelper
@@ -44,7 +45,7 @@ class TvShowFragment : Fragment() {
 
     }
 
-    private fun setPopularTvShow(items: List<TvShowItem>?) {
+    private fun setPopularTvShow(items: List<TvShowItemEntity>?) {
 
         val tvShowAdapter = TvShowAdapter()
         tvShowAdapter.setTvShow(items)

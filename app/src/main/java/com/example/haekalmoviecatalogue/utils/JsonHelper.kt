@@ -8,8 +8,8 @@ import retrofit2.Response
 
 class JsonHelper {
 
-    fun getPopularMovies(): PopularMovieResponse {
-        lateinit var list: PopularMovieResponse
+    fun getPopularMovies(): List<MovieItem> {
+        val list = ArrayList<MovieItem>()
 
         val client = ApiConfig.getApiService().getPopularMovie(Common.API_KEY, "en-US", 1)
         client.enqueue(object : Callback<List<MovieItem>> {
@@ -20,7 +20,12 @@ class JsonHelper {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        list = PopularMovieResponse(responseBody)
+                        for (response in responseBody) {
+                            val id = response.id
+                            val posterPath = response.posterPath
+                            val popularMovieResponse = MovieItem(id, posterPath)
+                            list.add(popularMovieResponse)
+                        }
                     }
                 }
             }
@@ -37,21 +42,25 @@ class JsonHelper {
         val list = ArrayList<TvShowItem>()
 
         val client = ApiConfig.getApiService().getPopularTv(Common.API_KEY, "en-US", 1)
-        client.enqueue(object : Callback<TvShowItem> {
+        client.enqueue(object : Callback<List<TvShowItem>> {
             override fun onResponse(
-                call: Call<TvShowItem>,
-                response: Response<TvShowItem>
+                call: Call<List<TvShowItem>>,
+                response: Response<List<TvShowItem>>
             ) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        val tvShowResponse = TvShowItem(responseBody.id, responseBody.posterPath)
-                        list.add(tvShowResponse)
+                        for (response in responseBody) {
+                            val id = response.id
+                            val posterPath = response.posterPath
+                            val popularTvShowResponse = TvShowItem(id, posterPath)
+                            list.add(popularTvShowResponse)
+                        }
                     }
                 }
             }
 
-            override fun onFailure(call: Call<TvShowItem>, t: Throwable) {
+            override fun onFailure(call: Call<List<TvShowItem>>, t: Throwable) {
 
             }
 
