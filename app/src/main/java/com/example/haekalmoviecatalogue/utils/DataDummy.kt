@@ -1,9 +1,5 @@
 package com.example.haekalmoviecatalogue.utils
 
-import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.source.local.entity.MovieDetailEntity
-import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowDetailEntity
-
 
 //object DataDummy {
 //

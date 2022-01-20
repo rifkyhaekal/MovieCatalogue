@@ -16,7 +16,6 @@ import com.example.haekalmoviecatalogue.data.source.remote.response.TvGenresItem
 import com.example.haekalmoviecatalogue.databinding.ActivityDetailTvShowBinding
 import com.example.haekalmoviecatalogue.databinding.ContentDetailTvShowBinding
 import com.example.haekalmoviecatalogue.utils.Common
-import com.example.haekalmoviecatalogue.utils.JsonHelper
 import com.example.haekalmoviecatalogue.viewmodel.ViewModelFactory
 
 class TvShowDetailActivity : AppCompatActivity() {
@@ -34,7 +33,7 @@ class TvShowDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 25f
 
-        val factory = ViewModelFactory.getInstance(JsonHelper())
+        val factory = ViewModelFactory.getInstance()
         val tvShowDetailViewModel = ViewModelProvider(this, factory)[TvShowDetailViewModel::class.java]
 
         val extras = intent.extras

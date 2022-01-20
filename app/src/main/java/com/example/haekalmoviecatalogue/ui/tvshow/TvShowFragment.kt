@@ -12,9 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.ErrorEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowItemEntity
-import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 import com.example.haekalmoviecatalogue.databinding.FragmentTvShowBinding
-import com.example.haekalmoviecatalogue.utils.JsonHelper
 import com.example.haekalmoviecatalogue.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment() {
@@ -34,7 +32,7 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory.getInstance(JsonHelper())
+        val factory = ViewModelFactory.getInstance()
         val tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         showLoading(true)

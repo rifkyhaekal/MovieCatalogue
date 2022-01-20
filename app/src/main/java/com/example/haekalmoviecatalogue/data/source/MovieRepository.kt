@@ -2,21 +2,27 @@ package com.example.haekalmoviecatalogue.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.haekalmoviecatalogue.data.source.local.entity.*
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieDetailEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieItemEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowDetailEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowItemEntity
 import com.example.haekalmoviecatalogue.data.source.remote.RemoteDataSource
-import com.example.haekalmoviecatalogue.data.source.remote.response.*
+import com.example.haekalmoviecatalogue.data.source.remote.response.MovieDetailResponse
+import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
+import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowDetailResponse
+import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 
 class MovieRepository private constructor(private val remoteDataSource: RemoteDataSource) : MovieDataSource{
 
-    override fun getPopularMovie(): LiveData<List<MovieItemEntity>> {
+    override fun getPopularMovies(): LiveData<List<MovieItemEntity>> {
         val popularMovieResults = MutableLiveData<List<MovieItemEntity>>()
-        remoteDataSource.getAllPopularMovies(object : RemoteDataSource.LoadPopularMoviesCallback {
-            override fun onAllPopularMovieReceived(popularMovieResponses: List<MovieItem>) {
+        remoteDataSource.getPopularMovies(object : RemoteDataSource.LoadPopularMoviesCallback {
+            override fun onAllPopularMoviesReceived(popularMovieResponses: List<MovieItem>) {
                 val movieList = ArrayList<MovieItemEntity>()
                 for (response in popularMovieResponses) {
                     val movie = MovieItemEntity(
-                        response.id,
-                        response.posterPath
+                        id = response.id,
+                        posterPath = response.posterPath
                     )
                     movieList.add(movie)
                 }
@@ -28,13 +34,13 @@ class MovieRepository private constructor(private val remoteDataSource: RemoteDa
 
     override fun getPopularTvShow(): LiveData<List<TvShowItemEntity>> {
         val popularTvShowResults = MutableLiveData<List<TvShowItemEntity>>()
-        remoteDataSource.getAllPopularTvShows(object : RemoteDataSource.LoadPopularTvShowCallback {
-            override fun onAllPopularTvShowReceived(popularTvShowResponses: List<TvShowItem>) {
+        remoteDataSource.getPopularTvShows(object : RemoteDataSource.LoadPopularTvShowCallback {
+            override fun onAllPopularTvShowsReceived(popularTvShowResponses: List<TvShowItem>) {
                 val popularTvShowList = ArrayList<TvShowItemEntity>()
                 for (response in popularTvShowResponses) {
                     val tvShow = TvShowItemEntity(
-                        response.id,
-                        response.posterPath
+                        id = response.id,
+                        posterPath = response.posterPath
                     )
                     popularTvShowList.add(tvShow)
                 }

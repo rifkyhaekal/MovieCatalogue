@@ -9,7 +9,6 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowItemEntity
-import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 import com.example.haekalmoviecatalogue.databinding.ItemsTvShowBinding
 import com.example.haekalmoviecatalogue.ui.detail.tvshowdetail.TvShowDetailActivity
 import com.example.haekalmoviecatalogue.utils.Common

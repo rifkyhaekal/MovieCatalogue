@@ -8,7 +8,6 @@ import com.example.haekalmoviecatalogue.ui.detail.moviedetail.MovieDetailViewMod
 import com.example.haekalmoviecatalogue.ui.detail.tvshowdetail.TvShowDetailViewModel
 import com.example.haekalmoviecatalogue.ui.movie.MovieViewModel
 import com.example.haekalmoviecatalogue.ui.tvshow.TvShowViewModel
-import com.example.haekalmoviecatalogue.utils.JsonHelper
 
 class ViewModelFactory private constructor(private val mMovieRepository: MovieRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -34,9 +33,9 @@ class ViewModelFactory private constructor(private val mMovieRepository: MovieRe
         private var INSTANCE: ViewModelFactory? = null
 
         @JvmStatic
-        fun getInstance(helper: JsonHelper): ViewModelFactory =
+        fun getInstance(): ViewModelFactory =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: ViewModelFactory(Injection.provideRepository(helper)).apply {
+                INSTANCE ?: ViewModelFactory(Injection.provideRepository()).apply {
                     INSTANCE = this
                 }
             }

@@ -2,6 +2,7 @@ package com.example.haekalmoviecatalogue.ui.movie
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.ErrorEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieItemEntity
-import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
 import com.example.haekalmoviecatalogue.databinding.FragmentMovieBinding
-import com.example.haekalmoviecatalogue.utils.JsonHelper
 import com.example.haekalmoviecatalogue.viewmodel.ViewModelFactory
 
 class MovieFragment : Fragment() {
@@ -34,7 +33,7 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory.getInstance(JsonHelper())
+        val factory = ViewModelFactory.getInstance()
         val movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
         showLoading(true)
@@ -45,9 +44,12 @@ class MovieFragment : Fragment() {
 
     }
 
-    private fun setPopularMovie(items: List<MovieItemEntity>?) {
+    private fun setPopularMovie(items: List<MovieItemEntity>) {
 
         val movieAdapater = MovieAdapter()
+        for (res in items) {
+            Log.d("Item: ", res.id.toString())
+        }
         movieAdapater.setMovies(items)
         movieAdapater.notifyDataSetChanged()
 

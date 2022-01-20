@@ -1,6 +1,9 @@
 package com.example.haekalmoviecatalogue.api
 
-import com.example.haekalmoviecatalogue.data.source.remote.response.*
+import com.example.haekalmoviecatalogue.data.source.remote.response.MovieDetailResponse
+import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
+import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowDetailResponse
+import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

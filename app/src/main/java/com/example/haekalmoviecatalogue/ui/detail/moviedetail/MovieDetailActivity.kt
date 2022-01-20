@@ -15,7 +15,6 @@ import com.example.haekalmoviecatalogue.data.source.remote.response.MovieGenresI
 import com.example.haekalmoviecatalogue.databinding.ActivityDetailMovieBinding
 import com.example.haekalmoviecatalogue.databinding.ContentDetailMovieBinding
 import com.example.haekalmoviecatalogue.utils.Common
-import com.example.haekalmoviecatalogue.utils.JsonHelper
 import com.example.haekalmoviecatalogue.viewmodel.ViewModelFactory
 import kotlin.math.floor
 
@@ -35,7 +34,7 @@ class MovieDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 25f
 
-        val factory = ViewModelFactory.getInstance(JsonHelper())
+        val factory = ViewModelFactory.getInstance()
         val movieDetailViewModel = ViewModelProvider(this, factory)[MovieDetailViewModel::class.java]
 
         val extras = intent.extras
