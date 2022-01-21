@@ -2,35 +2,30 @@ package com.example.haekalmoviecatalogue.data.source.remote
 
 import android.util.Log
 import com.example.haekalmoviecatalogue.api.ApiConfig
-import com.example.haekalmoviecatalogue.data.source.remote.response.MovieDetailResponse
-import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
-import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowDetailResponse
-import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
+import com.example.haekalmoviecatalogue.data.source.remote.response.*
 import com.example.haekalmoviecatalogue.utils.Common
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RemoteDataSource {
-
     fun getPopularMovies(callback: LoadPopularMoviesCallback) {
         val client = ApiConfig.getApiService().getPopularMovie(Common.API_KEY, "en-US", 1)
-        client.enqueue(object : Callback<List<MovieItem>> {
+            client.enqueue(object : Callback<PopularMovieResponse> {
             override fun onResponse(
-                call: Call<List<MovieItem>>,
-                response: Response<List<MovieItem>>
+                call: Call<PopularMovieResponse>,
+                response: Response<PopularMovieResponse>
             ) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        Log.d("Body", responseBody.size.toString())
-                        callback.onAllPopularMoviesReceived(responseBody)
+                        callback.onAllPopularMoviesReceived(responseBody.results)
                     }
                 }
             }
 
-            override fun onFailure(call: Call<List<MovieItem>>, t: Throwable) {
-
+            override fun onFailure(call: Call<PopularMovieResponse>, t: Throwable) {
+                Log.e("Error: ", "${t.message.toString()}")
             }
 
         })
@@ -38,21 +33,21 @@ class RemoteDataSource {
 
     fun getPopularTvShows(callback: LoadPopularTvShowCallback) {
         val client = ApiConfig.getApiService().getPopularTv(Common.API_KEY, "en-US", 1)
-        client.enqueue(object : Callback<List<TvShowItem>> {
+        client.enqueue(object : Callback<PopularTvShowResponse> {
             override fun onResponse(
-                call: Call<List<TvShowItem>>,
-                response: Response<List<TvShowItem>>
+                call: Call<PopularTvShowResponse>,
+                response: Response<PopularTvShowResponse>
             ) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        callback.onAllPopularTvShowsReceived(responseBody)
+                        callback.onAllPopularTvShowsReceived(responseBody.results)
                     }
                 }
             }
 
-            override fun onFailure(call: Call<List<TvShowItem>>, t: Throwable) {
-
+            override fun onFailure(call: Call<PopularTvShowResponse>, t: Throwable) {
+                Log.e("Error: ", "${t.message.toString()}")
             }
 
         })

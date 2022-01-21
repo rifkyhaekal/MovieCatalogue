@@ -12,7 +12,7 @@ import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
 import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowDetailResponse
 import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 
-class MovieRepository private constructor(private val remoteDataSource: RemoteDataSource) : MovieDataSource{
+class MovieRepository private constructor(private val remoteDataSource: RemoteDataSource) : MovieDataSource {
 
     override fun getPopularMovies(): LiveData<List<MovieItemEntity>> {
         val popularMovieResults = MutableLiveData<List<MovieItemEntity>>()

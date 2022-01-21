@@ -2,24 +2,23 @@ package com.example.haekalmoviecatalogue.ui.movie
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.ErrorEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieItemEntity
 import com.example.haekalmoviecatalogue.databinding.FragmentMovieBinding
-import com.example.haekalmoviecatalogue.viewmodel.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieFragment : Fragment() {
 
     private var _fragmentMovieBinding: FragmentMovieBinding? = null
     private val fragmentMovieBinding get() = _fragmentMovieBinding!!
+    private val movieViewModel: MovieViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,23 +32,18 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory.getInstance()
-        val movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
-
         showLoading(true)
         movieViewModel.getPopularMovies().observe(viewLifecycleOwner, { popularMovies ->
             showLoading(false)
-            setPopularMovie(popularMovies)
+            setPopularMovies(popularMovies)
         })
+
 
     }
 
-    private fun setPopularMovie(items: List<MovieItemEntity>) {
+    private fun setPopularMovies(items: List<MovieItemEntity>?) {
 
         val movieAdapater = MovieAdapter()
-        for (res in items) {
-            Log.d("Item: ", res.id.toString())
-        }
         movieAdapater.setMovies(items)
         movieAdapater.notifyDataSetChanged()
 

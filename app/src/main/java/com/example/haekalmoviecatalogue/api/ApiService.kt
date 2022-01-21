@@ -1,9 +1,9 @@
 package com.example.haekalmoviecatalogue.api
 
 import com.example.haekalmoviecatalogue.data.source.remote.response.MovieDetailResponse
-import com.example.haekalmoviecatalogue.data.source.remote.response.MovieItem
+import com.example.haekalmoviecatalogue.data.source.remote.response.PopularMovieResponse
+import com.example.haekalmoviecatalogue.data.source.remote.response.PopularTvShowResponse
 import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowDetailResponse
-import com.example.haekalmoviecatalogue.data.source.remote.response.TvShowItem
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,14 +16,14 @@ interface ApiService {
         @Query("api_key") api_key: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<List<MovieItem>>
+    ): Call<PopularMovieResponse>
 
     @GET("tv/popular")
     fun getPopularTv(
         @Query("api_key") api_key: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<List<TvShowItem>>
+    ): Call<PopularTvShowResponse>
 
     @GET("movie/{movie_id}")
     fun getMovieDetail(

@@ -39,4 +39,6 @@ ext {
 
     retrofitVersion = '2.9.0'
     interceptorVersion = '4.9.0'
+
+    koinVersion = "3.1.5"
 }

@@ -3,7 +3,6 @@ package com.example.haekalmoviecatalogue.ui.detail.moviedetail
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -15,13 +14,13 @@ import com.example.haekalmoviecatalogue.data.source.remote.response.MovieGenresI
 import com.example.haekalmoviecatalogue.databinding.ActivityDetailMovieBinding
 import com.example.haekalmoviecatalogue.databinding.ContentDetailMovieBinding
 import com.example.haekalmoviecatalogue.utils.Common
-import com.example.haekalmoviecatalogue.viewmodel.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.floor
 
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var contentDetailMovieBinding: ContentDetailMovieBinding
-
+    private val movieDetailViewModel: MovieDetailViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,9 +33,6 @@ class MovieDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 25f
 
-        val factory = ViewModelFactory.getInstance()
-        val movieDetailViewModel = ViewModelProvider(this, factory)[MovieDetailViewModel::class.java]
-
         val extras = intent.extras
         if (extras != null) {
             val movieId = extras.getInt(EXTRA_MOVIE)
@@ -44,7 +40,6 @@ class MovieDetailActivity : AppCompatActivity() {
 
                 showLoading(true)
                 showDetailMovie(false)
-
                 movieDetailViewModel.setSelectedMovie(movieId)
                 movieDetailViewModel.getMovieDetail().observe(this, { MovieDetail ->
                     showLoading(false)
@@ -60,7 +55,7 @@ class MovieDetailActivity : AppCompatActivity() {
             textTitleMovie.text = movieEntity.title
             textDurationMovie.text = generateMovieDuration(movieEntity.duration)
             textGenreMovie.text = generateGenres(movieEntity.genre)
-            textOverviewMovie.text = movieEntity.overview
+            textOverviewMovie.text = if (movieEntity.overview != "") movieEntity.overview else "-"
             textReleaseDateMovie.text = movieEntity.releaseDate
             ratingMovie.rating = (movieEntity.userScore).toFloat() / 2
             ratingValue.text = movieEntity.userScore.toString()
@@ -111,12 +106,16 @@ class MovieDetailActivity : AppCompatActivity() {
     private fun generateGenres(genresItem: List<MovieGenresItem>): String {
         val builder = StringBuilder()
 
-        genresItem.forEach { genre  ->
-            builder.append(genre.name)
-            if (genre.name == genresItem.lastOrNull()?.name) {
-                builder.append(".")
-            } else {
-                builder.append(", ")
+        if (genresItem.isEmpty()) {
+            builder.append("-")
+        } else {
+            genresItem.forEach { genre ->
+                builder.append(genre.name)
+                if (genre.name == genresItem.lastOrNull()?.name) {
+                    builder.append(".")
+                } else {
+                    builder.append(", ")
+                }
             }
         }
 

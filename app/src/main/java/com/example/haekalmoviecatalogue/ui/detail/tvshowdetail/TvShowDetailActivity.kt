@@ -3,7 +3,6 @@ package com.example.haekalmoviecatalogue.ui.detail.tvshowdetail
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -16,11 +15,11 @@ import com.example.haekalmoviecatalogue.data.source.remote.response.TvGenresItem
 import com.example.haekalmoviecatalogue.databinding.ActivityDetailTvShowBinding
 import com.example.haekalmoviecatalogue.databinding.ContentDetailTvShowBinding
 import com.example.haekalmoviecatalogue.utils.Common
-import com.example.haekalmoviecatalogue.viewmodel.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TvShowDetailActivity : AppCompatActivity() {
     private lateinit var contentDetailTvShowBinding: ContentDetailTvShowBinding
-
+    private val tvShowDetailViewModel: TvShowDetailViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,19 +32,17 @@ class TvShowDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 25f
 
-        val factory = ViewModelFactory.getInstance()
-        val tvShowDetailViewModel = ViewModelProvider(this, factory)[TvShowDetailViewModel::class.java]
-
         val extras = intent.extras
         if (extras != null) {
             val tvShowId = extras.getInt(EXTRA_TVSHOW)
             if (tvShowId != null) {
 
                 showLoading(true)
-                showLoading(false)
-
+                showDetailTvShow(false)
                 tvShowDetailViewModel.setSelectedTvShow(tvShowId)
                 tvShowDetailViewModel.getTvShowDetail().observe(this, { TvShowDetail ->
+                    showLoading(false)
+                    showDetailTvShow(true)
                     populateTvShow(TvShowDetail)
                 })
             }
@@ -58,7 +55,7 @@ class TvShowDetailActivity : AppCompatActivity() {
             textTitleTvshow.text = tvShowEntity.title
             textTypeTvshow.text = tvShowEntity.type
             textGenreTvshow.text = generateGenres(tvShowEntity.genre)
-            textOverviewTvshow.text = tvShowEntity.overview
+            textOverviewTvshow.text = if (tvShowEntity.overview != "") tvShowEntity.overview else "-"
             textNetworkTvshow.text = generateNetworks(tvShowEntity.network)
             ratingTvShow.rating = (tvShowEntity.userScore).toFloat() / 2
             ratingValue.text = tvShowEntity.userScore.toString()
@@ -116,12 +113,16 @@ class TvShowDetailActivity : AppCompatActivity() {
     private fun generateGenres(genresItem: List<TvGenresItem>): String {
         val builder = StringBuilder()
 
-        genresItem.forEach { genre  ->
-            builder.append(genre.name)
-            if (genre.name == genresItem.lastOrNull()?.name) {
-                builder.append(".")
-            } else {
-                builder.append(", ")
+        if (genresItem.isEmpty()) {
+            builder.append("-")
+        } else {
+            genresItem.forEach { genre ->
+                builder.append(genre.name)
+                if (genre.name == genresItem.lastOrNull()?.name) {
+                    builder.append(".")
+                } else {
+                    builder.append(", ")
+                }
             }
         }
 
