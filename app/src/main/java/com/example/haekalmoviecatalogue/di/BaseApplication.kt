@@ -13,7 +13,17 @@ class BaseApplication : Application() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@BaseApplication)
-            modules(listOf(remoteDataSourceModule, movieRepository,movieViewModelModule, tvShowViewModelModule, movieDetailViewModelModule, tvShowDetailViewModelModule))
+            modules(
+                listOf(
+                    remoteDataSourceModule,
+                    movieRepository,
+                    connectionLiveData,
+                    movieViewModelModule,
+                    tvShowViewModelModule,
+                    movieDetailViewModelModule,
+                    tvShowDetailViewModelModule
+                )
+            )
         }
     }
 }

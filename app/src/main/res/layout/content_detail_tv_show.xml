@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/content_tv_show"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:clipToPadding="false"
     android:descendantFocusability="blocksDescendants"
     android:padding="16dp"
@@ -15,12 +14,12 @@
         android:layout_width="190dp"
         android:layout_height="270dp"
         android:layout_marginTop="18dp"
-        android:elevation="25dp"
         android:contentDescription="@string/tv_show_poster"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="25dp"
         android:scaleType="centerCrop"
-        tools:src="@tools:sample/avatars"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/text_title_tvshow"
@@ -41,122 +40,122 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:text="@string/genre"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/text_title_tvshow"
-        app:layout_constraintTop_toBottomOf="@+id/text_title_tvshow"
-        android:text="@string/genre" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title_tvshow" />
 
     <TextView
         android:id="@+id/text_genre_tvshow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:textColor="@android:color/black"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@+id/txt_genre_tvshow"
         app:layout_constraintStart_toStartOf="@+id/txt_genre_tvshow"
-        tools:text="@string/genre"/>
+        app:layout_constraintTop_toBottomOf="@+id/txt_genre_tvshow"
+        tools:text="@string/genre" />
 
     <TextView
         android:id="@+id/txt_type_tvshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:text="@string/type"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/text_genre_tvshow"
-        app:layout_constraintTop_toBottomOf="@+id/text_genre_tvshow"
-        android:text="@string/type" />
+        app:layout_constraintTop_toBottomOf="@+id/text_genre_tvshow" />
 
     <TextView
         android:id="@+id/text_type_tvshow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:textColor="@android:color/black"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@+id/txt_type_tvshow"
         app:layout_constraintStart_toStartOf="@+id/txt_type_tvshow"
-        tools:text="@string/type"/>
+        app:layout_constraintTop_toBottomOf="@+id/txt_type_tvshow"
+        tools:text="@string/type" />
 
     <TextView
         android:id="@+id/txt_score_tvshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:text="@string/score"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/text_type_tvshow"
-        app:layout_constraintTop_toBottomOf="@+id/text_type_tvshow"
-        android:text="@string/score" />
+        app:layout_constraintTop_toBottomOf="@+id/text_type_tvshow" />
 
     <RatingBar
         android:id="@+id/rating_tv_show"
         style="@android:style/Widget.Material.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="0.1"
-        android:progressBackgroundTint="@color/lightGrey"
-        android:secondaryProgressTint="@color/lightGrey"
         android:backgroundTint="@color/lightGrey"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/lightGrey"
         android:progressTint="@color/duskYellow"
-        app:layout_constraintTop_toBottomOf="@+id/txt_score_tvshow"
-        app:layout_constraintStart_toStartOf="@+id/txt_score_tvshow" />
+        android:secondaryProgressTint="@color/lightGrey"
+        android:stepSize="0.1"
+        app:layout_constraintStart_toStartOf="@+id/txt_score_tvshow"
+        app:layout_constraintTop_toBottomOf="@+id/txt_score_tvshow" />
 
     <TextView
-        android:id="@+id/rating_value"
+        android:id="@+id/rating_value_tvshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/duskYellow"
         android:textSize="11sp"
-        app:layout_constraintTop_toTopOf="@+id/rating_tv_show"
         app:layout_constraintStart_toEndOf="@id/rating_tv_show"
-        tools:text="@string/score"/>
+        app:layout_constraintTop_toTopOf="@+id/rating_tv_show"
+        tools:text="@string/score" />
 
     <TextView
         android:id="@+id/txt_status_tvshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:text="@string/status"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/rating_tv_show"
-        app:layout_constraintTop_toBottomOf="@+id/rating_tv_show"
-        android:text="@string/status" />
+        app:layout_constraintTop_toBottomOf="@+id/rating_tv_show" />
 
     <TextView
         android:id="@+id/text_status_tvshow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:textColor="@android:color/black"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@+id/txt_status_tvshow"
         app:layout_constraintStart_toStartOf="@+id/txt_status_tvshow"
-        tools:text="@string/status"/>
+        app:layout_constraintTop_toBottomOf="@+id/txt_status_tvshow"
+        tools:text="@string/status" />
 
     <TextView
         android:id="@+id/txt_network_tvshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:text="@string/network"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/text_status_tvshow"
-        app:layout_constraintTop_toBottomOf="@+id/text_status_tvshow"
-        android:text="@string/network" />
+        app:layout_constraintTop_toBottomOf="@+id/text_status_tvshow" />
 
     <TextView
         android:id="@+id/text_network_tvshow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:textColor="@android:color/black"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@+id/txt_network_tvshow"
         app:layout_constraintStart_toStartOf="@+id/txt_network_tvshow"
-        tools:text="@string/network"/>
+        app:layout_constraintTop_toBottomOf="@+id/txt_network_tvshow"
+        tools:text="@string/network" />
 
     <TextView
         android:id="@+id/txt_overview_tvshow"
@@ -188,19 +187,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible"/>
-
-    <include
-        android:id="@+id/error_info"
-        layout="@layout/error_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

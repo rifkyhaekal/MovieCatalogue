@@ -14,4 +14,5 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
     }
 
     fun getMovieDetail(): LiveData<MovieDetailEntity> = movieRepository.getMovieDetail(movieId)
+
 }

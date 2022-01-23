@@ -24,7 +24,8 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
-        val itemsTvShowBinding = ItemsTvShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemsTvShowBinding =
+            ItemsTvShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TvShowViewHolder(itemsTvShowBinding)
     }
 
@@ -35,7 +36,8 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
     override fun getItemCount(): Int = listTvShow.size
 
-    inner class TvShowViewHolder(private val binding: ItemsTvShowBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class TvShowViewHolder(private val binding: ItemsTvShowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: TvShowItemEntity) {
             with(binding) {
                 itemView.setOnClickListener {
@@ -47,7 +49,7 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                     .load(Common.POSTER_URL + tvShow.posterPath)
                     .transform(CenterCrop())
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
-                        .error(R.drawable.ic_error)
+                    .error(R.drawable.ic_error)
                     .into(imgPoster)
             }
         }

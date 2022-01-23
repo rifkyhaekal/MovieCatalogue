@@ -8,10 +8,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.source.local.entity.ErrorEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowDetailEntity
-import com.example.haekalmoviecatalogue.data.source.remote.response.NetworksItem
-import com.example.haekalmoviecatalogue.data.source.remote.response.TvGenresItem
 import com.example.haekalmoviecatalogue.databinding.ActivityDetailTvShowBinding
 import com.example.haekalmoviecatalogue.databinding.ContentDetailTvShowBinding
 import com.example.haekalmoviecatalogue.utils.Common
@@ -36,7 +33,6 @@ class TvShowDetailActivity : AppCompatActivity() {
         if (extras != null) {
             val tvShowId = extras.getInt(EXTRA_TVSHOW)
             if (tvShowId != null) {
-
                 showLoading(true)
                 showDetailTvShow(false)
                 tvShowDetailViewModel.setSelectedTvShow(tvShowId)
@@ -54,11 +50,11 @@ class TvShowDetailActivity : AppCompatActivity() {
         contentDetailTvShowBinding.apply {
             textTitleTvshow.text = tvShowEntity.title
             textTypeTvshow.text = tvShowEntity.type
-            textGenreTvshow.text = generateGenres(tvShowEntity.genre)
+            textGenreTvshow.text = tvShowEntity.genre
             textOverviewTvshow.text = if (tvShowEntity.overview != "") tvShowEntity.overview else "-"
-            textNetworkTvshow.text = generateNetworks(tvShowEntity.network)
+            textNetworkTvshow.text = tvShowEntity.network
             ratingTvShow.rating = (tvShowEntity.userScore).toFloat() / 2
-            ratingValue.text = tvShowEntity.userScore.toString()
+            ratingValueTvshow.text = tvShowEntity.userScore.toString()
             textStatusTvshow.text = tvShowEntity.status
         }
 
@@ -72,61 +68,43 @@ class TvShowDetailActivity : AppCompatActivity() {
 
     private fun showDetailTvShow(isVisible: Boolean) {
         if (isVisible) {
-            contentDetailTvShowBinding.contentTvShow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.imgPosterTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.textTitleTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.textGenreTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.textTypeTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.ratingTvShow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.ratingValueTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.textStatusTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.textNetworkTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.textOverviewTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.txtGenreTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.txtTypeTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.txtScoreTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.txtStatusTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.txtNetworkTvshow.visibility = View.VISIBLE
+            contentDetailTvShowBinding.txtOverviewTvshow.visibility = View.VISIBLE
         } else {
-            contentDetailTvShowBinding.contentTvShow.visibility = View.GONE
-        }
-    }
-
-    private fun showErrorInfo (data: ErrorEntity) {
-        if (data.visible) {
-            contentDetailTvShowBinding.errorInfo.tvInfo.text = data.infoText
-            Glide.with(this)
-                .load(data.infoImg)
-                .error(R.drawable.ic_error)
-                .into(contentDetailTvShowBinding.errorInfo.imgInfo)
-            contentDetailTvShowBinding.errorInfo.root.visibility = View.VISIBLE
-        } else {
-            contentDetailTvShowBinding.errorInfo.root.visibility = View.GONE
+            contentDetailTvShowBinding.imgPosterTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.textTitleTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.textGenreTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.textTypeTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.ratingTvShow.visibility = View.GONE
+            contentDetailTvShowBinding.ratingValueTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.textStatusTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.textNetworkTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.textOverviewTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.txtGenreTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.txtTypeTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.txtScoreTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.txtStatusTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.txtNetworkTvshow.visibility = View.GONE
+            contentDetailTvShowBinding.txtOverviewTvshow.visibility = View.GONE
         }
     }
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) contentDetailTvShowBinding.progressBar.visibility = View.VISIBLE else contentDetailTvShowBinding.progressBar.visibility = View.GONE
-    }
-
-    private fun generateNetworks(networksItem: List<NetworksItem>): String {
-        val builder = StringBuilder()
-
-        networksItem.forEach { network  ->
-            builder.append(network.name)
-            if (network.name == networksItem.lastOrNull()?.name) {
-                builder.append(".")
-            } else {
-                builder.append(", ")
-            }
-        }
-
-        return builder.toString()
-    }
-
-    private fun generateGenres(genresItem: List<TvGenresItem>): String {
-        val builder = StringBuilder()
-
-        if (genresItem.isEmpty()) {
-            builder.append("-")
-        } else {
-            genresItem.forEach { genre ->
-                builder.append(genre.name)
-                if (genre.name == genresItem.lastOrNull()?.name) {
-                    builder.append(".")
-                } else {
-                    builder.append(", ")
-                }
-            }
-        }
-
-        return builder.toString()
+        if (isLoading) contentDetailTvShowBinding.progressBar.visibility =
+            View.VISIBLE else contentDetailTvShowBinding.progressBar.visibility = View.GONE
     }
 
     companion object {

@@ -1,14 +1,14 @@
-package com.example.haekalmoviecatalogue.data.source
+package com.example.haekalmoviecatalogue.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.haekalmoviecatalogue.data.source.MovieDataSource
 import com.example.haekalmoviecatalogue.data.source.local.entity.*
 import com.example.haekalmoviecatalogue.data.source.remote.RemoteDataSource
 import com.example.haekalmoviecatalogue.data.source.remote.response.*
 import kotlin.math.floor
 
-class MovieRepository private constructor(private val remoteDataSource: RemoteDataSource) :
-    MovieDataSource {
+class FakeMovieRepository (private val remoteDataSource: RemoteDataSource) : MovieDataSource {
 
     override fun getPopularMovies(): LiveData<PopularMovieEntity> {
         val popularMovieResults = MutableLiveData<PopularMovieEntity>()
@@ -61,7 +61,7 @@ class MovieRepository private constructor(private val remoteDataSource: RemoteDa
     override fun getMovieDetail(movieId: Int?): LiveData<MovieDetailEntity> {
         val movieDetailResults = MutableLiveData<MovieDetailEntity>()
 
-        remoteDataSource.getMovieDetail(movieId, object : RemoteDataSource.LoadMovieDetailCallback {
+        remoteDataSource.getMovieDetail(movieId, object : RemoteDataSource.LoadMovieDetailCallback{
             override fun onMovieDetailReceived(movieDetailResponse: MovieDetailResponse) {
                 val detailMovie = MovieDetailEntity(
                     movieDetailResponse.id,
@@ -83,24 +83,22 @@ class MovieRepository private constructor(private val remoteDataSource: RemoteDa
     override fun getTvShowDetail(tvShowId: Int?): LiveData<TvShowDetailEntity> {
         val tvShowDetailResults = MutableLiveData<TvShowDetailEntity>()
 
-        remoteDataSource.getTvShowDetail(
-            tvShowId,
-            object : RemoteDataSource.LoadTvShowDetailCallback {
-                override fun onTvShowDetailReceived(tvShowDetailResponse: TvShowDetailResponse) {
-                    val tvShow = TvShowDetailEntity(
-                        tvShowDetailResponse.id,
-                        tvShowDetailResponse.name,
-                        tvShowDetailResponse.overview,
-                        tvShowDetailResponse.status,
-                        tvShowDetailResponse.type,
-                        generateTvShowGenres(tvShowDetailResponse.genres),
-                        generateNetworks(tvShowDetailResponse.networks),
-                        tvShowDetailResponse.voteAverage,
-                        tvShowDetailResponse.posterPath
-                    )
-                    tvShowDetailResults.postValue(tvShow)
-                }
-            })
+        remoteDataSource.getTvShowDetail(tvShowId, object : RemoteDataSource.LoadTvShowDetailCallback {
+            override fun onTvShowDetailReceived(tvShowDetailResponse: TvShowDetailResponse) {
+                val tvShow = TvShowDetailEntity(
+                    tvShowDetailResponse.id,
+                    tvShowDetailResponse.name,
+                    tvShowDetailResponse.overview,
+                    tvShowDetailResponse.status,
+                    tvShowDetailResponse.type,
+                    generateTvShowGenres(tvShowDetailResponse.genres),
+                    generateNetworks(tvShowDetailResponse.networks),
+                    tvShowDetailResponse.voteAverage,
+                    tvShowDetailResponse.posterPath
+                )
+                tvShowDetailResults.postValue(tvShow)
+            }
+        })
         return tvShowDetailResults
     }
 
@@ -167,16 +165,6 @@ class MovieRepository private constructor(private val remoteDataSource: RemoteDa
         }
 
         return builder.toString()
-    }
-
-    companion object {
-        @Volatile
-        private var instance: MovieRepository? = null
-
-        fun getInstance(remoteData: RemoteDataSource): MovieRepository =
-            instance ?: synchronized(this) {
-                instance ?: MovieRepository(remoteData).apply { instance = this }
-            }
     }
 
 }

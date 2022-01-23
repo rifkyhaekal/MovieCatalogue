@@ -1,7 +1,8 @@
 package com.example.haekalmoviecatalogue.data.source.local.entity
 
 data class PopularTvShowEntity(
-    val results: List<TvShowItemEntity>
+    val success: Boolean,
+    var results: List<TvShowItemEntity>
 )
 
 data class TvShowItemEntity(

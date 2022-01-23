@@ -8,19 +8,17 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.source.local.entity.ErrorEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieDetailEntity
-import com.example.haekalmoviecatalogue.data.source.remote.response.MovieGenresItem
 import com.example.haekalmoviecatalogue.databinding.ActivityDetailMovieBinding
 import com.example.haekalmoviecatalogue.databinding.ContentDetailMovieBinding
 import com.example.haekalmoviecatalogue.utils.Common
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.floor
 
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var contentDetailMovieBinding: ContentDetailMovieBinding
     private val movieDetailViewModel: MovieDetailViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,89 +35,83 @@ class MovieDetailActivity : AppCompatActivity() {
         if (extras != null) {
             val movieId = extras.getInt(EXTRA_MOVIE)
             if (movieId != null) {
-
                 showLoading(true)
                 showDetailMovie(false)
                 movieDetailViewModel.setSelectedMovie(movieId)
-                movieDetailViewModel.getMovieDetail().observe(this, { MovieDetail ->
+                movieDetailViewModel.getMovieDetail().observe(this, { movieDetail ->
                     showLoading(false)
                     showDetailMovie(true)
-                    populateMovie(MovieDetail)
+                    populateMovie(movieDetail)
                 })
             }
         }
     }
 
-    private fun populateMovie(movieEntity: MovieDetailEntity) {
+    private fun populateMovie(movieEntity: MovieDetailEntity?) {
         contentDetailMovieBinding.apply {
-            textTitleMovie.text = movieEntity.title
-            textDurationMovie.text = generateMovieDuration(movieEntity.duration)
-            textGenreMovie.text = generateGenres(movieEntity.genre)
-            textOverviewMovie.text = if (movieEntity.overview != "") movieEntity.overview else "-"
-            textReleaseDateMovie.text = movieEntity.releaseDate
-            ratingMovie.rating = (movieEntity.userScore).toFloat() / 2
-            ratingValue.text = movieEntity.userScore.toString()
-            textStatusMovie.text = movieEntity.status
+            if (movieEntity != null) {
+                textTitleMovie.text = movieEntity.title
+                textDurationMovie.text = movieEntity.duration
+                textGenreMovie.text = movieEntity.genre
+                textOverviewMovie.text = if (movieEntity.overview != "") movieEntity.overview else "-"
+                textReleaseDateMovie.text = movieEntity.releaseDate
+                ratingMovie.rating = (movieEntity.userScore).toFloat() / 2
+                ratingValueMovie.text = movieEntity.userScore.toString()
+                textStatusMovie.text = movieEntity.status
+            }
         }
 
-        Glide.with(this)
-            .load(Common.POSTER_URL + movieEntity.imgPoster)
-            .transform(CenterCrop(), RoundedCorners(50))
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
-            .error(R.drawable.ic_error)
-            .into(contentDetailMovieBinding.imgPosterMovie)
+        if (movieEntity != null) {
+            Glide.with(this)
+                .load(Common.POSTER_URL + movieEntity.imgPoster)
+                .transform(CenterCrop(), RoundedCorners(50))
+                .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
+                .error(R.drawable.ic_error)
+                .into(contentDetailMovieBinding.imgPosterMovie)
+        }
     }
 
     private fun showDetailMovie(isVisible: Boolean) {
         if (isVisible) {
-            contentDetailMovieBinding.contentMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.imgPosterMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.textTitleMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.textGenreMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.textDurationMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.ratingMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.ratingValueMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.textStatusMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.textReleaseDateMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.textOverviewMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.txtDurationMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.txtGenreMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.txtOverviewMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.txtDurationMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.txtStatusMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.txtScoreMovie.visibility = View.VISIBLE
+            contentDetailMovieBinding.txtReleaseDateMovie.visibility = View.VISIBLE
         } else {
-            contentDetailMovieBinding.contentMovie.visibility = View.GONE
-        }
-    }
-
-    private fun showErrorInfo (data: ErrorEntity) {
-        if (data.visible) {
-            contentDetailMovieBinding.errorInfo.tvInfo.text = data.infoText
-            Glide.with(this)
-                .load(data.infoImg)
-                .error(R.drawable.ic_error)
-                .into(contentDetailMovieBinding.errorInfo.imgInfo)
-            contentDetailMovieBinding.errorInfo.root.visibility = View.VISIBLE
-        } else {
-            contentDetailMovieBinding.errorInfo.root.visibility = View.GONE
+            contentDetailMovieBinding.imgPosterMovie.visibility = View.GONE
+            contentDetailMovieBinding.textTitleMovie.visibility = View.GONE
+            contentDetailMovieBinding.textGenreMovie.visibility = View.GONE
+            contentDetailMovieBinding.textDurationMovie.visibility = View.GONE
+            contentDetailMovieBinding.ratingMovie.visibility = View.GONE
+            contentDetailMovieBinding.ratingValueMovie.visibility = View.GONE
+            contentDetailMovieBinding.textStatusMovie.visibility = View.GONE
+            contentDetailMovieBinding.textReleaseDateMovie.visibility = View.GONE
+            contentDetailMovieBinding.textOverviewMovie.visibility = View.GONE
+            contentDetailMovieBinding.txtDurationMovie.visibility = View.GONE
+            contentDetailMovieBinding.txtGenreMovie.visibility = View.GONE
+            contentDetailMovieBinding.txtOverviewMovie.visibility = View.GONE
+            contentDetailMovieBinding.txtDurationMovie.visibility = View.GONE
+            contentDetailMovieBinding.txtStatusMovie.visibility = View.GONE
+            contentDetailMovieBinding.txtScoreMovie.visibility = View.GONE
+            contentDetailMovieBinding.txtReleaseDateMovie.visibility = View.GONE
         }
     }
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) contentDetailMovieBinding.progressBar.visibility = View.VISIBLE else contentDetailMovieBinding.progressBar.visibility = View.GONE
-    }
-
-    private fun generateMovieDuration(duration: Int): String {
-        val hour: Double = floor(duration.toDouble() / 60)
-        val minute: Double = duration.toDouble() % 60
-
-        val duration = "${hour.toInt()}h ${minute.toInt()}m"
-        return duration
-    }
-
-    private fun generateGenres(genresItem: List<MovieGenresItem>): String {
-        val builder = StringBuilder()
-
-        if (genresItem.isEmpty()) {
-            builder.append("-")
-        } else {
-            genresItem.forEach { genre ->
-                builder.append(genre.name)
-                if (genre.name == genresItem.lastOrNull()?.name) {
-                    builder.append(".")
-                } else {
-                    builder.append(", ")
-                }
-            }
-        }
-
-        return builder.toString()
+        if (isLoading) contentDetailMovieBinding.progressBar.visibility =
+            View.VISIBLE else contentDetailMovieBinding.progressBar.visibility = View.GONE
     }
 
     companion object {

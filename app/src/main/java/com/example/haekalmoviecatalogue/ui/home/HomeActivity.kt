@@ -16,7 +16,10 @@ class HomeActivity : AppCompatActivity() {
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
         activityHomeBinding.viewPager.adapter = sectionsPagerAdapter
-        TabLayoutMediator(activityHomeBinding.tabs, activityHomeBinding.viewPager) { tabs, position ->
+        TabLayoutMediator(
+            activityHomeBinding.tabs,
+            activityHomeBinding.viewPager
+        ) { tabs, position ->
             tabs.text = resources.getString(TAB_TITLES[position])
         }.attach()
 

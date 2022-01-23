@@ -17,14 +17,15 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private var listMovie = ArrayList<MovieItemEntity>()
 
-    fun setMovies(movies: List<MovieItemEntity>?){
+    fun setMovies(movies: List<MovieItemEntity>?) {
         if (movies == null) return
         this.listMovie.clear()
         this.listMovie.addAll(movies)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val itemsMovieBinding = ItemsMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemsMovieBinding =
+            ItemsMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(itemsMovieBinding)
     }
 
@@ -35,7 +36,8 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun getItemCount(): Int = listMovie.size
 
-    inner class MovieViewHolder(private val binding: ItemsMovieBinding) :  RecyclerView.ViewHolder(binding.root){
+    inner class MovieViewHolder(private val binding: ItemsMovieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: MovieItemEntity) {
             with(binding) {
                 itemView.setOnClickListener {
@@ -47,7 +49,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     .load(Common.POSTER_URL + movie.posterPath)
                     .transform(CenterCrop())
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
-                        .error(R.drawable.ic_error)
+                    .error(R.drawable.ic_error)
                     .into(imgPoster)
             }
         }

@@ -1,238 +1,365 @@
 package com.example.haekalmoviecatalogue.utils
 
+import com.example.haekalmoviecatalogue.data.source.local.entity.*
+import com.example.haekalmoviecatalogue.data.source.remote.response.*
+import kotlin.math.floor
 
-//object DataDummy {
-//
-//    fun generateDummyMovies(): ArrayList<MovieDetailEntity> {
-//        val movies = ArrayList<MovieDetailEntity>()
-//
-//        movies.add(
-//            MovieDetailEntity("m1",
-//        "A Star Is Born",
-//        "Drama, Romance",
-//                "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
-//            "2h 16m",
-//            "75%",
-//            "10/05/2018",
-//            "Released",
-//                R.drawable.poster_a_start_is_born)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m2",
-//                "Alita: Battle Angel",
-//                "Action, Science Fiction, Adventure",
-//                "When Alita awakens with no memory of who she is in a future world she does not recognize, she is taken in by Ido, a compassionate doctor who realizes that somewhere in this abandoned cyborg shell is the heart and soul of a young woman with an extraordinary past.",
-//                "2h 2m",
-//                "72%",
-//                "02/14/2019",
-//                "Released",
-//                R.drawable.poster_alita)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m3",
-//                "Aquaman",
-//                "Action, Adventure, Fantasy",
-//                "Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne.",
-//                "2h 23m",
-//                "69%",
-//                "12/26/2018",
-//                "Released",
-//                R.drawable.poster_aquaman)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m4",
-//                "Bohemian Rhapsody",
-//                "Music, Drama, History",
-//                "Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the music world by storm when they form the rock 'n' roll band Queen in 1970. Hit songs become instant classics. When Mercury's increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest challenge yet – finding a way to keep the band together amid the success and excess.",
-//                "2h 15m",
-//                "80%",
-//                "10/05/2018",
-//                "Released",
-//                R.drawable.poster_bohemian)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m5",
-//                "Creed II",
-//                "Drama",
-//                "Between personal obligations and training for his next big fight against an opponent with ties to his family's past, Adonis Creed is up against the challenge of his life.",
-//                "2h 10m",
-//                "69%",
-//                "11/21/2018",
-//                "Released",
-//                R.drawable.poster_creed)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m6",
-//                "Cold Pursuit",
-//                "Action, Crime, Thriller",
-//                "The quiet family life of Nels Coxman, a snowplow driver, is upended after his son's murder. Nels begins a vengeful hunt for Viking, the drug lord he holds responsible for the killing, eliminating Viking's associates one by one. As Nels draws closer to Viking, his actions bring even more unexpected and violent consequences, as he proves that revenge is all in the execution.",
-//                "1h 59m",
-//                "57%",
-//                "02/08/2019",
-//                "Released",
-//                R.drawable.poster_cold_persuit)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m7",
-//                "Glass",
-//                "Thriller, Drama, Science Fiction\n",
-//                "In a series of escalating encounters, former security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities. Meanwhile, the shadowy presence of Elijah Price emerges as an orchestrator who holds secrets critical to both men.",
-//                "2h 9m",
-//                "67%",
-//                "01/18/2019",
-//                "Released",
-//                R.drawable.poster_glass)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m8",
-//                "How to Train Your Dragon: The Hidden World",
-//                "Animation, Family, Adventure",
-//                "As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind.",
-//                "1h 44m",
-//                "78%",
-//                "01/09/2019",
-//                "Released",
-//                R.drawable.poster_how_to_train)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m9",
-//                "Avengers: Infinity War",
-//                "Adventure, Action, Science Fiction",
-//                "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
-//                "2h 29m",
-//                "83%",
-//                "04/27/2018",
-//                "Released",
-//                R.drawable.poster_infinity_war)
-//        )
-//        movies.add(
-//            MovieDetailEntity("m10",
-//                "Mary Queen of Scots",
-//                "Drama, History",
-//                "In 1561, Mary Stuart, widow of the King of France, returns to Scotland, reclaims her rightful throne and menaces the future of Queen Elizabeth I as ruler of England, because she has a legitimate claim to the English throne. Betrayals, rebellions, conspiracies and their own life choices imperil both Queens. They experience the bitter cost of power, until their tragic fate is finally fulfilled.",
-//                "2h 4m",
-//                "66%",
-//                "12/21/2018",
-//                "Released",
-//                R.drawable.poster_marry_queen)
-//        )
-//        return movies
-//    }
-//
-//    fun generateDummyTvShows(): ArrayList<TvShowDetailEntity> {
-//        val tvShows = ArrayList<TvShowDetailEntity>()
-//
-//        tvShows.add(
-//            TvShowDetailEntity( "ts1",
-//                "Arrow",
-//                "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
-//                "Ended",
-//                "Scripted",
-//                "Crime, Drama, Mystery, Action & Adventure",
-//                "The CW",
-//                "67%",
-//                R.drawable.poster_arrow)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts2",
-//                "Doom Patrol",
-//                "The Doom Patrol’s members each suffered horrible accidents that gave them superhuman abilities — but also left them scarred and disfigured. Traumatized and downtrodden, the team found purpose through The Chief, who brought them together to investigate the weirdest phenomena in existence — and to protect Earth from what they find.",
-//                "Returning Series",
-//                "Scripted",
-//                "Sci-Fi & Fantasy, Drama",
-//                "MBO MAX",
-//                "77%",
-//                R.drawable.poster_doom_patrol)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts3",
-//                "Dragon Ball",
-//                "Long ago in the mountains, a fighting master known as Gohan discovered a strange boy whom he named Goku. Gohan raised him and trained Goku in martial arts until he died. The young and very strong boy was on his own, but easily managed. Then one day, Goku met a teenage girl named Bulma, whose search for the mystical Dragon Balls brought her to Goku's home. Together, they set off to find all seven and to grant her wish.",
-//                "Ended",
-//                "Scripted",
-//                "Animation, Action & Adventure, Sci-Fi & Fantasy",
-//                "Fuji TV",
-//                "82%",
-//                R.drawable.poster_dragon_ball)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts4",
-//                "Family Guy",
-//                "Sick, twisted, politically incorrect and Freakin' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he's not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.",
-//                "Returning Series",
-//                "Scripted",
-//                "Animation, Comedy",
-//                "FOX",
-//                "71%",
-//                R.drawable.poster_family_guy)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts5",
-//                "The Flash",
-//                "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
-//                "Returning Series",
-//                "Scripted",
-//                "Drama, Sci-Fi & Fantasy",
-//                "The CW",
-//                "78%",
-//                R.drawable.poster_flash)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts6",
-//                "Gotham",
-//                "Everyone knows the name Commissioner Gordon. He is one of the crime world's greatest foes, a man whose reputation is synonymous with law and order. But what is known of Gordon's story and his rise from rookie detective to Police Commissioner? What did it take to navigate the multiple layers of corruption that secretly ruled Gotham City, the spawning ground of the world's most iconic villains? And what circumstances created them – the larger-than-life personas who would become Catwoman, The Penguin, The Riddler, Two-Face and The Joker?",
-//                "Ended",
-//                "Scripted",
-//                "Drama, Crime, Sci-Fi & Fantasy",
-//                "FOX",
-//                "76%",
-//                R.drawable.poster_gotham)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts7",
-//                "Grey's Anatomy",
-//                "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
-//                "Returning Series",
-//                "Scripted",
-//                "Drama",
-//                "ABC",
-//                "82%",
-//                R.drawable.poster_grey_anatomy)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts8",
-//                "Hanna",
-//                "This thriller and coming-of-age drama follows the journey of an extraordinary young girl as she evades the relentless pursuit of an off-book CIA agent and tries to unearth the truth behind who she is. Based on the 2011 Joe Wright film.",
-//                "Ended",
-//                "Scripted",
-//                "Action & Adventure, Drama",
-//                "Prime Video",
-//                "76%",
-//                R.drawable.poster_hanna)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts9",
-//                "Marvel's Iron Fist ",
-//                "Danny Rand resurfaces 15 years after being presumed dead. Now, with the power of the Iron Fist, he seeks to reclaim his past and fulfill his destiny.",
-//                "Canceled",
-//                "Scripted",
-//                "Action & Adventure, Drama, Sci-Fi & Fantasy",
-//                "Netflix",
-//                "66%",
-//                R.drawable.poster_iron_fist)
-//        )
-//        tvShows.add(
-//            TvShowDetailEntity( "ts10",
-//                "NCIS",
-//                "From murder and espionage to terrorism and stolen submarines, a team of special agents investigates any crime that has a shred of evidence connected to Navy and Marine Corps personnel, regardless of rank or position.",
-//                "Returning Series",
-//                "Scripted",
-//                "Crime, Action & Adventure, Drama",
-//                "CBS",
-//                "75%",
-//                R.drawable.poster_ncis)
-//        )
-//
-//        return tvShows
-//    }
-//}
+object DataDummy {
+
+    fun generateDummyPopularMovies(success: Boolean): PopularMovieEntity {
+        val popularMovieResults = ArrayList<MovieItemEntity>()
+
+        popularMovieResults.add(
+            MovieItemEntity(
+                19610,
+                "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                17189,
+                "/xRWht48C2V8XNfzvPehyClOvDni.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                572802,
+                "/xLPffWMhMj1l50ND3KchMjYoKmE.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                424694,
+                "/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                480530,
+                "/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                438650,
+                "/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                663124,
+                "/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                654571,
+                "/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                299536,
+                "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+            )
+        )
+        popularMovieResults.add(
+            MovieItemEntity(
+                193006,
+                "/9NQh0CGCuvRQoZO3Nhwl7huGSOg.jpg"
+            )
+        )
+
+        return PopularMovieEntity(success, popularMovieResults)
+    }
+
+    fun generateDummyPopularTvShows(success: Boolean): PopularTvShowEntity {
+        val popularTvShowResults = ArrayList<TvShowItemEntity>()
+
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                1412,
+                "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                79501,
+                "/kOAn06LmRCg4YiSStwrGL6UOQ3a.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                118011,
+                "/xs1BRXnY5kStzwdxyrl2HYJOJCq.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                1434,
+                "/9RBeCo8QSaoJLmmuzlwzVH3Hi12.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                236,
+                "/fi1GEdCbyWRDHpyJcB25YYK7fh4.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                15185,
+                "/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                79897,
+                "/zPIug5giU8oug6Xes5K1sTfQJxY.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                63394,
+                "/pe10EUjgO2jgwiu01MAv9l3IjxG.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                62127,
+                "/4l6KD9HhtD6nCDEfg10Lp6C6zah.jpg"
+            )
+        )
+        popularTvShowResults.add(
+            TvShowItemEntity(
+                124271,
+                "/lSTchtc26YNdOjdKvZtLs22SokL.jpg"
+            )
+        )
+
+        return PopularTvShowEntity(success, popularTvShowResults)
+    }
+
+    fun generateDummyMovieDetail(): MovieDetailEntity {
+        return MovieDetailEntity(
+            19610,
+            "A Star Is Born",
+            "Drama, Music, Romance",
+            "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
+            "2h 19m",
+            5.9,
+            "10/05/2018",
+            "Released",
+            "/oVpUzCimMZ0ecni7lDuYPuRdxoQ.jpg"
+        )
+    }
+
+    fun generateDummyTvShowDetail(): TvShowDetailEntity {
+        return TvShowDetailEntity(
+            1412,
+            "Arrow",
+            "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
+            "Ended",
+            "Scripted",
+            "Crime, Drama, Mystery, Action & Adventure",
+            "The CW",
+            6.7,
+            "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"
+        )
+    }
+
+    fun generateRemoteDummyPopularMovies(): List<MovieItem> {
+        val popularMovies = ArrayList<MovieItem>()
+
+        popularMovies.add(
+            MovieItem(
+                19610,
+                "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                17189,
+                "/xRWht48C2V8XNfzvPehyClOvDni.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                572802,
+                "/xLPffWMhMj1l50ND3KchMjYoKmE.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                424694,
+                "/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                480530,
+                "/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                438650,
+                "/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                663124,
+                "/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                654571,
+                "/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                299536,
+                "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+            )
+        )
+        popularMovies.add(
+            MovieItem(
+                193006,
+                "/9NQh0CGCuvRQoZO3Nhwl7huGSOg.jpg"
+            )
+        )
+
+        return popularMovies
+    }
+
+    fun generateRemoteDummyPopularTvShows(): List<TvShowItem> {
+        val popularTvShow = ArrayList<TvShowItem>()
+
+        popularTvShow.add(
+            TvShowItem(
+                1412,
+                "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                79501,
+                "/kOAn06LmRCg4YiSStwrGL6UOQ3a.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                118011,
+                "/xs1BRXnY5kStzwdxyrl2HYJOJCq.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                1434,
+                "/9RBeCo8QSaoJLmmuzlwzVH3Hi12.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                236,
+                "/fi1GEdCbyWRDHpyJcB25YYK7fh4.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                15185,
+                "/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                79897,
+                "/zPIug5giU8oug6Xes5K1sTfQJxY.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                63394,
+                "/pe10EUjgO2jgwiu01MAv9l3IjxG.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                62127,
+                "/4l6KD9HhtD6nCDEfg10Lp6C6zah.jpg"
+            )
+        )
+        popularTvShow.add(
+            TvShowItem(
+                124271,
+                "/lSTchtc26YNdOjdKvZtLs22SokL.jpg"
+            )
+        )
+
+        return popularTvShow
+    }
+
+    fun generateRemoteDummyMovieDetail(): MovieDetailResponse {
+        val genres = ArrayList<MovieGenresItem>()
+
+        genres.add(
+            MovieGenresItem("Drama", 18)
+        )
+        genres.add(
+            MovieGenresItem("Music", 10402)
+        )
+        genres.add(
+            MovieGenresItem("Romance", 10749)
+        )
+
+        return MovieDetailResponse(
+            "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
+            "10/05/2018",
+            genres,
+            5.9,
+            139,
+            19610,
+            "A Star Is Born",
+            "/oVpUzCimMZ0ecni7lDuYPuRdxoQ.jpg",
+            "Released"
+        )
+    }
+
+    fun generateRemoteDummyTvShowDetail(): TvShowDetailResponse {
+        val tvShowGenres = ArrayList<TvGenresItem>()
+        val tvShowNetworks = ArrayList<NetworksItem>()
+
+        tvShowGenres.add(
+            TvGenresItem("Crime", 80)
+        )
+        tvShowGenres.add(
+            TvGenresItem("Drama", 18)
+        )
+        tvShowGenres.add(
+            TvGenresItem("Mystery", 9648)
+        )
+        tvShowGenres.add(
+            TvGenresItem("Action & Adventure", 10759)
+        )
+
+        tvShowNetworks.add(
+            NetworksItem("The CW", 71)
+        )
+
+        return TvShowDetailResponse(
+            "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
+            tvShowGenres,
+            6.7,
+            "Arrow",
+            1412,
+            tvShowNetworks,
+            "Scripted",
+            "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg",
+            "Ended"
+        )
+    }
+
+}
