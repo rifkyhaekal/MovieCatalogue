@@ -2,6 +2,7 @@ package com.example.haekalmoviecatalogue.ui.movie
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.example.haekalmoviecatalogue.data.source.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.PopularMovieEntity
 import com.example.haekalmoviecatalogue.utils.ConnectionLiveData
@@ -16,7 +17,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
-import androidx.lifecycle.Observer
 
 @RunWith(MockitoJUnitRunner::class)
 class MovieViewModelTest {

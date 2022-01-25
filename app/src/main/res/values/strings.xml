@@ -13,6 +13,7 @@
     <string name="overview">Overview</string>
     <string name="type">Type</string>
     <string name="network">Network</string>
+    <string name="error_info">Error Info</string>
 
     <string name="splash">Splash Screen</string>
     <string name="movie_poster">Movie Poster</string>

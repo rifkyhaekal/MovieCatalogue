@@ -2,6 +2,7 @@ package com.example.haekalmoviecatalogue.ui.tvshow
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.example.haekalmoviecatalogue.data.source.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.PopularTvShowEntity
 import com.example.haekalmoviecatalogue.utils.ConnectionLiveData
@@ -16,8 +17,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
-import androidx.lifecycle.Observer
-import com.example.haekalmoviecatalogue.data.source.local.entity.PopularMovieEntity
 
 @RunWith(MockitoJUnitRunner::class)
 class TvShowViewModelTest {

@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val remoteDataSourceModule = module {
-    single { RemoteDataSource.getInstance(get()) }
+    single { RemoteDataSource.getInstance() }
 }
 
 val movieRepository = module {

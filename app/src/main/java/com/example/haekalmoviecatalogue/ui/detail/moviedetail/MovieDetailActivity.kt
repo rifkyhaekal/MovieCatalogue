@@ -34,16 +34,14 @@ class MovieDetailActivity : AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             val movieId = extras.getInt(EXTRA_MOVIE)
-            if (movieId != null) {
-                showLoading(true)
-                showDetailMovie(false)
-                movieDetailViewModel.setSelectedMovie(movieId)
-                movieDetailViewModel.getMovieDetail().observe(this, { movieDetail ->
-                    showLoading(false)
-                    showDetailMovie(true)
-                    populateMovie(movieDetail)
-                })
-            }
+            showLoading(true)
+            showDetailMovie(false)
+            movieDetailViewModel.setSelectedMovie(movieId)
+            movieDetailViewModel.getMovieDetail().observe(this, { movieDetail ->
+                showLoading(false)
+                showDetailMovie(true)
+                populateMovie(movieDetail)
+            })
         }
     }
 

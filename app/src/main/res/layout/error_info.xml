@@ -12,6 +12,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginBottom="4dp"
+        android:contentDescription="@string/error_info"
         tools:src="@tools:sample/avatars" />
 
     <TextView

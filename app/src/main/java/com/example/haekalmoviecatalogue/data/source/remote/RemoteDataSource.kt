@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RemoteDataSource private constructor(private val context: Context) {
+class RemoteDataSource private constructor() {
     fun getPopularMovies(callback: LoadPopularMoviesCallback) {
         EspressoIdlingResources.increment()
         val client = ApiConfig.getApiService().getPopularMovie(Common.API_KEY, "en-US", 1)
@@ -129,9 +129,9 @@ class RemoteDataSource private constructor(private val context: Context) {
         @Volatile
         private var instance: RemoteDataSource? = null
 
-        fun getInstance(context: Context): RemoteDataSource =
+        fun getInstance(): RemoteDataSource =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(context).apply { instance = this }
+                instance ?: RemoteDataSource().apply { instance = this }
             }
     }
 }

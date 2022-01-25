@@ -2,7 +2,6 @@ package com.example.haekalmoviecatalogue.utils
 
 import com.example.haekalmoviecatalogue.data.source.local.entity.*
 import com.example.haekalmoviecatalogue.data.source.remote.response.*
-import kotlin.math.floor
 
 object DataDummy {
 
