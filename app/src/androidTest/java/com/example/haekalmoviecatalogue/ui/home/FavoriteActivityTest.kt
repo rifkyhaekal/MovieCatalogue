@@ -15,7 +15,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-class HomeActivityTest {
+class FavoriteActivityTest {
 
     private val dummyPopularMovie = DataDummy.generateDummyPopularMovies(true)
     private val dummyPopularTvShow = DataDummy.generateDummyPopularTvShows(true)
@@ -24,7 +24,7 @@ class HomeActivityTest {
 
     @Before
     fun setUp() {
-        ActivityScenario.launch(HomeActivity::class.java)
+        ActivityScenario.launch(FavoriteActivity::class.java)
         IdlingRegistry.getInstance().register(EspressoIdlingResources.idlingResource)
     }
 

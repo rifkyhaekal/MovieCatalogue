@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.haekalmoviecatalogue">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".di.BaseApplication"
@@ -12,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HaekalMovieCatalogue">
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main" />
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true"
@@ -26,26 +30,26 @@
             android:name=".ui.detail.moviedetail.MovieDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_detail_movie"
-            android:parentActivityName=".ui.home.HomeActivity"
+            android:parentActivityName=".ui.favorite.FavoriteActivity"
             android:theme="@style/Theme.HaekalMovieCatalogue.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.haekalmoviecatalogue.ui.home.HomeActivity" />
+                android:value="com.example.haekalmoviecatalogue.ui.favorite.FavoriteActivity" />
         </activity>
         <activity
             android:name=".ui.detail.tvshowdetail.TvShowDetailActivity"
-            android:label="@string/title_activity_detail_tv_show"
-            android:parentActivityName=".ui.home.HomeActivity"
             android:exported="false"
+            android:label="@string/title_activity_detail_tv_show"
+            android:parentActivityName=".ui.favorite.FavoriteActivity"
             android:theme="@style/Theme.HaekalMovieCatalogue.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.haekalmoviecatalogue.ui.home.HomeActivity" />
+                android:value="com.example.haekalmoviecatalogue.ui.favorite.FavoriteActivity" />
         </activity>
         <activity
-            android:name=".ui.home.HomeActivity"
+            android:name=".ui.favorite.FavoriteActivity"
             android:exported="false"
-            android:theme="@style/Theme.HaekalMovieCatalogue"/>
+            android:theme="@style/Theme.HaekalMovieCatalogue" />
     </application>
 
 </manifest>

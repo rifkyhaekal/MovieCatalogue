@@ -1,11 +1,12 @@
-package com.example.haekalmoviecatalogue.ui.home
+package com.example.haekalmoviecatalogue.ui.favorite
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.haekalmoviecatalogue.ui.movie.MovieFragment
 import com.example.haekalmoviecatalogue.ui.tvshow.TvShowFragment
 
-class SectionsPagerAdapter(activity: HomeActivity) : FragmentStateAdapter(activity) {
+class SectionsPagerAdapter(fragment: FavoriteFragment) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = 2
 
