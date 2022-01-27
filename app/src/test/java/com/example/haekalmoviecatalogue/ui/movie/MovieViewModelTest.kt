@@ -3,7 +3,7 @@ package com.example.haekalmoviecatalogue.ui.movie
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.haekalmoviecatalogue.data.source.MovieRepository
+import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.PopularMovieEntity
 import com.example.haekalmoviecatalogue.utils.ConnectionLiveData
 import com.example.haekalmoviecatalogue.utils.DataDummy

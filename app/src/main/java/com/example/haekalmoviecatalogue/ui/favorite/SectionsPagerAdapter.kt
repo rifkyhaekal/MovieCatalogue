@@ -1,10 +1,9 @@
 package com.example.haekalmoviecatalogue.ui.favorite
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.haekalmoviecatalogue.ui.movie.MovieFragment
-import com.example.haekalmoviecatalogue.ui.tvshow.TvShowFragment
+import com.example.haekalmoviecatalogue.ui.favorite.favoritemovie.FavoriteMovieFragment
+import com.example.haekalmoviecatalogue.ui.favorite.favoritetvshow.FavoriteTvShowFragment
 
 class SectionsPagerAdapter(fragment: FavoriteFragment) : FragmentStateAdapter(fragment) {
 
@@ -12,9 +11,9 @@ class SectionsPagerAdapter(fragment: FavoriteFragment) : FragmentStateAdapter(fr
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> MovieFragment()
-            1 -> TvShowFragment()
-            else -> TvShowFragment()
+            0 -> FavoriteMovieFragment()
+            1 -> FavoriteTvShowFragment()
+            else -> FavoriteMovieFragment()
         }
     }
 }

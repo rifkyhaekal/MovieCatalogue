@@ -1,26 +1,36 @@
 package com.example.haekalmoviecatalogue.ui.detail.tvshowdetail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowDetailEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.databinding.ActivityDetailTvShowBinding
 import com.example.haekalmoviecatalogue.databinding.ContentDetailTvShowBinding
 import com.example.haekalmoviecatalogue.utils.Common
+import com.example.haekalmoviecatalogue.vo.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TvShowDetailActivity : AppCompatActivity() {
+
+    private lateinit var activityDetailTvShowBinding: ActivityDetailTvShowBinding
     private lateinit var contentDetailTvShowBinding: ContentDetailTvShowBinding
+
     private val tvShowDetailViewModel: TvShowDetailViewModel by viewModel()
+    private var menu: Menu? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val activityDetailTvShowBinding = ActivityDetailTvShowBinding.inflate(layoutInflater)
+        activityDetailTvShowBinding = ActivityDetailTvShowBinding.inflate(layoutInflater)
         contentDetailTvShowBinding = activityDetailTvShowBinding.detailContent
 
         setContentView(activityDetailTvShowBinding.root)
@@ -32,20 +42,30 @@ class TvShowDetailActivity : AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             val tvShowId = extras.getInt(EXTRA_TVSHOW)
-            if (tvShowId != null) {
-                showLoading(true)
-                showDetailTvShow(false)
-                tvShowDetailViewModel.setSelectedTvShow(tvShowId)
-                tvShowDetailViewModel.getTvShowDetail().observe(this, { TvShowDetail ->
-                    showLoading(false)
-                    showDetailTvShow(true)
-                    populateTvShow(TvShowDetail)
-                })
+
+            showDetailTvShow(false)
+            tvShowDetailViewModel.setSelectedTvShow(tvShowId)
+            tvShowDetailViewModel.tvShow.observe(this) { tvShowDetail ->
+                if (tvShowDetail != null) {
+                    when (tvShowDetail.status) {
+                        Status.LOADING -> showLoading(true)
+                        Status.SUCCESS -> if (tvShowDetail.data != null) {
+                            showLoading(false)
+                            showDetailTvShow(true)
+                            populateTvShow(tvShowDetail.data)
+                        }
+                        Status.ERROR -> {
+                            showLoading(false)
+                            Toast.makeText(applicationContext, "Something wrong", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
             }
         }
     }
 
-    private fun populateTvShow(tvShowEntity: TvShowDetailEntity) {
+    private fun populateTvShow(tvShowEntity: TvShowEntity) {
 
         contentDetailTvShowBinding.apply {
             textTitleTvshow.text = tvShowEntity.title
@@ -53,7 +73,7 @@ class TvShowDetailActivity : AppCompatActivity() {
             textGenreTvshow.text = tvShowEntity.genre
             textOverviewTvshow.text = if (tvShowEntity.overview != "") tvShowEntity.overview else "-"
             textNetworkTvshow.text = tvShowEntity.network
-            ratingTvShow.rating = (tvShowEntity.userScore).toFloat() / 2
+            ratingTvShow.rating = (((tvShowEntity.userScore)?.toFloat() ?: 2) as Float)
             ratingValueTvshow.text = tvShowEntity.userScore.toString()
             textStatusTvshow.text = tvShowEntity.status
         }
@@ -64,6 +84,46 @@ class TvShowDetailActivity : AppCompatActivity() {
             .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
             .error(R.drawable.ic_error)
             .into(contentDetailTvShowBinding.imgPosterTvshow)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        this.menu = menu
+        tvShowDetailViewModel.tvShow.observe(this) { tvShowDetail ->
+            if (tvShowDetail != null) {
+                when(tvShowDetail.status) {
+                    Status.LOADING -> showLoading(true)
+                    Status.SUCCESS -> if (tvShowDetail.data != null) {
+                        showLoading(false)
+                        val state = tvShowDetail.data.favorite
+                        setFavoriteState(state)
+                    }
+                    Status.ERROR -> {
+                        showLoading(false)
+                        Toast.makeText(applicationContext, "Something wrong", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_favorite) {
+            tvShowDetailViewModel.setFavorite()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setFavoriteState(state: Boolean) {
+        if (menu == null) return
+        val menuItem = menu?.findItem(R.id.action_favorite)
+        if (state) {
+            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_yellow)
+        } else {
+            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_starred_yellow)
+        }
     }
 
     private fun showDetailTvShow(isVisible: Boolean) {

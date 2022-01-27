@@ -2,7 +2,6 @@ package com.example.haekalmoviecatalogue.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.haekalmoviecatalogue.data.source.MovieDataSource
 import com.example.haekalmoviecatalogue.data.source.local.entity.*
 import com.example.haekalmoviecatalogue.data.source.remote.RemoteDataSource
 import com.example.haekalmoviecatalogue.data.source.remote.response.*
@@ -80,12 +79,12 @@ class FakeMovieRepository (private val remoteDataSource: RemoteDataSource) : Mov
         return movieDetailResults
     }
 
-    override fun getTvShowDetail(tvShowId: Int?): LiveData<TvShowDetailEntity> {
-        val tvShowDetailResults = MutableLiveData<TvShowDetailEntity>()
+    override fun getTvShowDetail(tvShowId: Int?): LiveData<TvShowEntity> {
+        val tvShowDetailResults = MutableLiveData<TvShowEntity>()
 
         remoteDataSource.getTvShowDetail(tvShowId, object : RemoteDataSource.LoadTvShowDetailCallback {
             override fun onTvShowDetailReceived(tvShowDetailResponse: TvShowDetailResponse) {
-                val tvShow = TvShowDetailEntity(
+                val tvShow = TvShowEntity(
                     tvShowDetailResponse.id,
                     tvShowDetailResponse.name,
                     tvShowDetailResponse.overview,

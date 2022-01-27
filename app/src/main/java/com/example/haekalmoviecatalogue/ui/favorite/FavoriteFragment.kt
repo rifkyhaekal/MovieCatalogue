@@ -1,11 +1,11 @@
 package com.example.haekalmoviecatalogue.ui.favorite
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.databinding.FragmentFavoriteBinding
 import com.google.android.material.tabs.TabLayoutMediator

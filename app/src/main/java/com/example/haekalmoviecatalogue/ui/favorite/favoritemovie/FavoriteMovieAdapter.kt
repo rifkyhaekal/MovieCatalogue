@@ -1,4 +1,4 @@
-package com.example.haekalmoviecatalogue.ui.movie
+package com.example.haekalmoviecatalogue.ui.favorite.favoritemovie
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -13,40 +13,39 @@ import com.example.haekalmoviecatalogue.databinding.ItemsMovieBinding
 import com.example.haekalmoviecatalogue.ui.detail.moviedetail.MovieDetailActivity
 import com.example.haekalmoviecatalogue.utils.Common
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class FavoriteMovieAdapter : RecyclerView.Adapter<FavoriteMovieAdapter.FavoriteMovieViewHolder>() {
 
-    private var listMovie = ArrayList<MovieEntity>()
+    private var listFavoriteMovie = ArrayList<MovieEntity>()
 
-    fun setMovies(movies: List<MovieEntity>?) {
+    fun setFavoriteMovies(movies: List<MovieEntity>?) {
         if (movies == null) return
-        this.listMovie.clear()
-        this.listMovie.addAll(movies)
+        this.listFavoriteMovie.clear()
+        this.listFavoriteMovie.addAll(movies)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteMovieViewHolder {
         val itemsMovieBinding =
             ItemsMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MovieViewHolder(itemsMovieBinding)
+        return FavoriteMovieViewHolder(itemsMovieBinding)
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie = listMovie[position]
+    override fun onBindViewHolder(holder: FavoriteMovieViewHolder, position: Int) {
+        val movie = listFavoriteMovie[position]
         holder.bind(movie)
     }
 
-    override fun getItemCount(): Int = listMovie.size
+    override fun getItemCount(): Int = listFavoriteMovie.size
 
-    inner class MovieViewHolder(private val binding: ItemsMovieBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: MovieEntity) {
+    inner class FavoriteMovieViewHolder(private val binding: ItemsMovieBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(favoriteMovie: MovieEntity) {
             with(binding) {
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, MovieDetailActivity::class.java)
-                    intent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie.movieId)
+                    intent.putExtra(MovieDetailActivity.EXTRA_MOVIE, favoriteMovie.movieId)
                     itemView.context.startActivity(intent)
                 }
                 Glide.with(itemView.context)
-                    .load(Common.POSTER_URL + movie.imgPoster)
+                    .load(Common.POSTER_URL + favoriteMovie.imgPoster)
                     .transform(CenterCrop())
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
                     .error(R.drawable.ic_error)

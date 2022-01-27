@@ -1,18 +1,36 @@
 package com.example.haekalmoviecatalogue.ui.detail.tvshowdetail
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.example.haekalmoviecatalogue.data.source.MovieRepository
-import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowDetailEntity
+import com.example.haekalmoviecatalogue.data.MovieRepository
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
+import com.example.haekalmoviecatalogue.vo.Resource
 
 class TvShowDetailViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
-    private var tvShowId: Int? = null
+    val tvShowId = MutableLiveData<Int>()
 
     fun setSelectedTvShow(tvShowId: Int) {
-        this.tvShowId = tvShowId
+        this.tvShowId.value = tvShowId
     }
 
-    fun getTvShowDetail(): LiveData<TvShowDetailEntity> = movieRepository.getTvShowDetail(tvShowId)
+    var tvShow: LiveData<Resource<TvShowEntity>> = Transformations.switchMap(tvShowId) { mTvShowId ->
+        movieRepository.getTvShowDetail(mTvShowId)
+    }
+
+    fun setFavorite() {
+        val tvShowResource = tvShow.value
+        if (tvShowResource != null) {
+            val tvShowDetail = tvShowResource.data
+
+            if (tvShowDetail != null) {
+                val tvShowEntity = TvShowEntity(tvShowDetail.tvShowId, tvShowDetail.title, tvShowDetail.overview, tvShowDetail.status, tvShowDetail.type, tvShowDetail.genre, tvShowDetail.network, tvShowDetail.userScore, tvShowDetail.imgPoster)
+                val newState = !tvShowEntity.favorite
+                movieRepository.setTvShowFavorite(tvShowEntity, newState)
+            }
+        }
+    }
 
 }

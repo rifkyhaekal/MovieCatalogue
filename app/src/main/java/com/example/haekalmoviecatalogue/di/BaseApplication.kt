@@ -16,12 +16,18 @@ class BaseApplication : Application() {
             modules(
                 listOf(
                     remoteDataSourceModule,
+                    movieDatabaseModule,
+                    movieDaoModule,
+                    localDataSourceModule,
+                    appExecutorsModule,
                     movieRepository,
                     connectionLiveData,
                     movieViewModelModule,
                     tvShowViewModelModule,
                     movieDetailViewModelModule,
-                    tvShowDetailViewModelModule
+                    tvShowDetailViewModelModule,
+                    favoriteMovieViewModelModule,
+                    favoriteTvShowViewModelModule
                 )
             )
         }

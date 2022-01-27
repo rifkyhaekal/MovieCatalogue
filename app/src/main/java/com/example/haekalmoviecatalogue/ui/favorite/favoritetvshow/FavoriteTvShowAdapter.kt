@@ -1,4 +1,4 @@
-package com.example.haekalmoviecatalogue.ui.tvshow
+package com.example.haekalmoviecatalogue.ui.favorite.favoritetvshow
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -13,40 +13,39 @@ import com.example.haekalmoviecatalogue.databinding.ItemsTvShowBinding
 import com.example.haekalmoviecatalogue.ui.detail.tvshowdetail.TvShowDetailActivity
 import com.example.haekalmoviecatalogue.utils.Common
 
-class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
+class FavoriteTvShowAdapter : RecyclerView.Adapter<FavoriteTvShowAdapter.FavoriteTvShowViewHolder>() {
 
-    private var listTvShow = ArrayList<TvShowEntity>()
+    private var listFavoriteTvShow = ArrayList<TvShowEntity>()
 
-    fun setTvShow(tvShows: List<TvShowEntity>?) {
+    fun setFavoriteTvShows(tvShows: List<TvShowEntity>?) {
         if (tvShows == null) return
-        this.listTvShow.clear()
-        this.listTvShow.addAll(tvShows)
+        this.listFavoriteTvShow.clear()
+        this.listFavoriteTvShow.addAll(tvShows)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteTvShowViewHolder {
         val itemsTvShowBinding =
             ItemsTvShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TvShowViewHolder(itemsTvShowBinding)
+        return FavoriteTvShowViewHolder(itemsTvShowBinding)
     }
 
-    override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        val tvShows = listTvShow[position]
+    override fun onBindViewHolder(holder: FavoriteTvShowViewHolder, position: Int) {
+        val tvShows = listFavoriteTvShow[position]
         holder.bind(tvShows)
     }
 
-    override fun getItemCount(): Int = listTvShow.size
+    override fun getItemCount(): Int = listFavoriteTvShow.size
 
-    inner class TvShowViewHolder(private val binding: ItemsTvShowBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShow: TvShowEntity) {
+    inner class FavoriteTvShowViewHolder(private val binding: ItemsTvShowBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(favoriteTvShow: TvShowEntity) {
             with(binding) {
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, TvShowDetailActivity::class.java)
-                    intent.putExtra(TvShowDetailActivity.EXTRA_TVSHOW, tvShow.tvShowId)
+                    intent.putExtra(TvShowDetailActivity.EXTRA_TVSHOW, favoriteTvShow.tvShowId)
                     itemView.context.startActivity(intent)
                 }
                 Glide.with(itemView.context)
-                    .load(Common.POSTER_URL + tvShow.imgPoster)
+                    .load(Common.POSTER_URL + favoriteTvShow.imgPoster)
                     .transform(CenterCrop())
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
                     .error(R.drawable.ic_error)

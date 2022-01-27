@@ -24,6 +24,7 @@
     <string name="title_movie">Movie</string>
     <string name="title_tv_show">Tv Show</string>
     <string name="title_favorite">Favorite</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_movie">No favorite Movie yet.</string>
+    <string name="empty_tv_show">No favorite Tv Show yet.</string>
+    <string name="menu_favorite">Favorite</string>
 </resources>

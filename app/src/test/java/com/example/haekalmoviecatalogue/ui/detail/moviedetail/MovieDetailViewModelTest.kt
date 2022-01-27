@@ -3,7 +3,7 @@ package com.example.haekalmoviecatalogue.ui.detail.moviedetail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.haekalmoviecatalogue.data.source.MovieRepository
+import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieDetailEntity
 import com.example.haekalmoviecatalogue.utils.DataDummy
 import org.junit.Assert.assertEquals

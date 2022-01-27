@@ -5,142 +5,142 @@ import com.example.haekalmoviecatalogue.data.source.remote.response.*
 
 object DataDummy {
 
-    fun generateDummyPopularMovies(success: Boolean): PopularMovieEntity {
-        val popularMovieResults = ArrayList<MovieItemEntity>()
+    fun generateDummyPopularMovies(success: Boolean): List<MovieEntity> {
+        val popularMovieResults = ArrayList<MovieEntity>()
 
         popularMovieResults.add(
-            MovieItemEntity(
-                19610,
-                "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg"
+            MovieEntity(
+                movieId = 19610,
+                imgPoster = "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                17189,
-                "/xRWht48C2V8XNfzvPehyClOvDni.jpg"
+            MovieEntity(
+                movieId = 17189,
+                imgPoster = "/xRWht48C2V8XNfzvPehyClOvDni.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                572802,
-                "/xLPffWMhMj1l50ND3KchMjYoKmE.jpg"
+            MovieEntity(
+                movieId = 572802,
+                imgPoster = "/xLPffWMhMj1l50ND3KchMjYoKmE.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                424694,
-                "/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg"
+            MovieEntity(
+                movieId = 424694,
+                imgPoster = "/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                480530,
-                "/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg"
+            MovieEntity(
+                movieId = 480530,
+                imgPoster = "/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                438650,
-                "/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg"
+            MovieEntity(
+                movieId = 438650,
+                imgPoster = "/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                663124,
-                "/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg"
+            MovieEntity(
+                movieId = 663124,
+                imgPoster = "/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                654571,
-                "/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg"
+            MovieEntity(
+                movieId = 654571,
+                imgPoster = "/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                299536,
-                "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+            MovieEntity(
+                movieId = 299536,
+                imgPoster = "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
             )
         )
         popularMovieResults.add(
-            MovieItemEntity(
-                193006,
-                "/9NQh0CGCuvRQoZO3Nhwl7huGSOg.jpg"
+            MovieEntity(
+                movieId = 193006,
+                imgPoster = "/9NQh0CGCuvRQoZO3Nhwl7huGSOg.jpg"
             )
         )
 
-        return PopularMovieEntity(success, popularMovieResults)
+        return popularMovieResults
     }
 
-    fun generateDummyPopularTvShows(success: Boolean): PopularTvShowEntity {
-        val popularTvShowResults = ArrayList<TvShowItemEntity>()
+    fun generateDummyPopularTvShows(success: Boolean): List<TvShowEntity> {
+        val popularTvShowResults = ArrayList<TvShowEntity>()
 
         popularTvShowResults.add(
-            TvShowItemEntity(
-                1412,
-                "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"
+            TvShowEntity(
+                tvShowId = 1412,
+                imgPoster = "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                79501,
-                "/kOAn06LmRCg4YiSStwrGL6UOQ3a.jpg"
+            TvShowEntity(
+                tvShowId = 79501,
+                imgPoster = "/kOAn06LmRCg4YiSStwrGL6UOQ3a.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                118011,
-                "/xs1BRXnY5kStzwdxyrl2HYJOJCq.jpg"
+            TvShowEntity(
+                tvShowId = 118011,
+                imgPoster = "/xs1BRXnY5kStzwdxyrl2HYJOJCq.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                1434,
-                "/9RBeCo8QSaoJLmmuzlwzVH3Hi12.jpg"
+            TvShowEntity(
+                tvShowId = 1434,
+                imgPoster = "/9RBeCo8QSaoJLmmuzlwzVH3Hi12.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                236,
-                "/fi1GEdCbyWRDHpyJcB25YYK7fh4.jpg"
+            TvShowEntity(
+                tvShowId = 236,
+                imgPoster = "/fi1GEdCbyWRDHpyJcB25YYK7fh4.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                15185,
-                "/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg"
+            TvShowEntity(
+                tvShowId = 15185,
+                imgPoster = "/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                79897,
-                "/zPIug5giU8oug6Xes5K1sTfQJxY.jpg"
+            TvShowEntity(
+                tvShowId = 79897,
+                imgPoster = "/zPIug5giU8oug6Xes5K1sTfQJxY.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                63394,
-                "/pe10EUjgO2jgwiu01MAv9l3IjxG.jpg"
+            TvShowEntity(
+                tvShowId = 63394,
+                imgPoster = "/pe10EUjgO2jgwiu01MAv9l3IjxG.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                62127,
-                "/4l6KD9HhtD6nCDEfg10Lp6C6zah.jpg"
+            TvShowEntity(
+                tvShowId = 62127,
+                imgPoster = "/4l6KD9HhtD6nCDEfg10Lp6C6zah.jpg"
             )
         )
         popularTvShowResults.add(
-            TvShowItemEntity(
-                124271,
-                "/lSTchtc26YNdOjdKvZtLs22SokL.jpg"
+            TvShowEntity(
+                tvShowId = 124271,
+                imgPoster = "/lSTchtc26YNdOjdKvZtLs22SokL.jpg"
             )
         )
 
-        return PopularTvShowEntity(success, popularTvShowResults)
+        return popularTvShowResults
     }
 
-    fun generateDummyMovieDetail(): MovieDetailEntity {
-        return MovieDetailEntity(
+    fun generateDummyMovieDetail(): MovieEntity {
+        return MovieEntity(
             19610,
             "A Star Is Born",
             "Drama, Music, Romance",
@@ -153,8 +153,8 @@ object DataDummy {
         )
     }
 
-    fun generateDummyTvShowDetail(): TvShowDetailEntity {
-        return TvShowDetailEntity(
+    fun generateDummyTvShowDetail(): TvShowEntity {
+        return TvShowEntity(
             1412,
             "Arrow",
             "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",

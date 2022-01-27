@@ -10,9 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.haekalmoviecatalogue.R
-import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowItemEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.databinding.FragmentTvShowBinding
 import com.example.haekalmoviecatalogue.utils.ConnectionLiveData
+import com.example.haekalmoviecatalogue.vo.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TvShowFragment : Fragment() {
@@ -36,7 +37,7 @@ class TvShowFragment : Fragment() {
 
         showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
         connectionLiveData = tvShowViewModel.internetConnection()
-        connectionLiveData.observe(viewLifecycleOwner, { isNetworkAvailable ->
+        connectionLiveData.observe(viewLifecycleOwner) { isNetworkAvailable ->
             showLoading(true)
             showTvShowList(false)
 
@@ -45,23 +46,28 @@ class TvShowFragment : Fragment() {
             } else {
                 showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
             }
-            tvShowViewModel.getPopularTvShows().observe(viewLifecycleOwner, { popularTvShows ->
-                if (isNetworkAvailable && popularTvShows.success) {
-                    showLoading(false)
-                    showErrorInfo(false)
-                    showTvShowList(true)
-                    setPopularTvShows(popularTvShows.results)
-                } else {
-                    showLoading(false)
-                    showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
-                    showTvShowList(false)
-                    setPopularTvShows(popularTvShows.results)
+            tvShowViewModel.getPopularTvShows().observe(viewLifecycleOwner) { popularTvShows ->
+                if (popularTvShows != null) {
+                    when (popularTvShows.status) {
+                        Status.LOADING -> showLoading(true)
+                        Status.SUCCESS -> {
+                            showLoading(false)
+                            showErrorInfo(false)
+                            showTvShowList(true)
+                            setPopularTvShows(popularTvShows.data)
+                        }
+                        Status.ERROR -> {
+                            showLoading(false)
+                            showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
+                            showTvShowList(false)
+                        }
+                    }
                 }
-            })
-        })
+            }
+        }
     }
 
-    private fun setPopularTvShows(items: List<TvShowItemEntity>?) {
+    private fun setPopularTvShows(items: List<TvShowEntity>?) {
 
         val tvShowAdapter = TvShowAdapter()
         tvShowAdapter.setTvShow(items)

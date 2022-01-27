@@ -3,8 +3,8 @@ package com.example.haekalmoviecatalogue.ui.detail.tvshowdetail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.haekalmoviecatalogue.data.source.MovieRepository
-import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowDetailEntity
+import com.example.haekalmoviecatalogue.data.MovieRepository
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -33,7 +33,7 @@ class TvShowDetailViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var tvShowDetailObserver: Observer<TvShowDetailEntity>
+    private lateinit var tvShowObserver: Observer<TvShowEntity>
 
     @Before
     fun setUp() {
@@ -43,12 +43,12 @@ class TvShowDetailViewModelTest {
 
     @Test
     fun getTvShow() {
-        val tvShow = MutableLiveData<TvShowDetailEntity>()
+        val tvShow = MutableLiveData<TvShowEntity>()
         tvShow.value = dummyTvShow
 
         `when`(movieRepository.getTvShowDetail(tvShowId)).thenReturn(tvShow)
         detailViewModel.setSelectedTvShow(dummyTvShow.tvShowId)
-        val movieEntity = detailViewModel.getTvShowDetail().value as TvShowDetailEntity
+        val movieEntity = detailViewModel.getTvShowDetail().value as TvShowEntity
         verify(movieRepository).getTvShowDetail(tvShowId)
         assertNotNull(movieEntity)
         assertEquals(dummyTvShow.tvShowId, movieEntity.tvShowId)
@@ -61,7 +61,7 @@ class TvShowDetailViewModelTest {
         assertEquals(dummyTvShow.overview, movieEntity.overview)
         assertEquals(dummyTvShow.imgPoster, movieEntity.imgPoster)
 
-        detailViewModel.getTvShowDetail().observeForever(tvShowDetailObserver)
-        verify(tvShowDetailObserver).onChanged(dummyTvShow)
+        detailViewModel.getTvShowDetail().observeForever(tvShowObserver)
+        verify(tvShowObserver).onChanged(dummyTvShow)
     }
 }
