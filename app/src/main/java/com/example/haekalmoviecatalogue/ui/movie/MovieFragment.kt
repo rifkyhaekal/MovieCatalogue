@@ -20,7 +20,6 @@ class MovieFragment : Fragment() {
     private var _fragmentMovieBinding: FragmentMovieBinding? = null
     private val fragmentMovieBinding get() = _fragmentMovieBinding!!
     private val movieViewModel: MovieViewModel by viewModel()
-    private lateinit var connectionLiveData: ConnectionLiveData
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,32 +33,20 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
-        connectionLiveData = movieViewModel.internetConnection()
-        connectionLiveData.observe(viewLifecycleOwner) { isNetworkAvailable ->
-            showLoading(true)
-            showMovieList(false)
-
-            if (isNetworkAvailable) {
-                showErrorInfo(false)
-            } else {
-                showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
-            }
-            movieViewModel.getPopularMovies().observe(viewLifecycleOwner) { popularMovies ->
-                if (popularMovies != null) {
-                    when (popularMovies.status) {
-                        Status.LOADING -> showLoading(true)
-                        Status.SUCCESS -> {
-                            showLoading(false)
-                            showErrorInfo(false)
-                            showMovieList(true)
-                            setPopularMovies(popularMovies.data)
-                        }
-                        Status.ERROR -> {
-                            showLoading(false)
-                            showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
-                            showMovieList(false)
-                        }
+        showLoading(true)
+        showMovieList(false)
+        movieViewModel.getPopularMovies().observe(viewLifecycleOwner) { popularMovies ->
+            if (popularMovies != null) {
+                when (popularMovies.status) {
+                    Status.LOADING -> showLoading(true)
+                    Status.SUCCESS -> {
+                        showLoading(false)
+                        showMovieList(true)
+                        setPopularMovies(popularMovies.data)
+                    }
+                    Status.ERROR -> {
+                        showLoading(false)
+                        showMovieList(false)
                     }
                 }
             }
@@ -90,23 +77,6 @@ class MovieFragment : Fragment() {
 
     private fun showMovieList(isVisible: Boolean) {
         if  (isVisible) fragmentMovieBinding.rvMovie.visibility = View.VISIBLE else fragmentMovieBinding.rvMovie.visibility = View.GONE
-    }
-
-    private fun showErrorInfo(
-        isVisible: Boolean,
-        message: String? = null,
-        @DrawableRes infoImg: Int? = null
-    ) {
-        if (isVisible) {
-            fragmentMovieBinding.errorInfo.tvInfo.text = message
-            Glide.with(this)
-                .load(infoImg)
-                .error(R.drawable.ic_error)
-                .into(fragmentMovieBinding.errorInfo.imgInfo)
-            fragmentMovieBinding.errorInfo.root.visibility = View.VISIBLE
-        } else {
-            fragmentMovieBinding.errorInfo.root.visibility = View.GONE
-        }
     }
 
     override fun onDestroy() {

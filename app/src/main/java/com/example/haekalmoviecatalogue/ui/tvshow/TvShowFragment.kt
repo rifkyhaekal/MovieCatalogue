@@ -20,7 +20,6 @@ class TvShowFragment : Fragment() {
     private var _fragmentTvShowBinding: FragmentTvShowBinding? = null
     private val fragmentTvShowBinding get() = _fragmentTvShowBinding!!
     private val tvShowViewModel: TvShowViewModel by viewModel()
-    private lateinit var connectionLiveData: ConnectionLiveData
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,32 +33,20 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
-        connectionLiveData = tvShowViewModel.internetConnection()
-        connectionLiveData.observe(viewLifecycleOwner) { isNetworkAvailable ->
-            showLoading(true)
-            showTvShowList(false)
-
-            if (isNetworkAvailable) {
-                showErrorInfo(false)
-            } else {
-                showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
-            }
-            tvShowViewModel.getPopularTvShows().observe(viewLifecycleOwner) { popularTvShows ->
-                if (popularTvShows != null) {
-                    when (popularTvShows.status) {
-                        Status.LOADING -> showLoading(true)
-                        Status.SUCCESS -> {
-                            showLoading(false)
-                            showErrorInfo(false)
-                            showTvShowList(true)
-                            setPopularTvShows(popularTvShows.data)
-                        }
-                        Status.ERROR -> {
-                            showLoading(false)
-                            showErrorInfo(true, getString(R.string.no_connection), R.drawable.no_connection)
-                            showTvShowList(false)
-                        }
+        showLoading(true)
+        showTvShowList(false)
+        tvShowViewModel.getPopularTvShows().observe(viewLifecycleOwner) { popularTvShows ->
+            if (popularTvShows != null) {
+                when (popularTvShows.status) {
+                    Status.LOADING -> showLoading(true)
+                    Status.SUCCESS -> {
+                        showLoading(false)
+                        showTvShowList(true)
+                        setPopularTvShows(popularTvShows.data)
+                    }
+                    Status.ERROR -> {
+                        showLoading(false)
+                        showTvShowList(false)
                     }
                 }
             }
@@ -90,23 +77,6 @@ class TvShowFragment : Fragment() {
 
     private fun showTvShowList(isVisible: Boolean) {
         if  (isVisible) fragmentTvShowBinding.rvTvShow.visibility = View.VISIBLE else fragmentTvShowBinding.rvTvShow.visibility = View.GONE
-    }
-
-    private fun showErrorInfo(
-        isVisible: Boolean,
-        message: String? = null,
-        @DrawableRes infoImg: Int? = null
-    ) {
-        if (isVisible) {
-            fragmentTvShowBinding.errorInfo.tvInfo.text = message
-            Glide.with(this)
-                .load(infoImg)
-                .error(R.drawable.ic_error)
-                .into(fragmentTvShowBinding.errorInfo.imgInfo)
-            fragmentTvShowBinding.errorInfo.root.visibility = View.VISIBLE
-        } else {
-            fragmentTvShowBinding.errorInfo.root.visibility = View.GONE
-        }
     }
 
     override fun onDestroy() {
