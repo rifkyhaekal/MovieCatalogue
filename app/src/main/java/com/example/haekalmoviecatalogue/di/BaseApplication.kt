@@ -21,7 +21,6 @@ class BaseApplication : Application() {
                     localDataSourceModule,
                     appExecutorsModule,
                     movieRepository,
-                    connectionLiveData,
                     movieViewModelModule,
                     tvShowViewModelModule,
                     movieDetailViewModelModule,

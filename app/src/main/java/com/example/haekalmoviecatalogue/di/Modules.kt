@@ -11,7 +11,6 @@ import com.example.haekalmoviecatalogue.ui.favorite.favoritetvshow.FavoriteTvSho
 import com.example.haekalmoviecatalogue.ui.movie.MovieViewModel
 import com.example.haekalmoviecatalogue.ui.tvshow.TvShowViewModel
 import com.example.haekalmoviecatalogue.utils.AppExecutors
-import com.example.haekalmoviecatalogue.utils.ConnectionLiveData
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -39,16 +38,12 @@ val movieRepository = module {
     single { MovieRepository.getInstance(get(), get(), get()) }
 }
 
-val connectionLiveData = module {
-    single { ConnectionLiveData.getInstance(get()) }
-}
-
 val movieViewModelModule = module {
-    viewModel { MovieViewModel(get(), get()) }
+    viewModel { MovieViewModel(get()) }
 }
 
 val tvShowViewModelModule = module {
-    viewModel { TvShowViewModel(get(), get()) }
+    viewModel { TvShowViewModel(get()) }
 }
 
 val movieDetailViewModelModule = module {

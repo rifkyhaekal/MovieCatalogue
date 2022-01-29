@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.databinding.FragmentTvShowBinding
-import com.example.haekalmoviecatalogue.utils.ConnectionLiveData
 import com.example.haekalmoviecatalogue.vo.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
