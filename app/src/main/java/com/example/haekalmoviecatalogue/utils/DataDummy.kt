@@ -1,6 +1,9 @@
 package com.example.haekalmoviecatalogue.utils
 
-import com.example.haekalmoviecatalogue.data.source.local.entity.*
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieDetailEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowDetailEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.data.source.remote.response.*
 
 object DataDummy {
@@ -139,31 +142,27 @@ object DataDummy {
         return popularTvShowResults
     }
 
-    fun generateDummyMovieDetail(): MovieEntity {
-        return MovieEntity(
-            19610,
+    fun generateDummyMovieDetail(): MovieDetailEntity {
+        return MovieDetailEntity(
             "A Star Is Born",
             "Drama, Music, Romance",
             "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
             "2h 19m",
-            5.9,
+            5.9F,
             "10/05/2018",
             "Released",
-            "/oVpUzCimMZ0ecni7lDuYPuRdxoQ.jpg"
         )
     }
 
-    fun generateDummyTvShowDetail(): TvShowEntity {
-        return TvShowEntity(
-            1412,
+    fun generateDummyTvShowDetail(): TvShowDetailEntity {
+        return TvShowDetailEntity(
             "Arrow",
             "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
             "Ended",
             "Scripted",
             "Crime, Drama, Mystery, Action & Adventure",
             "The CW",
-            6.7,
-            "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"
+            6.7F
         )
     }
 

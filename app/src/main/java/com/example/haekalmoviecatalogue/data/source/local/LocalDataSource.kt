@@ -20,7 +20,7 @@ class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
         mMovieDao.updateMovie(movie)
     }
 
-    fun updateMovieDetail(movieId: Int, title: String, genre: String, overview: String, duration: String, userScore: Double, releaseDate: String, status: String) {
+    fun updateMovieDetail(movieId: Int, title: String, genre: String, overview: String, duration: String, userScore: Float, releaseDate: String, status: String) {
         mMovieDao.updateMovieDetail(movieId, title, genre, overview, duration, userScore, releaseDate, status)
     }
 
@@ -30,14 +30,14 @@ class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
 
     fun getTvShowDetail(tvShowId: Int): LiveData<TvShowEntity> = mMovieDao.getTvShowDetail(tvShowId)
 
-    fun insertTvShow(tvShow: List<TvShowEntity>) = mMovieDao.insertTvShows(tvShow)
+    fun insertTvShow(tvShows: List<TvShowEntity>) = mMovieDao.insertTvShows(tvShows)
 
     fun setFavoriteTvShow(tvShow: TvShowEntity, newState: Boolean) {
         tvShow.favorite = newState
         mMovieDao.updateTvShow(tvShow)
     }
 
-    fun updateTvShowDetail(tvShowId: Int, title: String, overview: String, status: String, type: String, genre: String, network: String, userScore: Double) {
+    fun updateTvShowDetail(tvShowId: Int, title: String, overview: String, status: String, type: String, genre: String, network: String, userScore: Float) {
         mMovieDao.updateTvShowDetail(tvShowId, title, overview, status, type, genre, network, userScore)
     }
 

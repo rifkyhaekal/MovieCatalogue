@@ -25,10 +25,8 @@ class MovieRepository private constructor(
             override fun shouldFetch(data: List<MovieEntity>?): Boolean =
                 data == null || data.isEmpty()
 
-
             override fun createCall(): LiveData<ApiResponse<PopularMovieResponse>> =
                 remoteDataSource.getPopularMovies()
-
 
             override fun saveCallResult(data: PopularMovieResponse) {
                 val popularMovieList = ArrayList<MovieEntity>()
@@ -54,13 +52,21 @@ class MovieRepository private constructor(
                 localDataSource.getMovieDetail(movieId)
 
             override fun shouldFetch(data: MovieEntity?): Boolean =
-                data?.movieId == null
+                data?.movieDetailEntity == null
 
             override fun createCall(): LiveData<ApiResponse<MovieDetailResponse>> =
                 remoteDataSource.getMovieDetail(movieId)
 
             override fun saveCallResult(data: MovieDetailResponse) =
-                localDataSource.updateMovieDetail(data.id, data.title, generateMovieGenres(data.genres), data.overview, generateMovieDuration(data.runtime), data.voteAverage, data.releaseDate, data.status)
+                localDataSource.updateMovieDetail(
+                    data.id,
+                    data.title,
+                    generateMovieGenres(data.genres),
+                    data.overview,
+                    generateMovieDuration(data.runtime),
+                    data.voteAverage.toFloat(),
+                    data.releaseDate,
+                    data.status)
 
         }.asLiveData()
     }
@@ -78,7 +84,6 @@ class MovieRepository private constructor(
 
             override fun createCall(): LiveData<ApiResponse<PopularTvShowResponse>> =
                 remoteDataSource.getPopularTvShows()
-
 
             override fun saveCallResult(data: PopularTvShowResponse) {
                 val popularTvShowResults = ArrayList<TvShowEntity>()
@@ -104,14 +109,22 @@ class MovieRepository private constructor(
                 localDataSource.getTvShowDetail(tvShowId)
 
             override fun shouldFetch(data: TvShowEntity?): Boolean =
-                data?.tvShowId == null
-
+                data?.tvShowDetailEntity == null
 
             override fun createCall(): LiveData<ApiResponse<TvShowDetailResponse>> =
                 remoteDataSource.getTvShowDetail(tvShowId)
 
             override fun saveCallResult(data: TvShowDetailResponse) {
-                localDataSource.updateTvShowDetail(data.id, data.name, data.overview, data.status, data.type, generateTvShowGenres(data.genres), generateNetworks(data.networks), data.voteAverage)
+                localDataSource.updateTvShowDetail(
+                    data.id,
+                    data.name,
+                    data.overview,
+                    data.status,
+                    data.type,
+                    generateTvShowGenres(data.genres),
+                    generateNetworks(data.networks),
+                    data.voteAverage.toFloat()
+                )
             }
         }.asLiveData()
     }

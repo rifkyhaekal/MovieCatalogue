@@ -26,7 +26,7 @@ class TvShowDetailViewModel(private val movieRepository: MovieRepository) : View
             val tvShowDetail = tvShowResource.data
 
             if (tvShowDetail != null) {
-                val tvShowEntity = TvShowEntity(tvShowDetail.tvShowId, tvShowDetail.title, tvShowDetail.overview, tvShowDetail.status, tvShowDetail.type, tvShowDetail.genre, tvShowDetail.network, tvShowDetail.userScore, tvShowDetail.imgPoster)
+                val tvShowEntity = tvShowDetail
                 val newState = !tvShowEntity.favorite
                 movieRepository.setTvShowFavorite(tvShowEntity, newState)
             }

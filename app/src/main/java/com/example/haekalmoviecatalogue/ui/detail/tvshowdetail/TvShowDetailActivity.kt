@@ -68,14 +68,14 @@ class TvShowDetailActivity : AppCompatActivity() {
     private fun populateTvShow(tvShowEntity: TvShowEntity) {
 
         contentDetailTvShowBinding.apply {
-            textTitleTvshow.text = tvShowEntity.title
-            textTypeTvshow.text = tvShowEntity.type
-            textGenreTvshow.text = tvShowEntity.genre
-            textOverviewTvshow.text = if (tvShowEntity.overview != "") tvShowEntity.overview else "-"
-            textNetworkTvshow.text = tvShowEntity.network
-            ratingTvShow.rating = (((tvShowEntity.userScore)?.toFloat() ?: 2) as Float)
-            ratingValueTvshow.text = tvShowEntity.userScore.toString()
-            textStatusTvshow.text = tvShowEntity.status
+            textTitleTvshow.text = tvShowEntity.tvShowDetailEntity?.title
+            textTypeTvshow.text = tvShowEntity.tvShowDetailEntity?.type
+            textGenreTvshow.text = tvShowEntity.tvShowDetailEntity?.genre
+            textOverviewTvshow.text = setOverview(tvShowEntity.tvShowDetailEntity?.overview)
+            textNetworkTvshow.text = tvShowEntity.tvShowDetailEntity?.network
+            ratingTvShow.rating = setRating(tvShowEntity.tvShowDetailEntity?.userScore)
+            ratingValueTvshow.text = tvShowEntity.tvShowDetailEntity?.userScore.toString()
+            textStatusTvshow.text = tvShowEntity.tvShowDetailEntity?.status
         }
 
         Glide.with(this)
@@ -120,9 +120,9 @@ class TvShowDetailActivity : AppCompatActivity() {
         if (menu == null) return
         val menuItem = menu?.findItem(R.id.action_favorite)
         if (state) {
-            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_yellow)
-        } else {
             menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_starred_yellow)
+        } else {
+            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_yellow)
         }
     }
 
@@ -165,6 +165,24 @@ class TvShowDetailActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) contentDetailTvShowBinding.progressBar.visibility =
             View.VISIBLE else contentDetailTvShowBinding.progressBar.visibility = View.GONE
+    }
+
+    private fun setRating(rating: Float?): Float {
+        val newRating: Float = if (rating != null) {
+            rating
+        } else {
+            0F
+        }
+        return newRating
+    }
+
+    private fun setOverview(overview: String?): String {
+        val newOverview: String = if (overview?.length != 0 && overview != null) {
+            overview
+        } else {
+            "-"
+        }
+        return newOverview
     }
 
     companion object {

@@ -67,14 +67,14 @@ class MovieDetailActivity : AppCompatActivity() {
     private fun populateMovie(movieEntity: MovieEntity?) {
         contentDetailMovieBinding.apply {
             if (movieEntity != null) {
-                textTitleMovie.text = movieEntity.title
-                textDurationMovie.text = movieEntity.duration
-                textGenreMovie.text = movieEntity.genre
-                textOverviewMovie.text = if (movieEntity.overview != "") movieEntity.overview else "-"
-                textReleaseDateMovie.text = movieEntity.releaseDate
-                ratingMovie.rating = (((movieEntity.userScore)?.toFloat() ?: 2) as Float)
-                ratingValueMovie.text = movieEntity.userScore.toString()
-                textStatusMovie.text = movieEntity.status
+                textTitleMovie.text = movieEntity.movieDetailEntity?.title
+                textDurationMovie.text = movieEntity.movieDetailEntity?.duration
+                textGenreMovie.text = movieEntity.movieDetailEntity?.genre
+                textOverviewMovie.text = setOverview(movieEntity.movieDetailEntity?.overview)
+                textReleaseDateMovie.text = movieEntity.movieDetailEntity?.releaseDate
+                ratingMovie.rating = setRating(movieEntity.movieDetailEntity?.userScore)
+                ratingValueMovie.text = movieEntity.movieDetailEntity?.userScore.toString()
+                textStatusMovie.text = movieEntity.movieDetailEntity?.status
             }
         }
 
@@ -122,9 +122,9 @@ class MovieDetailActivity : AppCompatActivity() {
         if (menu == null) return
         val menuItem = menu?.findItem(R.id.action_favorite)
         if (state) {
-            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_yellow)
-        } else {
             menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_starred_yellow)
+        } else {
+            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_yellow)
         }
     }
 
@@ -169,6 +169,24 @@ class MovieDetailActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) contentDetailMovieBinding.progressBar.visibility =
             View.VISIBLE else contentDetailMovieBinding.progressBar.visibility = View.GONE
+    }
+
+    private fun setRating(rating: Float?): Float {
+        val newRating: Float = if (rating != null) {
+            rating
+        } else {
+            0F
+        }
+        return newRating
+    }
+
+    private fun setOverview(overview: String?): String {
+        val newOverview: String = if (overview?.length != 0 && overview != null) {
+            overview
+        } else {
+            "-"
+        }
+        return newOverview
     }
 
     companion object {

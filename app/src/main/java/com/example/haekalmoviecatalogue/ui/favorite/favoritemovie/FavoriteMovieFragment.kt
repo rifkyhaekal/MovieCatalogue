@@ -32,24 +32,29 @@ class FavoriteMovieFragment : Fragment() {
 
         showLoading(true)
         showMovieList(false)
+        showEmpty(true, getString(R.string.empty_movie))
         favoriteMovieViewModel.getFavoriteMovie().observe(viewLifecycleOwner) { favoriteMovie ->
-            showLoading(false)
             if (favoriteMovie != null) {
                 showMovieList(true)
-                showEmpty(false)
+                showLoading(false)
                 setFavoriteMovies(favoriteMovie)
             } else {
                 showMovieList(false)
-                showEmpty(true, getString(R.string.empty_movie))
+                showLoading(false)
             }
         }
     }
 
     private fun setFavoriteMovies(items: List<MovieEntity>?) {
-
         val movieAdapater = FavoriteMovieAdapter()
         movieAdapater.setFavoriteMovies(items)
         movieAdapater.notifyDataSetChanged()
+
+        if (movieAdapater.itemCount != 0) {
+            showEmpty(false)
+        } else {
+            showEmpty(true, getString(R.string.empty_movie))
+        }
 
         with(fragmentFavoriteBinding.rvMovie) {
             layoutManager = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {

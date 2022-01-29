@@ -14,19 +14,22 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
     init {
         result.value = Resource.loading(null)
 
-        @Suppress
+        @Suppress("LeakingThis")
         val dbSource = loadFromDB()
 
         result.addSource(dbSource) { data ->
             result.removeSource(dbSource)
-            if (shouldFetch(data)){
+            if (shouldFetch(data)) {
                 fetchFromNetwork(dbSource)
+            } else {
+                result.addSource(dbSource) { newData ->
+                    result.value = Resource.success(newData)
+                }
             }
-
         }
     }
 
-    private fun onFetchFailed() {}
+    protected fun onFetchFailed() {}
 
     protected abstract fun loadFromDB(): LiveData<ResultType>
 
@@ -37,6 +40,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
     protected abstract fun saveCallResult(data: RequestType)
 
     private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
+
         val apiResponse = createCall()
 
         result.addSource(dbSource) { newData ->
@@ -46,7 +50,6 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
-
             when (response.status) {
                 StatusResponse.SUCCESS ->
                     mExecutors.diskIO().execute {
@@ -64,8 +67,8 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
                 }
                 StatusResponse.ERROR -> {
                     onFetchFailed()
-                    result.addSource(dbSource) { newDta ->
-                        result.value = Resource.error(response.message, newDta)
+                    result.addSource(dbSource) { newData ->
+                        result.value = Resource.error(response.message, newData)
                     }
                 }
             }

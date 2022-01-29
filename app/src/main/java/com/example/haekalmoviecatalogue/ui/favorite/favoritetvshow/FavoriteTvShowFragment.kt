@@ -50,6 +50,12 @@ class FavoriteTvShowFragment : Fragment() {
         movieAdapater.setFavoriteTvShows(items)
         movieAdapater.notifyDataSetChanged()
 
+        if (movieAdapater.itemCount != 0) {
+            showEmpty(false)
+        } else {
+            showEmpty(true, getString(R.string.empty_tv_show))
+        }
+
         with(fragmentFavoriteTvShowBinding.rvMovie) {
             layoutManager = if (resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT) {
                 GridLayoutManager(view?.context, 3)

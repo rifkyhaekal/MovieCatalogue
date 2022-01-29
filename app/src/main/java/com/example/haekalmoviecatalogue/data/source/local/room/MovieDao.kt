@@ -24,7 +24,7 @@ interface MovieDao {
     fun updateMovie(movie: MovieEntity)
 
     @Query("UPDATE movieentities SET title = :title, genre = :genre, overview = :overview, duration = :duration, userScore = :userScore, releaseDate = :releaseDate, status = :status WHERE movieId = :movieId")
-    fun updateMovieDetail(movieId: Int, title: String, genre: String, overview: String, duration: String, userScore: Double, releaseDate: String, status: String)
+    fun updateMovieDetail(movieId: Int, title: String, genre: String, overview: String, duration: String, userScore: Float, releaseDate: String, status: String)
 
     @Query("SELECT * FROM tvshowentities")
     fun getTvShows(): LiveData<List<TvShowEntity>>
@@ -42,6 +42,6 @@ interface MovieDao {
     fun updateTvShow(movie: TvShowEntity)
 
     @Query("UPDATE tvshowentities SET title = :title, overview = :overview, status = :status, type = :type , genre = :genre, network = :network, userScore = :userScore WHERE tvShowId = :tvShowId")
-    fun updateTvShowDetail(tvShowId: Int, title: String, overview: String, status: String, type: String, genre: String, network: String, userScore: Double,)
+    fun updateTvShowDetail(tvShowId: Int, title: String, overview: String, status: String, type: String, genre: String, network: String, userScore: Float)
 
 }

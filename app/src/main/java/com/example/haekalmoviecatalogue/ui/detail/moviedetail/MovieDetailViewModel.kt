@@ -27,7 +27,7 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
             val movieDetail = movieResource.data
 
             if (movieDetail != null) {
-                val movieEntity = MovieEntity(movieDetail.movieId, movieDetail.title, movieDetail.genre, movieDetail.overview, movieDetail.duration, movieDetail.userScore, movieDetail.releaseDate, movieDetail.status, movieDetail.imgPoster)
+                val movieEntity = movieDetail
                 val newState = !movieEntity.favorite
                 movieRepository.setMovieFavorite(movieEntity, newState)
             }

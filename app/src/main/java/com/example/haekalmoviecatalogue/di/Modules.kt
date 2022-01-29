@@ -2,7 +2,6 @@ package com.example.haekalmoviecatalogue.di
 
 import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.LocalDataSource
-import com.example.haekalmoviecatalogue.data.source.local.room.MovieDao
 import com.example.haekalmoviecatalogue.data.source.local.room.MovieDatabase
 import com.example.haekalmoviecatalogue.data.source.remote.RemoteDataSource
 import com.example.haekalmoviecatalogue.ui.detail.moviedetail.MovieDetailViewModel

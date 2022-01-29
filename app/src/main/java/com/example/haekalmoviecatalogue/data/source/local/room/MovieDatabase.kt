@@ -11,6 +11,7 @@ import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
     version = 1,
     exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
+
     abstract fun movieDao(): MovieDao
 
     companion object {
