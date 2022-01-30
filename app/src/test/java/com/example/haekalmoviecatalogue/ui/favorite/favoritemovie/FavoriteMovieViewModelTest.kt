@@ -3,6 +3,7 @@ package com.example.haekalmoviecatalogue.ui.favorite.favoritemovie
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.utils.DataDummy
@@ -29,7 +30,10 @@ class FavoriteMovieViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var observer : Observer<List<MovieEntity>>
+    private lateinit var observer : Observer<PagedList<MovieEntity>>
+
+    @Mock
+    private lateinit var pagedList: PagedList<MovieEntity>
 
     @Before
     fun setUp() {
@@ -38,8 +42,9 @@ class FavoriteMovieViewModelTest {
 
     @Test
     fun getFavoriteMovie() {
-        val dummyMovies = DataDummy.generateDummyPopularMovies()
-        val movies = MutableLiveData<List<MovieEntity>>()
+        val dummyMovies = pagedList
+        `when`(dummyMovies.size).thenReturn(10)
+        val movies = MutableLiveData<PagedList<MovieEntity>>()
         movies.value = dummyMovies
 
         `when`(movieRepository.getFavoriteMovies()).thenReturn(movies)

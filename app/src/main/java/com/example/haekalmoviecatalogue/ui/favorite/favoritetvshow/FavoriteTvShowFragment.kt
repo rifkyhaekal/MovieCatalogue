@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
@@ -45,10 +46,10 @@ class FavoriteTvShowFragment : Fragment() {
         }
     }
 
-    private fun setFavoriteTvShows(items: List<TvShowEntity>?) {
+    private fun setFavoriteTvShows(items: PagedList<TvShowEntity>?) {
 
         val movieAdapater = FavoriteTvShowAdapter()
-        movieAdapater.setFavoriteTvShows(items)
+        movieAdapater.submitList(items)
         movieAdapater.notifyDataSetChanged()
 
         if (movieAdapater.itemCount != 0) {

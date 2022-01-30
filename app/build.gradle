@@ -62,6 +62,7 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:$viewPager2Version"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
 
     //testing
     testImplementation "junit:junit:$junitVersion"

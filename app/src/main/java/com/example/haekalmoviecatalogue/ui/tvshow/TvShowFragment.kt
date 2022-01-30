@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.databinding.FragmentTvShowBinding
@@ -50,10 +51,10 @@ class TvShowFragment : Fragment() {
         }
     }
 
-    private fun setPopularTvShows(items: List<TvShowEntity>?) {
+    private fun setPopularTvShows(items: PagedList<TvShowEntity>?) {
 
         val tvShowAdapter = TvShowAdapter()
-        tvShowAdapter.setTvShow(items)
+        tvShowAdapter.submitList(items)
         tvShowAdapter.notifyDataSetChanged()
 
         with(fragmentTvShowBinding.rvTvShow) {

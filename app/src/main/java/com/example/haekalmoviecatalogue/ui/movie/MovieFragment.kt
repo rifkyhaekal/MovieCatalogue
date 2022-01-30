@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.databinding.FragmentMovieBinding
@@ -50,10 +51,10 @@ class MovieFragment : Fragment() {
         }
     }
 
-    private fun setPopularMovies(items: List<MovieEntity>?) {
+    private fun setPopularMovies(items: PagedList<MovieEntity>?) {
 
         val movieAdapater = MovieAdapter()
-        movieAdapater.setMovies(items)
+        movieAdapater.submitList(items)
         movieAdapater.notifyDataSetChanged()
 
         with(fragmentMovieBinding.rvMovie) {

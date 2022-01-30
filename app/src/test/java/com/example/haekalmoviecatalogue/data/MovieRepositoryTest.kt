@@ -2,6 +2,7 @@ package com.example.haekalmoviecatalogue.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import com.example.haekalmoviecatalogue.data.source.local.LocalDataSource
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
@@ -12,6 +13,8 @@ import com.example.haekalmoviecatalogue.data.source.remote.response.TvGenresItem
 import com.example.haekalmoviecatalogue.utils.AppExecutors
 import com.example.haekalmoviecatalogue.utils.DataDummy
 import com.example.haekalmoviecatalogue.utils.LiveDataTestUtil
+import com.example.haekalmoviecatalogue.utils.PagedListUtil
+import com.example.haekalmoviecatalogue.vo.Resource
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -41,11 +44,11 @@ class MovieRepositoryTest {
 
     @Test
     fun getPopularMovies() {
-        val dummyMovies = MutableLiveData<List<MovieEntity>>()
-        dummyMovies.value = DataDummy.generateDummyPopularMovies()
-        `when`(local.getAllMovies()).thenReturn(dummyMovies)
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getAllMovies()).thenReturn(dataSourceFactory)
+        movieRepository.getAllMovies()
 
-        val popularMovieEntities = LiveDataTestUtil.getValue(movieRepository.getAllMovies())
+        val popularMovieEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyPopularMovies()))
         verify(local).getAllMovies()
         assertNotNull(popularMovieEntities)
         assertEquals(popularMovieResponse.size.toLong(), popularMovieEntities.data?.size?.toLong())
@@ -53,11 +56,11 @@ class MovieRepositoryTest {
 
     @Test
     fun getPopularTvShow() {
-        val dummyTvShows = MutableLiveData<List<TvShowEntity>>()
-        dummyTvShows.value = DataDummy.generateDummyPopularTvShows()
-        `when`(local.getAllTvShows()).thenReturn(dummyTvShows)
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvShowEntity>
+        `when`(local.getAllTvShows()).thenReturn(dataSourceFactory)
+        movieRepository.getAllTvShows()
 
-        val popularTvShowEntities = LiveDataTestUtil.getValue(movieRepository.getAllTvShows())
+        val popularTvShowEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyPopularTvShows()))
         verify(local).getAllTvShows()
         assertNotNull(popularTvShowEntities)
         assertEquals(popularMovieResponse.size.toLong(), popularTvShowEntities.data?.size?.toLong())
@@ -103,6 +106,30 @@ class MovieRepositoryTest {
         assertEquals(tvShowDetailResponse.status, resultTvShow.data?.tvShowDetailEntity?.status)
         assertEquals(tvShowDetailResponse.type, resultTvShow.data?.tvShowDetailEntity?.type)
         assertEquals(tvShowDetailResponse.voteAverage.toFloat(), resultTvShow.data?.tvShowDetailEntity?.userScore)
+    }
+
+    @Test
+    fun getFavoriteMovies() {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getFavoriteMovies()).thenReturn(dataSourceFactory)
+        movieRepository.getFavoriteMovies()
+
+        val favoriteMovieEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyPopularMovies()))
+        verify(local).getFavoriteMovies()
+        assertNotNull(favoriteMovieEntities)
+        assertEquals(popularMovieResponse.size.toLong(), favoriteMovieEntities.data?.size?.toLong())
+    }
+
+    @Test
+    fun getFavoriteTvShows() {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvShowEntity>
+        `when`(local.getFavoriteTvShows()).thenReturn(dataSourceFactory)
+        movieRepository.getFavoriteTvShows()
+
+        val favoriteTvShowEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyPopularTvShows()))
+        verify(local).getFavoriteTvShows()
+        assertNotNull(favoriteTvShowEntities)
+        assertEquals(popularTvShowResponse.size.toLong(), favoriteTvShowEntities.data?.size?.toLong())
     }
 
     private fun generateMovieGenres(genresItem: List<MovieGenresItem>): String {

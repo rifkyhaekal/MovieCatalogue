@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.haekalmoviecatalogue.R
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
@@ -45,9 +46,9 @@ class FavoriteMovieFragment : Fragment() {
         }
     }
 
-    private fun setFavoriteMovies(items: List<MovieEntity>?) {
+    private fun setFavoriteMovies(items: PagedList<MovieEntity>?) {
         val movieAdapater = FavoriteMovieAdapter()
-        movieAdapater.setFavoriteMovies(items)
+        movieAdapater.submitList(items)
         movieAdapater.notifyDataSetChanged()
 
         if (movieAdapater.itemCount != 0) {

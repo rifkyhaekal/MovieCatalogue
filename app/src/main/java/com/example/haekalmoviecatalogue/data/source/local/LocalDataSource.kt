@@ -1,15 +1,16 @@
 package com.example.haekalmoviecatalogue.data.source.local
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.data.source.local.room.MovieDao
 
 class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
 
-    fun getAllMovies(): LiveData<List<MovieEntity>> = mMovieDao.getMovies()
+    fun getAllMovies(): DataSource.Factory<Int, MovieEntity> = mMovieDao.getMovies()
 
-    fun getFavoriteMovies(): LiveData<List<MovieEntity>> = mMovieDao.getFavoriteMovies()
+    fun getFavoriteMovies(): DataSource.Factory<Int, MovieEntity> = mMovieDao.getFavoriteMovies()
 
     fun getMovieDetail(movieId: Int): LiveData<MovieEntity> = mMovieDao.getMovieDetail(movieId)
 
@@ -24,9 +25,9 @@ class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
         mMovieDao.updateMovieDetail(movieId, title, genre, overview, duration, userScore, releaseDate, status)
     }
 
-    fun getAllTvShows(): LiveData<List<TvShowEntity>> = mMovieDao.getTvShows()
+    fun getAllTvShows(): DataSource.Factory<Int, TvShowEntity> = mMovieDao.getTvShows()
 
-    fun getFavoriteTvShows(): LiveData<List<TvShowEntity>> = mMovieDao.getFavoriteTvShows()
+    fun getFavoriteTvShows(): DataSource.Factory<Int, TvShowEntity> = mMovieDao.getFavoriteTvShows()
 
     fun getTvShowDetail(tvShowId: Int): LiveData<TvShowEntity> = mMovieDao.getTvShowDetail(tvShowId)
 

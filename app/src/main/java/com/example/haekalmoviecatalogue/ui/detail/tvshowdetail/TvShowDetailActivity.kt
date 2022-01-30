@@ -169,7 +169,7 @@ class TvShowDetailActivity : AppCompatActivity() {
 
     private fun setRating(rating: Float?): Float {
         val newRating: Float = if (rating != null) {
-            rating
+            rating / 2
         } else {
             0F
         }

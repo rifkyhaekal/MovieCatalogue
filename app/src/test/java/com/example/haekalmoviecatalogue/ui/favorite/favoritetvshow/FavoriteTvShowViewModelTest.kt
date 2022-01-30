@@ -3,6 +3,7 @@ package com.example.haekalmoviecatalogue.ui.favorite.favoritetvshow
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.utils.DataDummy
@@ -15,6 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -29,7 +31,10 @@ class FavoriteTvShowViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var observer : Observer<List<TvShowEntity>>
+    private lateinit var observer : Observer<PagedList<TvShowEntity>>
+
+    @Mock
+    private lateinit var pagedList: PagedList<TvShowEntity>
 
     @Before
     fun setUp() {
@@ -38,11 +43,12 @@ class FavoriteTvShowViewModelTest {
 
     @Test
     fun getFavoriteTvShow() {
-        val dummyTvShows = DataDummy.generateDummyPopularTvShows()
-        val tvShows = MutableLiveData<List<TvShowEntity>>()
+        val dummyTvShows = pagedList
+        `when`(dummyTvShows.size).thenReturn(10)
+        val tvShows = MutableLiveData<PagedList<TvShowEntity>>()
         tvShows.value = dummyTvShows
 
-        Mockito.`when`(movieRepository.getFavoriteTvShows()).thenReturn(tvShows)
+        `when`(movieRepository.getFavoriteTvShows()).thenReturn(tvShows)
         val tvShowEntities = viewModel.getFavoriteTvShow().value
         verify(movieRepository).getFavoriteTvShows()
         assertNotNull(tvShowEntities)

@@ -1,6 +1,7 @@
 package com.example.haekalmoviecatalogue.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
@@ -9,10 +10,10 @@ import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 interface MovieDao {
 
     @Query("SELECT * FROM movieentities" )
-    fun getMovies(): LiveData<List<MovieEntity>>
+    fun getMovies(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM movieentities WHERE favorite = 1")
-    fun getFavoriteMovies(): LiveData<List<MovieEntity>>
+    fun getFavoriteMovies(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM movieentities WHERE movieId = :movieId")
     fun getMovieDetail(movieId: Int): LiveData<MovieEntity>
@@ -27,10 +28,10 @@ interface MovieDao {
     fun updateMovieDetail(movieId: Int, title: String, genre: String, overview: String, duration: String, userScore: Float, releaseDate: String, status: String)
 
     @Query("SELECT * FROM tvshowentities")
-    fun getTvShows(): LiveData<List<TvShowEntity>>
+    fun getTvShows(): DataSource.Factory<Int, TvShowEntity>
 
     @Query("SELECT * FROM tvshowentities WHERE favorite = 1")
-    fun getFavoriteTvShows(): LiveData<List<TvShowEntity>>
+    fun getFavoriteTvShows(): DataSource.Factory<Int, TvShowEntity>
 
     @Query("SELECT * FROM tvshowentities WHERE tvShowId = :tvShowId")
     fun getTvShowDetail(tvShowId: Int): LiveData<TvShowEntity>
