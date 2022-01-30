@@ -4,10 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.haekalmoviecatalogue.data.MovieRepository
-import com.example.haekalmoviecatalogue.data.source.local.entity.MovieDetailEntity
+import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.utils.DataDummy
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import com.example.haekalmoviecatalogue.vo.Resource
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,9 +20,8 @@ import org.mockito.junit.MockitoJUnitRunner
 class MovieDetailViewModelTest {
 
     private lateinit var detailViewModel: MovieDetailViewModel
-    private val dummyMovie = DataDummy.generateDummyMovieDetail()
+    private val dummyMovie = DataDummy.generateDummyMovieWithDetail(true)
     private val movieId = dummyMovie.movieId
-    private val DELTA = 1e-15
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -32,7 +30,7 @@ class MovieDetailViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var movieDetailObserver: Observer<MovieDetailEntity>
+    private lateinit var movieDetailObserver: Observer<Resource<MovieEntity>>
 
     @Before
     fun setUp() {
@@ -42,25 +40,14 @@ class MovieDetailViewModelTest {
 
     @Test
     fun getMovie() {
-        val movie = MutableLiveData<MovieDetailEntity>()
-        movie.value = dummyMovie
+        val dummyMovieWithDetail = Resource.success(dummyMovie)
+        val movie = MutableLiveData<Resource<MovieEntity>>()
+        movie.value = dummyMovieWithDetail
 
         `when`(movieRepository.getMovieDetail(movieId)).thenReturn(movie)
         detailViewModel.setSelectedMovie(dummyMovie.movieId)
-        val movieEntity = detailViewModel.getMovieDetail().value as MovieDetailEntity
-        verify(movieRepository).getMovieDetail(movieId)
-        assertNotNull(movieEntity)
-        assertEquals(dummyMovie.movieId, movieEntity.movieId)
-        assertEquals(dummyMovie.title, movieEntity.title)
-        assertEquals(dummyMovie.genre, movieEntity.genre)
-        assertEquals(dummyMovie.status, movieEntity.status)
-        assertEquals(dummyMovie.releaseDate, movieEntity.releaseDate)
-        assertEquals(dummyMovie.duration, movieEntity.duration)
-        assertEquals(dummyMovie.userScore, movieEntity.userScore, DELTA)
-        assertEquals(dummyMovie.overview, movieEntity.overview)
-        assertEquals(dummyMovie.imgPoster, movieEntity.imgPoster)
 
-        detailViewModel.getMovieDetail().observeForever(movieDetailObserver)
-        verify(movieDetailObserver).onChanged(dummyMovie)
+        detailViewModel.movie.observeForever(movieDetailObserver)
+        verify(movieDetailObserver).onChanged(dummyMovieWithDetail)
     }
 }

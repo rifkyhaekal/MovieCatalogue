@@ -6,8 +6,7 @@ import androidx.lifecycle.Observer
 import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.utils.DataDummy
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import com.example.haekalmoviecatalogue.vo.Resource
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,7 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class TvShowDetailViewModelTest {
 
     private lateinit var detailViewModel: TvShowDetailViewModel
-    private val dummyTvShow = DataDummy.generateDummyTvShowDetail()
+    private val dummyTvShow = DataDummy.generateDummyTvShowWithDetail(true)
     private val tvShowId = dummyTvShow.tvShowId
     private val DELTA = 1e-15
 
@@ -33,7 +32,7 @@ class TvShowDetailViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var tvShowObserver: Observer<TvShowEntity>
+    private lateinit var tvShowObserver: Observer<Resource<TvShowEntity>>
 
     @Before
     fun setUp() {
@@ -43,25 +42,14 @@ class TvShowDetailViewModelTest {
 
     @Test
     fun getTvShow() {
-        val tvShow = MutableLiveData<TvShowEntity>()
-        tvShow.value = dummyTvShow
+        val dummyTvShowWithDetail = Resource.success(dummyTvShow)
+        val tvShow = MutableLiveData<Resource<TvShowEntity>>()
+        tvShow.value = dummyTvShowWithDetail
 
         `when`(movieRepository.getTvShowDetail(tvShowId)).thenReturn(tvShow)
         detailViewModel.setSelectedTvShow(dummyTvShow.tvShowId)
-        val movieEntity = detailViewModel.getTvShowDetail().value as TvShowEntity
-        verify(movieRepository).getTvShowDetail(tvShowId)
-        assertNotNull(movieEntity)
-        assertEquals(dummyTvShow.tvShowId, movieEntity.tvShowId)
-        assertEquals(dummyTvShow.title, movieEntity.title)
-        assertEquals(dummyTvShow.genre, movieEntity.genre)
-        assertEquals(dummyTvShow.status, movieEntity.status)
-        assertEquals(dummyTvShow.network, movieEntity.network)
-        assertEquals(dummyTvShow.type, movieEntity.type)
-        assertEquals(dummyTvShow.userScore, movieEntity.userScore, DELTA)
-        assertEquals(dummyTvShow.overview, movieEntity.overview)
-        assertEquals(dummyTvShow.imgPoster, movieEntity.imgPoster)
 
-        detailViewModel.getTvShowDetail().observeForever(tvShowObserver)
-        verify(tvShowObserver).onChanged(dummyTvShow)
+        detailViewModel.tvShow.observeForever(tvShowObserver)
+        verify(tvShowObserver).onChanged(dummyTvShowWithDetail)
     }
 }

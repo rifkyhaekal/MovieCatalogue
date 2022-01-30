@@ -1,5 +1,6 @@
 package com.example.haekalmoviecatalogue.ui.favorite.favoritetvshow
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -56,8 +57,8 @@ class FavoriteTvShowFragment : Fragment() {
             showEmpty(true, getString(R.string.empty_tv_show))
         }
 
-        with(fragmentFavoriteTvShowBinding.rvMovie) {
-            layoutManager = if (resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT) {
+        with(fragmentFavoriteTvShowBinding.rvTvShowFavorite) {
+            layoutManager = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 GridLayoutManager(view?.context, 3)
             } else {
                 GridLayoutManager(view?.context, 5)
@@ -73,7 +74,7 @@ class FavoriteTvShowFragment : Fragment() {
     }
 
     private fun showMovieList(isVisible: Boolean) {
-        if (isVisible) fragmentFavoriteTvShowBinding.rvMovie.visibility = View.VISIBLE else fragmentFavoriteTvShowBinding.rvMovie.visibility = View.GONE
+        if (isVisible) fragmentFavoriteTvShowBinding.rvTvShowFavorite.visibility = View.VISIBLE else fragmentFavoriteTvShowBinding.rvTvShowFavorite.visibility = View.GONE
     }
 
     private fun showEmpty(

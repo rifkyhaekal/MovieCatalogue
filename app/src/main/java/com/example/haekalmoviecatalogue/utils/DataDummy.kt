@@ -8,134 +8,154 @@ import com.example.haekalmoviecatalogue.data.source.remote.response.*
 
 object DataDummy {
 
-    fun generateDummyPopularMovies(success: Boolean): List<MovieEntity> {
+    fun generateDummyPopularMovies(): List<MovieEntity> {
         val popularMovieResults = ArrayList<MovieEntity>()
 
         popularMovieResults.add(
             MovieEntity(
                 movieId = 19610,
-                imgPoster = "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg"
+                imgPoster = "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 17189,
-                imgPoster = "/xRWht48C2V8XNfzvPehyClOvDni.jpg"
+                imgPoster = "/xRWht48C2V8XNfzvPehyClOvDni.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 572802,
-                imgPoster = "/xLPffWMhMj1l50ND3KchMjYoKmE.jpg"
+                imgPoster = "/xLPffWMhMj1l50ND3KchMjYoKmE.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 424694,
-                imgPoster = "/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg"
+                imgPoster = "/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 480530,
-                imgPoster = "/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg"
+                imgPoster = "/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 438650,
-                imgPoster = "/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg"
+                imgPoster = "/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 663124,
-                imgPoster = "/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg"
+                imgPoster = "/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 654571,
-                imgPoster = "/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg"
+                imgPoster = "/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 299536,
-                imgPoster = "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+                imgPoster = "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+                favorite = false
             )
         )
         popularMovieResults.add(
             MovieEntity(
                 movieId = 193006,
-                imgPoster = "/9NQh0CGCuvRQoZO3Nhwl7huGSOg.jpg"
+                imgPoster = "/9NQh0CGCuvRQoZO3Nhwl7huGSOg.jpg",
+                favorite = false
             )
         )
 
         return popularMovieResults
     }
 
-    fun generateDummyPopularTvShows(success: Boolean): List<TvShowEntity> {
+    fun generateDummyPopularTvShows(): List<TvShowEntity> {
         val popularTvShowResults = ArrayList<TvShowEntity>()
 
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 1412,
-                imgPoster = "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"
+                imgPoster = "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 79501,
-                imgPoster = "/kOAn06LmRCg4YiSStwrGL6UOQ3a.jpg"
+                imgPoster = "/kOAn06LmRCg4YiSStwrGL6UOQ3a.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 118011,
-                imgPoster = "/xs1BRXnY5kStzwdxyrl2HYJOJCq.jpg"
+                imgPoster = "/xs1BRXnY5kStzwdxyrl2HYJOJCq.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 1434,
-                imgPoster = "/9RBeCo8QSaoJLmmuzlwzVH3Hi12.jpg"
+                imgPoster = "/9RBeCo8QSaoJLmmuzlwzVH3Hi12.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 236,
-                imgPoster = "/fi1GEdCbyWRDHpyJcB25YYK7fh4.jpg"
+                imgPoster = "/fi1GEdCbyWRDHpyJcB25YYK7fh4.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 15185,
-                imgPoster = "/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg"
+                imgPoster = "/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 79897,
-                imgPoster = "/zPIug5giU8oug6Xes5K1sTfQJxY.jpg"
+                imgPoster = "/zPIug5giU8oug6Xes5K1sTfQJxY.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 63394,
-                imgPoster = "/pe10EUjgO2jgwiu01MAv9l3IjxG.jpg"
+                imgPoster = "/pe10EUjgO2jgwiu01MAv9l3IjxG.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 62127,
-                imgPoster = "/4l6KD9HhtD6nCDEfg10Lp6C6zah.jpg"
+                imgPoster = "/4l6KD9HhtD6nCDEfg10Lp6C6zah.jpg",
+                favorite = false
             )
         )
         popularTvShowResults.add(
             TvShowEntity(
                 tvShowId = 124271,
-                imgPoster = "/lSTchtc26YNdOjdKvZtLs22SokL.jpg"
+                imgPoster = "/lSTchtc26YNdOjdKvZtLs22SokL.jpg",
+                favorite = false
             )
         )
 
@@ -145,7 +165,7 @@ object DataDummy {
     fun generateDummyMovieDetail(): MovieDetailEntity {
         return MovieDetailEntity(
             "A Star Is Born",
-            "Drama, Music, Romance",
+            "Drama, Music, Romance.",
             "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
             "2h 19m",
             5.9F,
@@ -160,10 +180,24 @@ object DataDummy {
             "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
             "Ended",
             "Scripted",
-            "Crime, Drama, Mystery, Action & Adventure",
-            "The CW",
+            "Crime, Drama, Mystery, Action & Adventure.",
+            "The CW.",
             6.7F
         )
+    }
+
+    fun generateDummyMovieWithDetail(favorite: Boolean): MovieEntity {
+        val movieEntity = generateDummyPopularMovies()[0]
+        movieEntity.movieDetailEntity = generateDummyMovieDetail()
+        movieEntity.favorite = favorite
+        return movieEntity
+    }
+
+    fun generateDummyTvShowWithDetail(favorite: Boolean): TvShowEntity {
+        val tvShowEntity = generateDummyPopularTvShows()[0]
+        tvShowEntity.tvShowDetailEntity = generateDummyTvShowDetail()
+        tvShowEntity.favorite = favorite
+        return tvShowEntity
     }
 
     fun generateRemoteDummyPopularMovies(): List<MovieItem> {
@@ -321,7 +355,7 @@ object DataDummy {
             139,
             19610,
             "A Star Is Born",
-            "/oVpUzCimMZ0ecni7lDuYPuRdxoQ.jpg",
+            "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg",
             "Released"
         )
     }

@@ -33,11 +33,11 @@ class FavoriteMovieFragment : Fragment() {
         showLoading(true)
         showMovieList(false)
         showEmpty(true, getString(R.string.empty_movie))
-        favoriteMovieViewModel.getFavoriteMovie().observe(viewLifecycleOwner) { favoriteMovie ->
-            if (favoriteMovie != null) {
+        favoriteMovieViewModel.getFavoriteMovies().observe(viewLifecycleOwner) { favoriteMovies ->
+            if (favoriteMovies != null) {
                 showMovieList(true)
                 showLoading(false)
-                setFavoriteMovies(favoriteMovie)
+                setFavoriteMovies(favoriteMovies)
             } else {
                 showMovieList(false)
                 showLoading(false)
@@ -56,7 +56,7 @@ class FavoriteMovieFragment : Fragment() {
             showEmpty(true, getString(R.string.empty_movie))
         }
 
-        with(fragmentFavoriteBinding.rvMovie) {
+        with(fragmentFavoriteBinding.rvMovieFavorite) {
             layoutManager = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 GridLayoutManager(view?.context, 3)
             } else {
@@ -73,7 +73,7 @@ class FavoriteMovieFragment : Fragment() {
     }
 
     private fun showMovieList(isVisible: Boolean) {
-        if (isVisible) fragmentFavoriteBinding.rvMovie.visibility = View.VISIBLE else fragmentFavoriteBinding.rvMovie.visibility = View.GONE
+        if (isVisible) fragmentFavoriteBinding.rvMovieFavorite.visibility = View.VISIBLE else fragmentFavoriteBinding.rvMovieFavorite.visibility = View.GONE
     }
 
     private fun showEmpty(

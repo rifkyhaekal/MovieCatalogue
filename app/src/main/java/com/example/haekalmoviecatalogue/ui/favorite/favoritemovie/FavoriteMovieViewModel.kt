@@ -7,6 +7,6 @@ import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 
 class FavoriteMovieViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
-    fun getFavoriteMovie(): LiveData<List<MovieEntity>> = movieRepository.getFavoriteMovies()
+    fun getFavoriteMovies(): LiveData<List<MovieEntity>> = movieRepository.getFavoriteMovies()
 
 }

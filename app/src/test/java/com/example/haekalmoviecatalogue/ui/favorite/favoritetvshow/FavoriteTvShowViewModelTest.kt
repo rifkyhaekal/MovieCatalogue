@@ -1,4 +1,4 @@
-package com.example.haekalmoviecatalogue.ui.tvshow
+package com.example.haekalmoviecatalogue.ui.favorite.favoritetvshow
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.utils.DataDummy
-import com.example.haekalmoviecatalogue.vo.Resource
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -14,14 +14,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class TvShowViewModelTest {
+class FavoriteTvShowViewModelTest {
 
-    private lateinit var viewModel: TvShowViewModel
+    private lateinit var viewModel: FavoriteTvShowViewModel
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -30,26 +29,26 @@ class TvShowViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var observer: Observer<Resource<List<TvShowEntity>>>
+    private lateinit var observer : Observer<List<TvShowEntity>>
 
     @Before
     fun setUp() {
-        viewModel = TvShowViewModel(movieRepository)
+        viewModel = FavoriteTvShowViewModel(movieRepository)
     }
 
     @Test
-    fun getTvShows() {
-        val dummyTvShow = Resource.success(DataDummy.generateDummyPopularTvShows())
-        val tvShows = MutableLiveData<Resource<List<TvShowEntity>>>()
-        tvShows.value = dummyTvShow
+    fun getFavoriteTvShow() {
+        val dummyTvShows = DataDummy.generateDummyPopularTvShows()
+        val tvShows = MutableLiveData<List<TvShowEntity>>()
+        tvShows.value = dummyTvShows
 
-        `when`(movieRepository.getAllTvShows()).thenReturn(tvShows)
-        val tvShowEntities = viewModel.getPopularTvShows().value?.data
-        verify(movieRepository).getAllTvShows()
+        Mockito.`when`(movieRepository.getFavoriteTvShows()).thenReturn(tvShows)
+        val tvShowEntities = viewModel.getFavoriteTvShow().value
+        verify(movieRepository).getFavoriteTvShows()
         assertNotNull(tvShowEntities)
         assertEquals(10, tvShowEntities?.size)
 
-        viewModel.getPopularTvShows().observeForever(observer)
-        verify(observer).onChanged(dummyTvShow)
+        viewModel.getFavoriteTvShow().observeForever(observer)
+        verify(observer).onChanged(dummyTvShows)
     }
 }
