@@ -45,7 +45,6 @@ class MovieDetailViewModelTest {
         movie.value = dummyMovieWithDetail
 
         `when`(movieRepository.getMovieDetail(movieId)).thenReturn(movie)
-        detailViewModel.setSelectedMovie(dummyMovie.movieId)
 
         detailViewModel.movie.observeForever(movieDetailObserver)
         verify(movieDetailObserver).onChanged(dummyMovieWithDetail)

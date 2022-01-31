@@ -51,4 +51,6 @@ ext {
     roomRuntimeVersion = '2.2.5'
 
     pagingVersion = '2.1.1'
+
+    roboletricVersion = '4.6.1'
 }

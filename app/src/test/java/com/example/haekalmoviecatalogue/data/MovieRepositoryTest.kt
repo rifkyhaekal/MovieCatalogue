@@ -6,7 +6,6 @@ import androidx.paging.DataSource
 import com.example.haekalmoviecatalogue.data.source.local.LocalDataSource
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
-import com.example.haekalmoviecatalogue.data.source.local.room.MovieDatabase
 import com.example.haekalmoviecatalogue.data.source.remote.RemoteDataSource
 import com.example.haekalmoviecatalogue.data.source.remote.response.MovieGenresItem
 import com.example.haekalmoviecatalogue.data.source.remote.response.NetworksItem
@@ -31,8 +30,6 @@ class MovieRepositoryTest {
     private val local = mock(LocalDataSource::class.java)
     private val appExecutors = mock(AppExecutors::class.java)
 
-    private lateinit var bufferoosDatabase: MovieDatabase
-
     private val movieRepository = FakeMovieRepository(remote, local, appExecutors)
 
     private val popularMovieResponse = DataDummy.generateRemoteDummyPopularMovies()
@@ -45,27 +42,25 @@ class MovieRepositoryTest {
     @Test
     fun getPopularMovies() {
         val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
-        val query = SortUtils.getSortedMovieQuery(SortUtils.NEWEST)
-        `when`(local.getAllMovies(query)).thenReturn(dataSourceFactory)
+        `when`(local.getAllMovies(SortUtils.NEWEST)).thenReturn(dataSourceFactory)
         movieRepository.getAllMovies(SortUtils.NEWEST)
 
-        val popularMovieEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyPopularMovies()))
-        verify(local).getAllMovies(query)
-        assertNotNull(popularMovieEntities)
-        assertEquals(popularMovieResponse.size.toLong(), popularMovieEntities.data?.size?.toLong())
+        val movieEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyPopularMovies()))
+        verify(local).getAllMovies(SortUtils.NEWEST)
+        assertNotNull(movieEntities)
+        assertEquals(popularMovieResponse.size.toLong(), movieEntities.data?.size?.toLong())
     }
 
     @Test
     fun getPopularTvShow() {
         val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvShowEntity>
-        val query = SortUtils.getSortedMovieQuery(SortUtils.NEWEST)
-        `when`(local.getAllTvShows(query)).thenReturn(dataSourceFactory)
+        `when`(local.getAllTvShows(SortUtils.NEWEST)).thenReturn(dataSourceFactory)
         movieRepository.getAllTvShows(SortUtils.NEWEST)
 
-        val popularTvShowEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyPopularTvShows()))
-        verify(local).getAllTvShows(query)
-        assertNotNull(popularTvShowEntities)
-        assertEquals(popularMovieResponse.size.toLong(), popularTvShowEntities.data?.size?.toLong())
+        val tvShowEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyPopularTvShows()))
+        verify(local).getAllTvShows(SortUtils.NEWEST)
+        assertNotNull(tvShowEntities)
+        assertEquals(popularMovieResponse.size.toLong(), tvShowEntities.data?.size?.toLong())
     }
 
     @Test

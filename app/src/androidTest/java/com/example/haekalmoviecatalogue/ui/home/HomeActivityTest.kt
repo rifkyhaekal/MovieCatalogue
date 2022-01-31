@@ -14,6 +14,7 @@ import com.example.haekalmoviecatalogue.utils.DataDummy
 import com.example.haekalmoviecatalogue.utils.EspressoIdlingResources
 import org.hamcrest.Matchers.allOf
 import org.junit.After
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
@@ -118,5 +119,4 @@ class HomeActivityTest {
         onView(withId(R.id.action_favorite)).perform(click())
         onView(isRoot()).perform(ViewActions.pressBack())
     }
-
 }

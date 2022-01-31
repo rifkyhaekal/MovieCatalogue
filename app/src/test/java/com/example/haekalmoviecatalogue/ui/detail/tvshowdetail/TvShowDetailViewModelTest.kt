@@ -47,7 +47,6 @@ class TvShowDetailViewModelTest {
         tvShow.value = dummyTvShowWithDetail
 
         `when`(movieRepository.getTvShowDetail(tvShowId)).thenReturn(tvShow)
-        detailViewModel.setSelectedTvShow(dummyTvShow.tvShowId)
 
         detailViewModel.tvShow.observeForever(tvShowObserver)
         verify(tvShowObserver).onChanged(dummyTvShowWithDetail)

@@ -10,7 +10,6 @@ import com.example.haekalmoviecatalogue.data.source.remote.ApiResponse
 import com.example.haekalmoviecatalogue.data.source.remote.RemoteDataSource
 import com.example.haekalmoviecatalogue.data.source.remote.response.*
 import com.example.haekalmoviecatalogue.utils.AppExecutors
-import com.example.haekalmoviecatalogue.utils.SortUtils
 import com.example.haekalmoviecatalogue.vo.Resource
 import kotlin.math.floor
 
@@ -28,8 +27,8 @@ class FakeMovieRepository (
                     .setInitialLoadSizeHint(4)
                     .setPageSize(4)
                     .build()
-                val newQuery = SortUtils.getSortedMovieQuery(query)
-                return LivePagedListBuilder(localDataSource.getAllMovies(newQuery), config).build()
+
+                return LivePagedListBuilder(localDataSource.getAllMovies(query), config).build()
             }
 
             override fun shouldFetch(data: PagedList<MovieEntity>?): Boolean =
@@ -98,8 +97,8 @@ class FakeMovieRepository (
                     .setInitialLoadSizeHint(4)
                     .setPageSize(4)
                     .build()
-                val newQuery = SortUtils.getSortedTvShowQuery(query)
-                return LivePagedListBuilder(localDataSource.getAllTvShows(newQuery), config).build()
+
+                return LivePagedListBuilder(localDataSource.getAllTvShows(query), config).build()
             }
 
             override fun shouldFetch(data: PagedList<TvShowEntity>?): Boolean =

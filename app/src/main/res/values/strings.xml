@@ -30,7 +30,4 @@
     <string name="menu_oldest">Oldest</string>
     <string name="menu_random">Random</string>
 
-    <string name="menu_default">Default</string>
-    <string name="menu_vote_average">Rating</string>
-    <string name="menu_title">Title</string>
 </resources>
