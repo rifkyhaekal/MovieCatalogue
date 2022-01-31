@@ -10,6 +10,7 @@ import com.example.haekalmoviecatalogue.data.source.remote.ApiResponse
 import com.example.haekalmoviecatalogue.data.source.remote.RemoteDataSource
 import com.example.haekalmoviecatalogue.data.source.remote.response.*
 import com.example.haekalmoviecatalogue.utils.AppExecutors
+import com.example.haekalmoviecatalogue.utils.SortUtils
 import com.example.haekalmoviecatalogue.vo.Resource
 import kotlin.math.floor
 
@@ -19,7 +20,7 @@ class FakeMovieRepository (
     private val appExecutors: AppExecutors
     ) : MovieDataSource {
 
-    override fun getAllMovies(): LiveData<Resource<PagedList<MovieEntity>>> {
+    override fun getAllMovies(query: String): LiveData<Resource<PagedList<MovieEntity>>> {
         return object : NetworkBoundResource<PagedList<MovieEntity>, PopularMovieResponse>(appExecutors) {
             override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
                 val config = PagedList.Config.Builder()
@@ -27,7 +28,8 @@ class FakeMovieRepository (
                     .setInitialLoadSizeHint(4)
                     .setPageSize(4)
                     .build()
-                return LivePagedListBuilder(localDataSource.getAllMovies(), config).build()
+                val newQuery = SortUtils.getSortedMovieQuery(query)
+                return LivePagedListBuilder(localDataSource.getAllMovies(newQuery), config).build()
             }
 
             override fun shouldFetch(data: PagedList<MovieEntity>?): Boolean =
@@ -88,7 +90,7 @@ class FakeMovieRepository (
     override fun setMovieFavorite(movie: MovieEntity, state: Boolean) =
         appExecutors.diskIO().execute { localDataSource.setFavoriteMovie(movie, state) }
 
-    override fun getAllTvShows(): LiveData<Resource<PagedList<TvShowEntity>>> {
+    override fun getAllTvShows(query: String): LiveData<Resource<PagedList<TvShowEntity>>> {
         return object : NetworkBoundResource<PagedList<TvShowEntity>, PopularTvShowResponse>(appExecutors) {
             override fun loadFromDB(): LiveData<PagedList<TvShowEntity>> {
                 val config = PagedList.Config.Builder()
@@ -96,7 +98,8 @@ class FakeMovieRepository (
                     .setInitialLoadSizeHint(4)
                     .setPageSize(4)
                     .build()
-                return LivePagedListBuilder(localDataSource.getAllTvShows(), config).build()
+                val newQuery = SortUtils.getSortedTvShowQuery(query)
+                return LivePagedListBuilder(localDataSource.getAllTvShows(newQuery), config).build()
             }
 
             override fun shouldFetch(data: PagedList<TvShowEntity>?): Boolean =

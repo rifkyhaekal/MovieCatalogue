@@ -9,6 +9,6 @@ import com.example.haekalmoviecatalogue.vo.Resource
 
 class TvShowViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
-    fun getPopularTvShows(): LiveData<Resource<PagedList<TvShowEntity>>> = movieRepository.getAllTvShows()
+    fun getPopularTvShows(sort: String): LiveData<Resource<PagedList<TvShowEntity>>> = movieRepository.getAllTvShows(sort)
 
 }

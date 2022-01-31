@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
-import com.example.haekalmoviecatalogue.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull

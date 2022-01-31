@@ -8,7 +8,7 @@ import com.example.haekalmoviecatalogue.vo.Resource
 
 interface MovieDataSource {
 
-    fun getAllMovies(): LiveData<Resource<PagedList<MovieEntity>>>
+    fun getAllMovies(query: String): LiveData<Resource<PagedList<MovieEntity>>>
 
     fun getFavoriteMovies(): LiveData<PagedList<MovieEntity>>
 
@@ -16,7 +16,7 @@ interface MovieDataSource {
 
     fun setMovieFavorite(movie: MovieEntity, state: Boolean)
 
-    fun getAllTvShows(): LiveData<Resource<PagedList<TvShowEntity>>>
+    fun getAllTvShows(query: String): LiveData<Resource<PagedList<TvShowEntity>>>
 
     fun getFavoriteTvShows(): LiveData<PagedList<TvShowEntity>>
 

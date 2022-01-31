@@ -11,9 +11,9 @@ object SortUtils {
     fun getSortedMovieQuery(filter: String): SimpleSQLiteQuery {
         val simpleQuery = StringBuilder().append("SELECT * FROM movieentities ")
         if (filter == NEWEST) {
-            simpleQuery.append("ORDER BY id DESC")
+            simpleQuery.append("ORDER BY movieId ASC")
         } else if (filter == OLDEST) {
-            simpleQuery.append("ORDER BY id ASC")
+            simpleQuery.append("ORDER BY movieId DESC")
         } else if (filter == RANDOM) {
             simpleQuery.append("ORDER BY RANDOM()")
         }
@@ -23,9 +23,9 @@ object SortUtils {
     fun getSortedTvShowQuery(filter: String): SimpleSQLiteQuery {
         val simpleQuery = StringBuilder().append("SELECT * FROM tvshowentities ")
         if (filter == NEWEST) {
-            simpleQuery.append("ORDER BY id DESC")
+            simpleQuery.append("ORDER BY tvShowId ASC")
         } else if (filter == OLDEST) {
-            simpleQuery.append("ORDER BY id ASC")
+            simpleQuery.append("ORDER BY tvShowId DESC")
         } else if (filter == RANDOM) {
             simpleQuery.append("ORDER BY RANDOM()")
         }

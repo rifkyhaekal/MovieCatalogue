@@ -3,14 +3,15 @@ package com.example.haekalmoviecatalogue.data.source.local.room
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 
 @Dao
 interface MovieDao {
 
-    @Query("SELECT * FROM movieentities" )
-    fun getMovies(): DataSource.Factory<Int, MovieEntity>
+    @RawQuery(observedEntities = [MovieEntity::class])
+    fun getMovies(query: SupportSQLiteQuery): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM movieentities WHERE favorite = 1")
     fun getFavoriteMovies(): DataSource.Factory<Int, MovieEntity>
@@ -27,8 +28,8 @@ interface MovieDao {
     @Query("UPDATE movieentities SET title = :title, genre = :genre, overview = :overview, duration = :duration, userScore = :userScore, releaseDate = :releaseDate, status = :status WHERE movieId = :movieId")
     fun updateMovieDetail(movieId: Int, title: String, genre: String, overview: String, duration: String, userScore: Float, releaseDate: String, status: String)
 
-    @Query("SELECT * FROM tvshowentities")
-    fun getTvShows(): DataSource.Factory<Int, TvShowEntity>
+    @RawQuery(observedEntities = [TvShowEntity::class])
+    fun getTvShows(query: SupportSQLiteQuery): DataSource.Factory<Int, TvShowEntity>
 
     @Query("SELECT * FROM tvshowentities WHERE favorite = 1")
     fun getFavoriteTvShows(): DataSource.Factory<Int, TvShowEntity>

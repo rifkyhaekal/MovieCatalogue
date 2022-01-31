@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.example.haekalmoviecatalogue.data.MovieRepository
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
-import com.example.haekalmoviecatalogue.utils.DataDummy
+import com.example.haekalmoviecatalogue.utils.SortUtils
 import com.example.haekalmoviecatalogue.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -49,13 +49,13 @@ class MovieViewModelTest {
         val movies = MutableLiveData<Resource<PagedList<MovieEntity>>>()
         movies.value = dummyMovies
 
-        `when`(movieRepository.getAllMovies()).thenReturn(movies)
-        val movieEntities = viewModel.getPopularMovies().value?.data
-        verify(movieRepository).getAllMovies()
+        `when`(movieRepository.getAllMovies(SortUtils.NEWEST)).thenReturn(movies)
+        val movieEntities = viewModel.getPopularMovies(SortUtils.NEWEST).value?.data
+        verify(movieRepository).getAllMovies(SortUtils.NEWEST)
         assertNotNull(movieEntities)
         assertEquals(10, movieEntities?.size)
 
-        viewModel.getPopularMovies().observeForever(observer)
+        viewModel.getPopularMovies(SortUtils.NEWEST).observeForever(observer)
         verify(observer).onChanged(dummyMovies)
     }
 }

@@ -25,4 +25,12 @@
     <string name="empty_movie">No favorite Movie yet.</string>
     <string name="empty_tv_show">No favorite Tv Show yet.</string>
     <string name="menu_favorite">Favorite</string>
+
+    <string name="menu_newest">Newest</string>
+    <string name="menu_oldest">Oldest</string>
+    <string name="menu_random">Random</string>
+
+    <string name="menu_default">Default</string>
+    <string name="menu_vote_average">Rating</string>
+    <string name="menu_title">Title</string>
 </resources>

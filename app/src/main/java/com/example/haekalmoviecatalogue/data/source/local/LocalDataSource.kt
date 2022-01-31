@@ -2,13 +2,14 @@ package com.example.haekalmoviecatalogue.data.source.local
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.haekalmoviecatalogue.data.source.local.entity.MovieEntity
 import com.example.haekalmoviecatalogue.data.source.local.entity.TvShowEntity
 import com.example.haekalmoviecatalogue.data.source.local.room.MovieDao
 
 class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
 
-    fun getAllMovies(): DataSource.Factory<Int, MovieEntity> = mMovieDao.getMovies()
+    fun getAllMovies(query: SupportSQLiteQuery): DataSource.Factory<Int, MovieEntity> = mMovieDao.getMovies(query)
 
     fun getFavoriteMovies(): DataSource.Factory<Int, MovieEntity> = mMovieDao.getFavoriteMovies()
 
@@ -25,7 +26,7 @@ class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
         mMovieDao.updateMovieDetail(movieId, title, genre, overview, duration, userScore, releaseDate, status)
     }
 
-    fun getAllTvShows(): DataSource.Factory<Int, TvShowEntity> = mMovieDao.getTvShows()
+    fun getAllTvShows(query: SupportSQLiteQuery): DataSource.Factory<Int, TvShowEntity> = mMovieDao.getTvShows(query)
 
     fun getFavoriteTvShows(): DataSource.Factory<Int, TvShowEntity> = mMovieDao.getFavoriteTvShows()
 
