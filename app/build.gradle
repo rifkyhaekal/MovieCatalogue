@@ -12,8 +12,8 @@ android {
         applicationId "com.example.haekalmoviecatalogue"
         minSdk 21
         targetSdk 31
-        versionCode 2
-        versionName "2.0"
+        versionCode 3
+        versionName "3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -37,11 +37,7 @@ android {
     buildFeatures {
         viewBinding true
     }
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
+
 }
 
 dependencies {
@@ -60,10 +56,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "androidx.legacy:legacy-support-v4:$legacyVersion"
     implementation "androidx.viewpager2:viewpager2:$viewPager2Version"
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation "androidx.paging:paging-runtime:$pagingVersion"
-    implementation 'androidx.test:monitor:1.5.0'
 
     //testing
     testImplementation "junit:junit:$junitVersion"
@@ -78,7 +71,6 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
     testImplementation "androidx.arch.core:core-testing:$androidCoreTestVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
-    testImplementation "org.robolectric:robolectric:$roboletricVersion"
 
     // API
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
