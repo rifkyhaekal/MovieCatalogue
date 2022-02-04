@@ -23,4 +23,9 @@
         <item name="colorControlNormal">@android:color/black</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/lightGrey</item>
+        <item name="colorControlActivated">@color/duskYellow</item>
+    </style>
+
 </resources>
