@@ -11,4 +11,5 @@ class TvShowViewModel(private val movieRepository: MovieRepository) : ViewModel(
 
     fun getPopularTvShows(sort: String): LiveData<Resource<PagedList<TvShowEntity>>> = movieRepository.getAllTvShows(sort)
 
+
 }

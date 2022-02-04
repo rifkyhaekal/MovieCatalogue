@@ -48,10 +48,10 @@ class MovieFragment : Fragment() {
         movieAdapater.notifyDataSetChanged()
 
         with(fragmentMovieBinding.rvMovie) {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                layoutManager = GridLayoutManager(view?.context, 3)
+            layoutManager = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                GridLayoutManager(view?.context, 3)
             } else {
-                layoutManager = GridLayoutManager(view?.context, 5)
+                GridLayoutManager(view?.context, 5)
             }
             setHasFixedSize(true)
             adapter = movieAdapater

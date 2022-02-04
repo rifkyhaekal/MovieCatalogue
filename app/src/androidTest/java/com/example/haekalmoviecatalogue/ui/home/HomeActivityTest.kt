@@ -118,4 +118,5 @@ class HomeActivityTest {
         onView(withId(R.id.action_favorite)).perform(click())
         onView(isRoot()).perform(ViewActions.pressBack())
     }
+
 }

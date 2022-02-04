@@ -21,6 +21,7 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
         movieRepository.getMovieDetail(mMovieId)
     }
 
+
     fun setFavorite() {
         val movieResource = movie.value
         if (movieResource != null) {
