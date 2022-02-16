@@ -1,0 +1,318 @@
+Submission 1
+
+Unit testing:
+
+1. MovieViewModelTest:
+     >Memuat Movie:
+       -Memastikan data movie tidak null.
+       -Memastikan jumlah data movie sesuai dengan yang diharapkan.
+
+2. TvShowViewModelTest:
+     >Memuat TvShow:
+       -Memastikan data tvshow tidak null.
+       -Memastikan jumlah data tvshow sesuai dengan yang diharapkan.
+
+3. DetailMovieViewModelTest:
+     >Memuat Movie:
+       -Memastikan data movie tidak null.
+       -Memastikan data movie sesuai dengan yang diharapkan.
+
+4. DetailTvShowViewModelTest:
+     >Memuat TvShow:
+       -Memastikan data tvshow tidak null.
+       -Memastikan data tvshow sesuai dengan yang diharapkan.
+
+Instrument testing:
+
+1. Menampilkan data movie:
+   -Memastikan rv_movie dalam keadaan tampil.
+   -Gulir rv_movie ke posisi data terakhir.
+
+2. Menampilkan data tvshow:
+   -Klik TabLayout dengan teks TV SHOW.
+   -Memastikan rv_tv_show dalam keadaan tampil.
+   -Gulir rv_tv_show ke posisi data terakhir.
+
+3. Menampilkan data detail movie:
+   -Memberi tindakan klik pada data pertama di rv_movie.
+   -Memastikan ImageView untuk imgPoster tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk title tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk genre tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk duration tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk overview tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk userScroe tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk releaseDate tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk status tampil sesuai yang diharapkan.
+
+4. Menampilkan data detail tvshow:
+   -Klik TabLayout dengan teks TV SHOW.
+   -Memberi tindakan klik pada data pertama di rv_tv_show
+   -Memastikan ImageView untuk imgPoster tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk title tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk genre tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk type tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk overview tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk userScroe tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk network tampil sesuai yang diharapkan.
+   -Memastikan TextView untuk status tampil sesuai yang diharapkan.
+
+
+Submission 2
+
+Unit testing:
+
+1. MovieViewModelTest:
+   > Memuat Popular Movie:
+     - Memanipulasi data ketika pemanggilan data PopularMovieEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data PopularMovieEntity apakah null atau tidak.
+     - Melakukan pengecekan jumlah data PopularMovieEntity apakah sudah sesuai atau belum.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData.
+
+2. TvShowViewModelTest:
+   > Memuat Popular Tv Show:
+     - Memanipulasi data ketika pemanggilan data PopularTvShowEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data PopularTvShowEntity apakah null atau tidak.
+     - Melakukan pengecekan jumlah data PopularTvShowEntity apakah sudah sesuai atau belum.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData.
+
+3. MovieDetailViewModelTest:
+   > Memuat Detail Movie:
+     - Memanipulasi data ketika pemanggilan data MovieDetailEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data MovieDetailEntity apakah null atau tidak.
+     - Membandingkan data MovieDetailEntity sudah sesuai dengan yang diharapkan atau tidak.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData.
+
+4. TvShowDetailViewModelTest:
+   > Memuat Detail Tv Show:
+     - Memanipulasi data ketika pemanggilan data TvShowDetailEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data TvShowDetailEntity apakah null atau tidak.
+     - Membandingkan data TvShowDetailEntity sudah sesuai dengan yang diharapkan atau tidak.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData. 
+
+5. MovieRepositoryTest:
+   > getPopularMovies():
+     - Memanipulasi data ketika pemanggilan data PopularMovieResponse di kelas RemoteDataSource.
+     - Memastikan metode di kelas RemoteDataSource terpanggil.
+     - Melakukan pengecekan data PopularMovieEntity berupa LiveData dari Repository apakah null atau tidak.
+     - Melakukan pengecekan jumlah data PopularMovieResponse apakah sama dengan PopularMovieEntity atau tidak.
+  
+  > getPopularTvShow():
+    - Memanipulasi data ketika pemanggilan data PopularTvShowResponse di kelas RemoteDataSource.
+    - Memastikan metode di kelas RemoteDataSource terpanggil.
+    - Melakukan pengecekan data PopularTvShowEntity berupa LiveData dari Repository apakah null atau tidak.
+    - Melakukan pengecekan jumlah data PopularTvShowResponse apakah sama dengan PopularTvShowEntity atau tidak.
+
+  > getMovieDetail():
+    - Memanipulasi data ketika pemanggilan data MovieDetailResponse di kelas RemoteDataSource.
+    - Memastikan metode di kelas RemoteDataSource terpanggil.
+    - Melakukan pengecekan data MovieDetailEntity berupa LiveData dari Repository apakah null atau tidak.
+    - Membandingkan data MovieDetailEntity sudah sesuai dengan MovieDetailResponse atau tidak.
+  
+  > getTvShowDetail():
+    - Memanipulasi data ketika pemanggilan data TvShowDetailResponse di kelas RemoteDataSource.
+    - Memastikan metode di kelas RemoteDataSource terpanggil.
+    - Melakukan pengecekan data TvShowDetailEntity berupa LiveData dari Repository apakah null atau tidak.
+    - Membandingkan data TvShowDetailEntity sudah sesuai dengan TvShowDetailResponse atau tidak. 
+
+Instrument testing:
+
+1. Menampilkan data popular movie:
+   -Memastikan rv_movie dalam keadaan tampil.
+   -Gulir rv_movie ke posisi data terakhir dummy data.
+
+2. Menampilkan data tvshow:
+   -Klik TabLayout dengan teks TV SHOW.
+   -Memastikan rv_tv_show dalam keadaan tampil.
+   -Gulir rv_tv_show ke posisi data terakhir dummy data.
+
+3. Menampilkan data detail movie:
+   -Memberi tindakan klik pada data pertama di rv_movie.
+   -Memastikan ImageView untuk imgPoster tampil.
+   -Memastikan TextView untuk title tampil.
+   -Memastikan TextView untuk genre tampil.
+   -Memastikan TextView untuk duration tampil.
+   -Memastikan TextView untuk overview tampil.
+   -Memastikan TextView untuk userScroe tampil.
+   -Memastikan TextView untuk releaseDate tampil.
+   -Memastikan TextView untuk status tampil.
+
+4. Menampilkan data detail tvshow:
+   -Klik TabLayout dengan teks TV SHOW.
+   -Memberi tindakan klik pada data pertama di rv_tv_show
+   -Memastikan ImageView untuk imgPoster tampil.
+   -Memastikan TextView untuk title tampil.
+   -Memastikan TextView untuk genre tampil.
+   -Memastikan TextView untuk type tampil.
+   -Memastikan TextView untuk overview tampil.
+   -Memastikan TextView untuk userScroe tampil.
+   -Memastikan TextView untuk network tampil.
+   -Memastikan TextView untuk status tampil.
+
+Submission 3
+
+Unit testing:
+
+1. MovieViewModelTest:
+   > Memuat Popular Movie:
+     - Memanipulasi data ketika pemanggilan data MovieEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data MovieEntity apakah null atau tidak.
+     - Melakukan pengecekan jumlah data MovieEntity apakah sudah sesuai atau belum.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData.
+
+2. TvShowViewModelTest:
+   > Memuat Popular Tv Show:
+     - Memanipulasi data ketika pemanggilan data TvShowEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data TvShowEntity apakah null atau tidak.
+     - Melakukan pengecekan jumlah data TvShowEntity apakah sudah sesuai atau belum.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData.
+
+3. MovieDetailViewModelTest:
+   > Memuat Detail Movie:
+     - Memanipulasi data ketika pemanggilan data MovieEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data MovieEntity apakah null atau tidak.
+     - Melakukan pengecekan data MovieDetailEntity apakah null atau tidak.
+     - Membandingkan data MovieEntity dari View Model sudah sesuai dengan yang diharapkan (dummy) atau tidak. 
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData.
+
+4. TvShowDetailViewModelTest:
+   > Memuat Detail Tv Show:
+     - Memanipulasi data ketika pemanggilan data TvShowEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data TvShowEntity apakah null atau tidak.
+     - Melakukan pengecekan data TvShowDetailEntity apakah null atau tidak.
+     - Membandingkan data TvShowEntity dari View Model sudah sesuai dengan yang diharapkan (dummy) atau tidak.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData. 
+
+5. FavoriteMovieViewModelTest:
+   > Memuat Favorite Movie:
+     - Memanipulasi data ketika pemanggilan data MovieEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data MovieEntity apakah null atau tidak.
+     - Melakukan pengecekan jumlah data MovieEntity apakah sudah sesuai atau belum.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData.
+
+6. FavoriteTvShowViewModelTest:
+   > Memuat Favorite Tv Show:
+     - Memanipulasi data ketika pemanggilan data TvShowEntity di kelas repository.
+     - Memastikan metode di kelas repository terpanggil.
+     - Melakukan pengecekan data TvShowEntity apakah null atau tidak.
+     - Melakukan pengecekan jumlah data TvShowEntity apakah sudah sesuai atau belum.
+     - Melakukan pengecekan memastikan terjadi perubahan di observer LiveData.
+
+7. MovieRepositoryTest:
+   > getPopularMovies():
+     - Memanipulasi data ketika pemanggilan data MovieEntity di kelas LocalDataResource.
+     - Memastikan metode di kelas LocalDataResource terpanggil.
+     - Melakukan pengecekan data PagedList dari MovieEntity apakah null atau tidak.
+     - Melakukan pengecekan jumlah data PopularMovieResponse apakah sama dengan MovieEntity atau tidak.
+  
+  > getPopularTvShow():
+    - Memanipulasi data ketika pemanggilan data TvShowEntity di kelas LocalDataResource.
+    - Memastikan metode di kelas LocalDataResource terpanggil.
+    - Melakukan pengecekan data PagedList dari TvShowEntity apakah null atau tidak.
+    - Melakukan pengecekan jumlah data PopularTvShowResponse apakah sama dengan TvShowEntity atau tidak.
+
+  > getMovieDetail():
+    - Memanipulasi data ketika pemanggilan data MovieEntity di kelas LocalDataSource.
+    - Memastikan metode di kelas LocalDataSource terpanggil.
+    - Melakukan pengecekan data MovieEntity dari Repository apakah null atau tidak.
+    - Melakukan pengecekan data MovieDetailEntity dari Repository apakah null atau tidak.
+    - Membandingkan data MovieEntity sudah sesuai dengan MovieDetailResponse atau tidak.
+  
+  > getTvShowDetail():
+    - Memanipulasi data ketika pemanggilan data TvShowEntity di kelas LocalDataSource.
+    - Memastikan metode di kelas LocalDataSource terpanggil.
+    - Melakukan pengecekan data TvShowEntity  dari Repository apakah null atau tidak.
+    - Melakukan pengecekan data TvShowDetailEntity  dari Repository apakah null atau tidak.
+    - Membandingkan data TvShowDetailEntity sudah sesuai dengan TvShowDetailResponse atau tidak. 
+  
+  > getMovieTvShows():
+    - Memanipulasi data ketika pemanggilan data MovieEntity di kelas LocalDataResource.
+    - Memastikan metode di kelas LocalDataResource terpanggil.
+    - Melakukan pengecekan data PagedList dari MovieEntity apakah null atau tidak.
+    - Melakukan pengecekan jumlah data PopularMovieResponse apakah sama dengan MovieEntity atau tidak.
+  
+  > getFavoriteTvShows():
+    - Memanipulasi data ketika pemanggilan data TvShowEntity di kelas LocalDataResource.
+    - Memastikan metode di kelas LocalDataResource terpanggil.
+    - Melakukan pengecekan data PagedList dari TvShowEntity apakah null atau tidak.
+    - Melakukan pengecekan jumlah data PopularTvShowResponse apakah sama dengan TvShowEntity atau tidak.
+
+Instrument testing:
+
+1. Menampilkan data popular movie:
+   -Memastikan rv_movie dalam keadaan tampil.
+   -Gulir rv_movie ke posisi data terakhir dummy data.
+
+2. Menampilkan data tvshow:
+   -Klik menu dengan id navigation_tv_show.
+   -Memastikan rv_tv_show dalam keadaan tampil.
+   -Gulir rv_tv_show ke posisi data terakhir dummy data.
+
+3. Menampilkan data detail movie:
+   -Memberi tindakan klik pada data pertama di rv_movie.
+   -Memastikan ImageView untuk imgPoster tampil.
+   -Memastikan TextView untuk title tampil.
+   -Memastikan TextView untuk genre tampil.
+   -Memastikan TextView untuk duration tampil.
+   -Memastikan TextView untuk overview tampil.
+   -Memastikan TextView untuk userScroe tampil.
+   -Memastikan TextView untuk releaseDate tampil.
+   -Memastikan TextView untuk status tampil.
+
+4. Menampilkan data detail tvshow:
+   -Klik menu dengan id navigation_tv_show.
+   -Memberi tindakan klik pada data pertama di rv_tv_show.
+   -Memastikan ImageView untuk imgPoster tampil.
+   -Memastikan TextView untuk title tampil.
+   -Memastikan TextView untuk genre tampil.
+   -Memastikan TextView untuk type tampil.
+   -Memastikan TextView untuk overview tampil.
+   -Memastikan TextView untuk userScroe tampil.
+   -Memastikan TextView untuk network tampil.
+   -Memastikan TextView untuk status tampil.
+
+5. Menampilkan data movie favorit:
+   -Memberi tindakan klik pada data pertama di rv_movie.
+   -Memberi tindakan klik pada menu favorite.
+   -Memberi tindakan press back pada back button.
+   -Klik menu dengan id navigation_favorite.
+   -Memastikan rv_movie_favorite dalam keadaan tampil.
+   -Memberi tindakan klik pada data pertama di rv_movie_favorite.
+   -Memastikan ImageView untuk imgPoster tampil.
+   -Memastikan TextView untuk title tampil.
+   -Memastikan TextView untuk genre tampil.
+   -Memastikan TextView untuk duration tampil.
+   -Memastikan TextView untuk overview tampil.
+   -Memastikan TextView untuk userScroe tampil.
+   -Memastikan TextView untuk releaseDate tampil.
+   -Memastikan TextView untuk status tampil.
+   -Memberi tindakan klik pada menu favorite.
+   -Memberi tindakan press back pada back button.
+
+6. Menampilkan data tv show favorit:
+   -Klik menu dengan id navigation_tv_show.
+   -Memberi tindakan klik pada data pertama di rv_tv_show.
+   -Memberi tindakan klik pada menu favorite.
+   -Memberi tindakan press back pada back button.
+   -Klik menu dengan id navigation_favorite.
+   -Klik Tab Layout dengan teks TV SHOW yang merupakan turunan dari View Tab Layout.
+   -Memastikan rv_tv_show_favorite dalam keadaan tampil.
+   -Memberi tindakan klik pada data pertama di rv_tv_show_favorite.
+   -Memastikan ImageView untuk imgPoster tampil.
+   -Memastikan TextView untuk title tampil.
+   -Memastikan TextView untuk genre tampil.
+   -Memastikan TextView untuk type tampil.
+   -Memastikan TextView untuk overview tampil.
+   -Memastikan TextView untuk userScroe tampil.
+   -Memastikan TextView untuk network tampil.
+   -Memastikan TextView untuk status tampil.
+   -Memberi tindakan klik pada menu favorite.
+   -Memberi tindakan press back pada back button.
